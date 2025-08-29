@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+    <!--
+
+     ________  ___  ___  ________  ________   ________  ___      ___ ___  _______
+    |\_____  \|\  \|\  \|\   __  \|\   ___  \|\   ____\|\  \    /  /|\  \|\  ___ \
+     \|___/  /\ \  \\\  \ \  \|\  \ \  \\ \  \ \  \___|\ \  \  /  / | \  \ \   __/|
+         /  / /\ \   __  \ \  \\\  \ \  \\ \  \ \  \  __\ \  \/  / / \ \  \ \  \_|/__
+        /  /_/__\ \  \ \  \ \  \\\  \ \  \\ \  \ \  \|\  \ \    / /   \ \  \ \  \_|\ \
+       |\________\ \__\ \__\ \_______\ \__\\ \__\ \_______\ \__/ /     \ \__\ \_______\
+        \|_______|\|__|\|__|\|_______|\|__| \|__|\|_______|\|__|/       \|__|\|_______|
+
+    Welcome to my insanity, if you're here, go get a sip of water. Anyway, feel free to
+    peep at my (probably disorganized) coding!! Just don't 1:1 copy.
+
+    -->
+    <head>
+        <!-- Setting character encoding and viewport size. Do not remove. -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://zhongvie.neocities.org/rss.xml"
+            rel="alternate"
+            type="application/rss+xml"
+            title="What's new on zhongvie.neociites.org" />
+
+        <!-- Send to not found page is there's no javascript -->
+        <noscript> <meta http-equiv="Refresh" content="0; URL=not_found.html" /> </noscript>
+
+        <!-- Site Title -->
+        <title>aid's small corner</title>
+
+        <!-- Author -->
+        <meta name="author" content="Asuraid" />
+
+        <!-- Site Description -->
+        <meta content="A personal website." name="description" />
+
+        <!-- FavIcon -->
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+        <!-- Lite Youtube -->
+        <!-- Include the CSS & JS.. (This could be direct from the package or bundled) -->
+        <link rel="stylesheet" href="js/lite-youtube/lite-yt-embed.css" />
+        <script src="js/lite-youtube/lite-yt-embed.js"></script>
+
+        <!-- CSS: -->
+        <!-- You will have to change this to "../style.css" if this HTML file is in a subfolder, to "../../style.css"
+        if this HTML file is in 2 subfolders, etc. -->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/normalize.css" />
+        <link rel="stylesheet" href="css/siwwidget.css" />
+        <link rel="stylesheet" href="css/weddingring.css" />
+
+        <!-- JavaScript: -->
+        <!-- You will have to change this to "../layout.js" if this HTML file is in a subfolder, to "../../layout.js"
+        if this HTML file is in 2 subfolders, etc. -->
+
+        <!-- Menu Items -->
+        <script src="js/left-sidebar.js" defer></script>
+        <script src="js/header.js" defer></script>
+        <script src="js/footer.js" defer></script>
+
+        <!-- Marquee JS -->
+        <script src="js/marquee-setup.js"></script>
+        <script src="js/marquee.js"></script>
+
+        <!-- Disclosure Menu -->
+        <script src="js/accessibility/disclosure-menu.iife.js" defer></script>
+        <script src="js/accessibility/accessible-menu.js" type="module"></script>
+
+        <!-- Font Toggle -->
+        <script src="js/main.js"></script>
+
+        <style>
+            #videoWrapper {
+                position: relative;
+                padding-bottom: 56.25%; /* 16:9 */
+                height: 0;
+                overflow: hidden;
+            }
+
+            #videoWrapper iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <!-- =============================================== -->
+        <!-- Preloader. -->
+        <!-- =============================================== -->
+        <div id="preloader"></div>
+
+        <!-- =============================================== -->
+        <!-- Accessibility links. -->
+        <!-- =============================================== -->
+        <a href="#content" id="skip-to-content-link">Skip to content</a>
+
+        <!-- =============================================== -->
+        <!-- Header will be loaded per JavaScript! Edit header.js to change. -->
+        <!-- =============================================== -->
+        <nav-header></nav-header>
+
+        <button onclick="topFunction()" id="backscroll" title="Go to top">Top</button>
+
+        <!-- =============================================== -->
+        <!-- BODY BEGINS. -->
+        <!-- =============================================== -->
+        <div class="container-grid">
+            <!-- =============================================== -->
+            <!-- Sidebar will be loaded per JavaScript! Edit left-sidebar.js to change. -->
+            <!-- =============================================== -->
+            <left-sidebar></left-sidebar>
+
+            <main id="content">
+                <!-- =============================================== -->
+                <!-- SITE INTRODUCTION. -->
+                <!-- =============================================== -->
+                <article>
+                    <!-- HEADER -->
+                    <h1>
+                        <img src="../assets/hanging_flowers.gif" loading="lazy" aria-hidden="true" alt="" />
+                        Site Introduction
+                    </h1>
+
+                    <blockquote>
+                        <div id="quote-spit"></div>
+                        <a onclick="generateQuote()" style="float: right; margin-top: -16px" title="New Quote">+</a>
+                    </blockquote>
+                    <p>Welcome to my little personal corner!</p>
+                    <p>
+                        Some part of me has gotten super tired with social media/how online spheres feel, so I wanted to
+                        use my tumblr knowledge of CSS and HTML to make a site that's my own little hidey hole for
+                        myself, and whoever passes by. This site is <u>relatively optimized for mobile</u>, but it's not
+                        perfect, and it does make heavy use of <i>javascript</i> (though it'll probably look ugly
+                        already if it's disabled for yall).
+                    </p>
+                    <p>
+                        Although this site is <u>SFW</u>, I'll discuss <i>mature topics</i>, I do also swear and tend to
+                        like making more <i>crude jokes</i> (pp jokes funny sorry). As this will mostly be a
+                        <mark>personal site</mark>, you can expect these things:
+                    </p>
+                    <ul>
+                        <li><a href="ocs.html">OC corners</a> for my main blorbos / shrines</li>
+                        <li>My <a href="gallery.html">artwork over the years</a></li>
+                        <li><a href="bookmarks.html">Cool resources</a> I like and have found over the years</li>
+                        <li>My favourite things / <a href="media-log.html">media I consume</a></li>
+                        <li>Game related things or <a href="recipes.html">recipes</a> I like</li>
+                        <li>
+                            Yume / OC x Canon stuff cause I'm stupid pilled over
+                            <a href="shrines/zhongvie.html">them</a>
+                        </li>
+                    </ul>
+                    <a href="https://graphic.neocities.org/trees">
+                        <img
+                            src="../assets/pixel_stump.gif"
+                            loading="lazy"
+                            style="float: left; margin-right: 20px; width: 77px; height: auto"
+                            alt="pixel tree stump" />
+                    </a>
+                    <p>
+                        Slowly making my dent in working on this over time ... god forbid if tumblr dies I guess I'll
+                        settle here.
+                    </p>
+                    <hr />
+                    <div class="marquee alt" data-speed="30" id="zhongvie-stamps">
+                        <img
+                            src="img/stamps/sylvie%20stamp%20(1).png"
+                            loading="lazy"
+                            style="width: 99px; height: auto"
+                            aria-hidden="true"
+                            alt="" />
+                        <img
+                            src="img/stamps/sylvie%20stamp%20(2).png"
+                            loading="lazy"
+                            style="width: 99px; height: auto"
+                            aria-hidden="true"
+                            alt="" />
+                        <img
+                            src="img/stamps/sylvie%20stamp%20(3).png"
+                            loading="lazy"
+                            style="width: 99px; height: auto"
+                            aria-hidden="true"
+                            alt="" />
+                        <img
+                            src="img/stamps/sylvie%20stamp%20(4).png"
+                            loading="lazy"
+                            style="width: 99px; height: auto"
+                            aria-hidden="true"
+                            alt="" />
+                        <img
+                            src="img/stamps/sylvie%20stamp%20(5).png"
+                            loading="lazy"
+                            style="width: 99px; height: auto"
+                            aria-hidden="true"
+                            alt="" />
+                        <img src="img/stamps/sylvie%20stamp%20(6).png" loading="lazy" aria-hidden="true" alt="" />
+                        <img
+                            src="img/stamps/sylvie%20stamp%20(7).png"
+                            loading="lazy"
+                            style="width: 99px; height: auto"
+                            aria-hidden="true"
+                            alt="" />
+                        <img
+                            src="img/stamps/sylvie%20stamp%20(8).png"
+                            loading="lazy"
+                            style="width: 99px; height: auto"
+                            aria-hidden="true"
+                            alt="" />
+                        <img
+                            src="img/stamps/sylvie%20stamp.png"
+                            loading="lazy"
+                            style="width: 99px; height: auto"
+                            aria-hidden="true"
+                            alt="" />
+                    </div>
+                </article>
+                <!-- =============================================== -->
+                <!-- ABOUT ME. -->
+                <!-- =============================================== -->
+                <article>
+                    <!-- HEADER -->
+                    <h1>
+                        <img src="../assets/hanging_flowers.gif" loading="lazy" aria-hidden="true" alt="" />
+                        About the Webmaster
+                    </h1>
+                    <div class="columns">
+                        <div class="column" style="flex: 0 0 29%">
+                            <div class="image-deco" style="padding: 0; width: 100%">
+                                <a href="https://picrew.me/en/image_maker/599056">
+                                    <img
+                                        src="img/decos/about_me_1.png"
+                                        style="width: 100%; height: 100%; margin-left: auto; margin-right: auto"
+                                        loading="lazy"
+                                        alt="a chibi picrew of the webmaster with brown hair and glasses" />
+                                </a>
+                            </div>
+                            <ul class="links" style="margin-top: 0">
+                                <li><a href="https://neocities.org/site/zhongvie">profile</a></li>
+                                <li><a href="https://sylviegirly.tumblr.com/">tumblr</a></li>
+                            </ul>
+                            <!-- FC2 Clap tag starts here -->
+                            <a
+                                href="//clap.fc2.com/post/asuraid/?url=https%3A%2F%2Fzhongvie.neocities.org%2F&title=Home+Page"
+                                title="Web Clap by FC2"
+                                ><img
+                                    class="image"
+                                    loading="lazy"
+                                    src="//clap.fc2.com/images/button/green/asuraid?url=https%3A%2F%2Fzhongvie.neocities.org%2F&amp;lang=en"
+                                    alt="Web Clap by FC2"
+                                    style="border: none; margin-left: auto; margin-right: auto; margin-top: -10px"
+                            /></a>
+                            <!-- FC2 Clap tag ends here -->
+                        </div>
+                        <div class="column" style="flex: 0 0 65%">
+                            <a href="https://www.deviantart.com/gasara/art/Shamrock-Divider-440983436">
+                                <img
+                                    src="../assets/pixel_divider.gif"
+                                    class="center-img"
+                                    alt="A pixel divider made up of four leaf clovers"
+                            /></a>
+                            <p>
+                                Hiiiii, name's <b>Aid</b>; I'm an <u>artist</u> and <u>game designer</u> and suck at
+                                introducing myself usually cause I forget what I like LOL. I've been ill over my OC
+                                blorbo <a href="oc/sylvie.html">Sylvie</a> since 2021 thanks to
+                                <a href="shrines/zhongli.html">Zhongli Genshin Impact</a>. You can read more about me
+                                <a href="about.html">on this page</a>! You can usually find me on my Tumblr primarily.
+                            </p>
+                            <a href="https://www.deviantart.com/gasara/art/Shamrock-Divider-440983436">
+                                <img
+                                    src="../assets/pixel_divider.gif"
+                                    class="center-img"
+                                    alt="A pixel divider made up of four leaf clovers"
+                            /></a>
+                        </div>
+                    </div>
+                </article>
+                <!-- =============================================== -->
+                <!-- STATUS CAFE YAPPING. -->
+                <!-- =============================================== -->
+                <article>
+                    <h1>
+                        <img src="../assets/hanging_flowers.gif" loading="lazy" aria-hidden="true" alt="" />
+                        Status
+                    </h1>
+                    <div class="columns" style="position: relative">
+                        <div class="talkingbox">
+                            <iframe
+                                src="https://sylviegirly.github.io/public/frames/status-cafe.html"
+                                title="status cafe update"
+                                id="status-cafe"
+                                style="border: none; width: 100%">
+                            </iframe>
+                        </div>
+                        <img
+                            src="../assets/fffsmoll.png"
+                            alt=""
+                            loading="lazy"
+                            aria-hidden="true"
+                            class="hide-mobile" />
+                    </div>
+                </article>
+                <!-- =============================================== -->
+                <!-- SITE UPDATES. -->
+                <!-- =============================================== -->
+                <article>
+                    <a href="https://zhongvie.neocities.org/feed.xml"
+                        ><img
+                            src="../assets/nukoBigHeart.gif"
+                            data-tippy-content="RSS feed for site updates!"
+                            loading="lazy"
+                            alt="RSS feed icon"
+                            style="float: right; margin-top: 3px; width: 47px"
+                    /></a>
+                    <!-- HEADER -->
+                    <h1>
+                        <img src="../assets/hanging_flowers.gif" loading="lazy" aria-hidden="true" alt="" />
+                        Site Updates
+                    </h1>
+                    <div class="scrollable" style="height: 310px">
+                        <p>
+                            <b>08/26/25:</b> Temporarily archived my minecraft page, just until I pick it up again and
+                            can return to my forever world in full (it's not deleted, it's just in an archived folder
+                            that doesn't get pushed to Github). Added a new <a href="blog.html">blog post</a> as well
+                            about my new Sims 3 legacy challenge ... maybe if I ever do finish it, I'll make a page here
+                            about it (miracle if I ever do)
+                        </p>
+                        <p>
+                            <b>08/15/25:</b> Almost 3 weeks since my last update, but my
+                            <a href="now.html">now page</a> is caught up to the present; not much has changed outside of
+                            me finishing my post-grad and starting to pick up personal projects again
+                        </p>
+                        <p>
+                            <b>08/14/25:</b> New <a href="blog.html">blog entry</a> documenting the bentos I've made for
+                            myself during my semester! They're all under a 'read more' on the blog
+                        </p>
+                        <p>
+                            <b>07/31/25:</b> Finally caved to make a new shrine ... it's not the most detailed thing
+                            ever, but I wanted to blab about my favourite Bleach character
+                            <a href="shrines/ukitake.html">Ukitake</a> and list all the alt cards I got from the Bleach
+                            Brave Souls game
+                        </p>
+                        <p>
+                            <b>07/27/25:</b> Updated <a href="now.html">/now</a> and reorganized my index page to add
+                            some new webrings. Also changed the front video to one of adef's cool pokemon videos!
+                        </p>
+                        <p>
+                            <b>07/16/25:</b> <a href="gallery.html">Gallery</a> has been updated to 2015; I'm working
+                            backwards since it's a lot more artwork I need to do in the past vs more recent years, so
+                            I'd rather knock them out first
+                        </p>
+                        <p>
+                            <b>07/14/25:</b> Completely overhauled <a href="blog.html">/blog</a> with a new look! I'll
+                            be using it for a lot more 'looser' blogging as well. Updated front page video as well!
+                        </p>
+                        <p>
+                            <b>07/12/25:</b> New <a href="now.html">now page</a> with what's been going on, though it's
+                            a&nbsp;<em>little</em> emptier than some of the other weeks (I did look through my journal
+                            and most stuff was either minor life stuff, or website work which I already documented)
+                        </p>
+                        <p>
+                            <b>07/08/25:</b> Created an <a href="gallery.html">art page</a>! I finally caved to make one
+                            to document my artwork throughout the years, though I'll be curating which ones I add. So
+                            far it's only 2025 and <i>part</i> of 2012 and earlier since there's some art I haven't
+                            uploaded yet
+                        </p>
+                        <p>
+                            <b>07/08/25:</b> A few changes inbound: I added a full font toggle with different font
+                            options, and opted to remove my dark/light mode toggle for the fully built in prefers-system
+                            CSS code. Also adjusted the index page layout. On a more character end, I finally brought
+                            over Sylvie's game kit, cause I realize I never did actually include it in their character
+                            page even though it's been fully designed. By extension, I did now finally come up with
+                            recommended weapons, artifacts, and teams for them which I did not have before.
+                        </p>
+                        <p>
+                            <b>07/05/25:</b> Added polls to the index page, even though it's fucking <i>ass</i> to set
+                            up; thanks to <a href="https://starry-knight.neocities.org/">starry-knight</a> for figuring
+                            out how to do it (aka github page you embed)
+                        </p>
+                        <p>
+                            <b>06/30/25:</b> Made another <a href="oc/raiden.html">OC page</a>!! Although it's not as
+                            fleshed out, he's Hideki's hubby and still means a lot to me even if retired.
+                        </p>
+                        <p>
+                            <b>06/28/25:</b> Updated <a href="now.html">/now</a> page again! ... I didn't realize it's
+                            been a bit over two weeks since my last update; I wanna try to keep them to a bi-weekly
+                            basis for my own tracking as well to look back on for funsies
+                        </p>
+                        <p>
+                            <b>06/24/25:</b> Added a <a href="toybox.html">/toybox</a> page to store cute pixels,
+                            inspired off other toyboxes!! I ... do need to make a nicer pixel shelf though ...
+                        </p>
+                        <p>
+                            <b>06/11/25:</b> New <a href="now.html">/now</a> entry to catch everything up to the present
+                        </p>
+                        <p>
+                            <b>06/09/25:</b> Note to self don't make folder structures without lowercase names again ...
+                            migrating everything to new folder names sucked ass.
+                        </p>
+                        <p>
+                            <b>06/06/25:</b> Added a YouTube video to the front! Which is uh ... right below here :P
+                            I'll just be using it to drop cool videos I enjoyed on a [unknown] time basis
+                        </p>
+                        <p>
+                            <b>06/04/25:</b> New <a href="blogging.html">/blog</a> entry mostly around journaling for me
+                        </p>
+                        <p>
+                            <b>05/31/25:</b> I found Kalechip's cool fake listography page template and I wanted to make
+                            a <a href="listfauxgraphy/index.html">little page</a> for just thought dumps + random links
+                            I feel won't fit into my bookmarks page
+                        </p>
+                        <p>
+                            <b>05/28/25:</b> New <a href="blogging.html">/blog</a> entry yapping mostly about
+                            recognizing traits of myself (some of which I didn't know) in my own OCs.
+                            <em>(I also expanded more on my media log, but that's minor compared to this </em>😉<em
+                                >)</em
+                            >
+                        </p>
+                        <p>
+                            <b>05/27/25:</b> I caved and made a <a href="media-log.html">/media-log</a> to document some
+                            of my tracked media in a single place; although it won't be everything I list in my tracking
+                            specific sites, I'd like to show off the stuff I've consumed and my thoughts on them!
+                        </p>
+                        <p>
+                            <b>05/25/25:</b> New <a href="./now.html">/now</a> entry! Just new life updates + what's
+                            been going on
+                        </p>
+                        <p>
+                            <b>05/23/25:</b> New <a href="https://zhongvie.neocities.org/blogging">blog post</a>, though
+                            I'd call it more of an unorganized thought dump. Mostly surrounding me talking about how I
+                            view my own identity, and more as something to empty my brain out of my thoughts! It's
+                            definitely a more personal blab.
+                        </p>
+                        <p>
+                            <b>05/19/25:</b> Brought in one of my oldest OCs which is my
+                            <a href="oc/resu.html">Bleach OC</a>! Her profile is rough cause god knows it was written
+                            well over ten years ago, but she's one of my more developed OCs I had immensely active for
+                            3&ndash;4 years before she was retired. Had it not been for her, I'd have never met such
+                            wonderful people in the OC/Canon community back then
+                        </p>
+                        <p>
+                            <b>05/15/25:</b> New <a href="Recipes/airfry-pork-tenderloin.html">/recipe</a> for pork
+                            tenderloin!! Also updated <a href="blogging.html">/blog</a> with a new post about being
+                            non-sharing in the yume community
+                        </p>
+                        <p>
+                            <b>05/14/25:</b> Began work on the program list on my
+                            <a href="bookmarks.html">/bookmarks</a>, though I know I'm still missing quite a few
+                        </p>
+                        <p><b>05/13/25:</b> Added a feed!! It'll be a reflection of future updates made here</p>
+                        <p>
+                            <b>05/12/25:</b> Added a <a href="now.html">/now</a> page to try to track what's been going
+                            on with my life cause my memory is SO peepee poo poo
+                        </p>
+                        <p>
+                            <b>05/09/25:</b> Got <a href="bookmarks.html">/bookmarks</a> up and running with some of my
+                            firefox extensions! Also finished <a href="oc/khaliun.html">/khaliun</a>'s OC page too
+                        </p>
+                        <p>
+                            <b>05/07/25:</b> Added my <a href="ocs.html">/oc</a> hub and made
+                            <a href="oc/hideki.html">/hideki</a>'s page ... slowly adding my other blorbos in
+                        </p>
+                        <p>
+                            <b>05/05/25:</b> Happy one month anniversary to this website coming to be!! Nothing big has
+                            been going on, mostly minor fixes + CSS tweaks
+                        </p>
+                        <p>
+                            <b>05/02/25:</b> Euehgugh dark mode overhaul ... so many pages to put scripts into but ...
+                            all pages <i>should</i> be on the same toggle to swap between dark/light mode
+                        </p>
+                        <p>
+                            <b>05/01/25:</b> Finished my <a href="shrines/zhongli.html">/zhongli</a> shrine!! Now all
+                            that's left that's empty are my recipes and bookmarks ...
+                        </p>
+                        <p>
+                            <b>04/30/25:</b> New <a href="blogging.html">/blog</a> post about some nostalgia over old
+                            MMO games I've played
+                        </p>
+                        <p>
+                            <b>04/29/25:</b> RAAAH my <a href="shrines/zhongvie.html">OC/Canon shrine</a> is DONEEEE
+                            LETS GOOOOO!!!!!
+                        </p>
+                        <p>
+                            <b>04/27/25:</b> Recipe page + first two recipes added, finished my 3 main OC pages, and a
+                            lot more back-end keeping ... I'm beginning my first shrine right now!!
+                        </p>
+                        <p>
+                            <b>04/24/25:</b> First OC page is now live!!! And the template is set up for me to easily
+                            remove sections I don't need/personalize colours so more should be coming out soon for my
+                            two other main OCs 😏
+                        </p>
+                        <p>
+                            <b>04/22/25:</b> Finally got an accessible nav bar in ... my brain hurts from it ... nav bar
+                            should be navigatable using arrow keys.
+                        </p>
+                        <p>
+                            <b>04/20/25:</b> New webring added!! Also shuffled some stuff around on the index (like this
+                            update zone). Also yay more responsive nav header with dropdowns!
+                        </p>
+                        <p>
+                            <b>04/17/25:</b> Bleh mostly been doing back-end stuff (image optimizing + aria-hidden),
+                            school is nuking me rn ...
+                        </p>
+                        <p>
+                            <b>04/13/25:</b> Yay <a href="about.html">about me</a> is live, though I'm having a hoot
+                            figuring out tabs ...
+                        </p>
+                        <p>
+                            <b>04/12/25:</b> HAHAH font toggle + persistence on refresh/pages FINALLY works. I mostly
+                            added it for days when its hard for even my eyes to focus on the pixel text, so as a simple
+                            toggle to Arial which is easiest on my eyes.
+                        </p>
+                        <p>
+                            <b>04/11/25:</b> Uhh, added a bunch of stuff ... adjusting my credits page + began a sitemap
+                            + did some mobile responsiveness work.
+                        </p>
+                        <p>
+                            <b>04/10/25:</b> Ughh re-coded the entire site to use a grid system, so it's not reliant on
+                            the template I began with. Everything is now properly marked in the CSS + HTML, and it's
+                            <i>somewhat</i> responsive on mobile. I'll probably keep just the main content visible on
+                            mobile since I haven't figured out how to force the sidebars to re-size to the screen width.
+                        </p>
+                        <p>
+                            <b>04/08/25:</b> Marquees beloathed ... no success in getting a javascript alternative to
+                            work, so I just used the good old &lt;marquee&gt; code lmaoooo. Added a site button too, so
+                            I <i>think</i> I'm done with the barebone setting up for the layouts.
+                        </p>
+                        <p>
+                            <b>04/07/25:</b> Added a <a href="manifesto.html">manifesto</a> page, though uh ... gonna be
+                            pondering on what to write in it for a good while. Otherwise just CSS mucking about.
+                        </p>
+                        <p>
+                            <b>04/06/25:</b> Why is it so hard to decide on a theme ... revamped the entire CSS layout
+                            to match closer to my Toyhouse one.
+                        </p>
+                        <p style="margin-bottom: 0">
+                            <b>04/05/25:</b> Made the site ... HTML and CSS spooky, it's been years since I've really
+                            went super in depth. Made a <a href="to-do.html">to-do</a> to keep note of what I need ...
+                            to do ...
+                        </p>
+                    </div>
+                </article>
+            </main>
+            <!-- =============================================== -->
+            <!-- RIGHT SIDEBAR CONTENT -->
+            <!-- =============================================== -->
+            <aside class="right-sidebar hide-mobile">
+                <!-- =============================================== -->
+                <!-- WATCHING / PLAYING. -->
+                <!-- =============================================== -->
+                <section>
+                    <!-- HEADER -->
+                    <h4>
+                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
+                        Currently
+                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
+                    </h4>
+                    <p>
+                        <span class="highlight">Watching:</span>
+                        Panty and Stocking, The Summer Hikaru Died
+                    </p>
+                    <p>
+                        <span class="highlight">Playing:</span>
+                        <span class="tippy" data-tippy-content="Honkai Star Rail">HSR</span>, Genshin,
+                        <span class="tippy" data-tippy-content="Imperishable Night">Touhou 8</span>,
+                        <span class="tippy" data-tippy-content="Need for Speed Most Wanted (2005)">NFSMW</span>
+                    </p>
+                    <p>
+                        <span class="highlight">Reading:</span>
+                        Nothing
+                    </p>
+                    <p>
+                        <span class="highlight">Feeling:</span>
+                        <a href="https://www.imood.com/users/asuraid">
+                            <img
+                                src="https://moods.imood.com/display/uname-asuraid/fg-788b68/trans-1/imood.gif"
+                                alt="The current mood of asuraid at www.imood.com"
+                                style="border: 0; color: var(--text-colour)"
+                        /></a>
+                    </p>
+                </section>
+                <!-- =============================================== -->
+                <!-- PICLOG. -->
+                <!-- =============================================== -->
+                <section>
+                    <!-- HEADER -->
+                    <h4>
+                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
+                        Piclog
+                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
+                    </h4>
+                    <a href="https://piclog.blue/profile.php?id=1375"
+                        ><img
+                            src="https://piclog.blue/latest.php?id=1375"
+                            class="full-width-image"
+                            loading="lazy"
+                            style="margin-bottom: 0; margin-top: 10px"
+                            alt="Piclog entry"
+                    /></a>
+                </section>
+                <!-- =============================================== -->
+                <!-- MONTHLY POLL. -->
+                <!-- =============================================== -->
+                <section>
+                    <!-- HEADER -->
+                    <h4 style="margin-bottom: 10px">
+                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
+                        Monthly Poll
+                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
+                    </h4>
+                    <iframe
+                        src="https://sylviegirly.github.io/public/frames/polls.html"
+                        title="poll"
+                        id="poll-code"
+                        style="border: none; width: 100%; height: 360px; min-height: none !important">
+                    </iframe>
+                </section>
+                <!-- =============================================== -->
+                <!-- NEIGHBOURS. -->
+                <!-- =============================================== -->
+                <section style="padding-bottom: 5px">
+                    <!-- HEADER -->
+                    <h4>
+                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
+                        Neighbours
+                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
+                    </h4>
+                    <div class="marquee" style="--hover: paused" data-speed="70">
+                        <a href="https://aegann.neocities.org/"
+                            ><img alt="aegann" src="./img/sites/aegcafebutton.gif" class="freezeframe" loading="lazy"
+                        /></a>
+                        <a href="https://altalenae.neocities.org"
+                            ><img src="./img/sites/altalenae.png" loading="lazy" alt="altalenae"
+                        /></a>
+                        <a href="https://arataka.moe"
+                            ><img
+                                alt="Laith Rai7an"
+                                src="https://files.catbox.moe/k0v6qu.gif"
+                                class="freezeframe"
+                                loading="lazy"
+                        /></a>
+                        <a href="https://badgraph1csghost.neocities.org/">
+                            <img src="./img/sites/8s_badgraph1csghost.png" alt="bad graphics ghost" loading="lazy"
+                        /></a>
+                        <a href="https://bechnokid.neocities.org/">
+                            <img src="./img/sites/bechnokid.png" alt="bechno kid" loading="lazy"
+                        /></a>
+                        <a href="https://blueberrymuffinss.neocities.org/">
+                            <img src="./img/sites/blueberrymuffinss.png" alt="blueberry muffins" loading="lazy"
+                        /></a>
+                        <a href="https://BLUecho.neocities.org/" target="_blank"
+                            ><img
+                                src="./img/sites/BLUecho_button.gif"
+                                loading="lazy"
+                                class="freezeframe"
+                                alt="bluecho button"
+                        /></a>
+                        <a href="https://bughug.neocities.org/"
+                            ><img src="./img/sites/bughug.png" loading="lazy" alt="bughug" width="88" height="31"
+                        /></a>
+                        <a href="https://bulltown.neocities.org/">
+                            <img src="./img/sites/b-n-button.png" alt="bull town" loading="lazy"
+                        /></a>
+                        <a href="https://butcher-birds-nest.neocities.org"
+                            ><img src="./img/sites/butcherbirdsnest.png" alt="BUTCHER--BIRD'S ART DUNGEON"
+                        /></a>
+                        <a href="https://byrdseed.neocities.org"
+                            ><img src="./img/sites/byrdseed.png" loading="lazy" alt="byrd seed"
+                        /></a>
+                        <a href="https://caminus.neocities.org/"
+                            ><img src="./img/sites/caminus.png" alt="cheruehai" loading="lazy"
+                        /></a>
+                        <a href="https://cheruehai.neocities.org/"
+                            ><img
+                                src="./img/sites/cheruehai_button.gif"
+                                alt="cheruehai"
+                                loading="lazy"
+                                class="freezeframe"
+                        /></a>
+                        <a href="https://crotovane.neocities.org/">
+                            <img
+                                src="https://file.garden/Zk7Kw4iRxGzlYvGW/crotovane.gif"
+                                loading="lazy"
+                                alt="crotovane"
+                        /></a>
+                        <a href="https://crowcoco.neocities.org/"
+                            ><img alt="crowcoco" src="./img/sites/crowcoco.gif" class="freezeframe" loading="lazy"
+                        /></a>
+                        <a href="https://cyberstheb.neocities.org/">
+                            <img src="./img/sites/cyberstheb.gif" loading="lazy" alt="cyberstheb" class="freezeframe"
+                        /></a>
+                        <a href="https://daniele63.com/"
+                            ><img alt="daniele 63" src="./img/sites/danieles_button.png" loading="lazy"
+                        /></a>
+                        <a href="https://derangedyaoi.neocities.org/"
+                            ><img alt="deranged yaoi" src="./img/sites/derangedyaoibutton.png" loading="lazy"
+                        /></a>
+                        <a href="https://divergentrays.com"
+                            ><img alt="divergent rays" src="./img/sites/drbutton2.png" loading="lazy"
+                        /></a>
+                        <a href="https://dobeastsdream.neocities.org/"
+                            ><img alt="do beasts dream" src="./img/sites/button_dobeastsdream_1.png" loading="lazy"
+                        /></a>
+                        <a href="https://doglike.nekoweb.org/"
+                            ><img
+                                src="https://doglike.nekoweb.org/graphics/doglike.gif"
+                                alt="doglike"
+                                loading="lazy"
+                                class="freezeframe"
+                        /></a>
+                        <a href="https://drinkmoretea.neocities.org/">
+                            <img src="./img/sites/drinkmoreteasitebutt.png" alt="drink more tea" loading="lazy"
+                        /></a>
+                        <a href="https://evilperson.neocities.org/"
+                            ><img src="./img/sites/evilbutton.gif" loading="lazy" alt="evil person" class="freezeframe"
+                        /></a>
+                        <a href="https://heeraaith.neocities.org/"
+                            ><img
+                                src="./img/sites/heeraaithbutton.gif"
+                                alt="heeraaith"
+                                loading="lazy"
+                                class="freezeframe"
+                        /></a>
+                        <a href="https://humblebeeowo.neocities.org/"
+                            ><img src="img/sites/bee_button.png" alt="humblebee owo" loading="lazy"
+                        /></a>
+                        <a href="https://juneish.neocities.org"
+                            ><img alt="juneish" src="./img/sites/button.gif" loading="lazy"
+                        /></a>
+                        <a href="https://katbots.neocities.org/"
+                            ><img src="./img/sites/katbots.png" loading="lazy" alt="kat bots"
+                        /></a>
+                        <a href="https://keysklubhouse.com">
+                            <img src="./img/sites/keys_by_pastelhello2.png" alt="keys clubhouse" loading="lazy"
+                        /></a>
+                        <a href="https://kkb.online"
+                            ><img
+                                src="./img/sites/kkbutton.gif"
+                                alt="kkb.online 88x31 button"
+                                loading="lazy"
+                                class="freezeframe"
+                        /></a>
+                        <a href="https://kuroi.neocities.org/"
+                            ><img alt="kuroi" src="./img/sites/kuroi.png" loading="lazy"
+                        /></a>
+                        <a href="https://lakestheguy.neocities.org/"
+                            ><img src="./img/sites/lakestheguy.png" alt="lakes the guy" loading="lazy"
+                        /></a>
+                        <a href="https://lazer-bunny.neocities.org/"
+                            ><img
+                                src="https://i.imgur.com/PTTYSwz.gif"
+                                alt="lazer bunny"
+                                loading="lazy"
+                                class="freezeframe"
+                        /></a>
+                        <a href="https://leizy8499.neocities.org"
+                            ><img src="./img/sites/greenteeth.png" loading="lazy" alt="leizy8499"
+                        /></a>
+                        <a href="https://lemonadehammer.neocities.org"
+                            ><img
+                                src="https://i.imgur.com/7xr3Lfk.gif"
+                                alt="lemonade hammer"
+                                loading="lazy"
+                                class="freezeframe"
+                        /></a>
+                        <a href="https://literallyfictional.neocities.org"
+                            ><img
+                                src="https://i.imgur.com/a5fqWpm.gif"
+                                alt="literally fictional"
+                                class="freezeframe"
+                                loading="lazy"
+                        /></a>
+                        <a href="https://maggyoutthere.neocities.org/"
+                            ><img
+                                src="./img/sites/maggyoutthere-button-2.gif"
+                                loading="lazy"
+                                class="freezeframe"
+                                alt="maggie you there button"
+                        /></a>
+                        <a href="https://mavisdeluna.art">
+                            <img src="img/sites/mavisdeluna.gif" alt="mavis de luna" class="freezeframe" loading="lazy"
+                        /></a>
+                        <a href="https://mintywyvern.neocities.org"
+                            ><img src="./img/sites/MintyWyvern_button.png" loading="lazy" alt="minty wyvern"
+                        /></a>
+                        <a href="https://mioasis.neocities.org/">
+                            <img src="./img/sites/mibutton.gif" loading="lazy" alt="mioasis" class="freezeframe"
+                        /></a>
+                        <a href="https://mle-s-paint.neocities.org/">
+                            <img src="./img/sites/MLESLINK1.gif" loading="lazy" alt="mle's paint" class="freezeframe"
+                        /></a>
+                        <a href="https://moogleboogles.neocities.org/">
+                            <img src="https://i.imgur.com/lFO9jno.png" alt="moogle boogles" loading="lazy"
+                        /></a>
+                        <a href="https://moonside-inn.neocities.org/"
+                            ><img src="https://files.catbox.moe/2va2li.png" alt="moonside" loading="lazy"
+                        /></a>
+                        <a href="https://mossypawprints.neocities.org/"
+                            ><img
+                                src="./img/sites/mossypawprints.JPG"
+                                width="88"
+                                height="31"
+                                loading="lazy"
+                                alt="mossy pawprints"
+                        /></a>
+                        <a href="https://nanacore.neocities.org/"
+                            ><img src="./img/sites/nanacore.png" width="88" height="31" loading="lazy" alt="nanacore"
+                        /></a>
+                        <a href="https://napreviewz.neocities.org/"
+                            ><img src="img/sites/napreviewz.gif" alt="nap reviewz" class="freezeframe" loading="lazy"
+                        /></a>
+                        <a href="https://newarcade.cc" target="_blank"
+                            ><img src="img/sites/arcadebutton.png" alt="New Arcade" loading="lazy"
+                        /></a>
+                        <a href="https://nomnomnami.com/"
+                            ><img
+                                src="./img/sites/nomnomnami_button.gif"
+                                alt="nom nom nami"
+                                loading="lazy"
+                                class="freezeframe"
+                        /></a>
+                        <a href="https://northomecavern.neocities.org"
+                            ><img src="./img/sites/northomepc_b.png" loading="lazy" alt="north home cavern"
+                        /></a>
+                        <a href="https://nyscyra.nekoweb.org/"
+                            ><img src="https://nyscyra.nekoweb.org/img/button.png" loading="lazy" alt="nyscyra"
+                        /></a>
+                        <a href="https://ordainedmotion.neocities.org"
+                            ><img
+                                src="./img/sites/ordainedmotion.png"
+                                width="88"
+                                height="31"
+                                loading="lazy"
+                                alt="Mizumiya - Water Palace"
+                        /></a>
+                        <a href="https://orion-overdrive.neocities.org"
+                            ><img
+                                src="./img/sites/orion%20overdrive%20button%2088x31.png"
+                                loading="lazy"
+                                alt="orion overdrive"
+                        /></a>
+                        <a href="https://p7uen.neocities.org"
+                            ><img
+                                src="./img/sites/p7button.gif"
+                                loading="lazy"
+                                class="freezeframe"
+                                alt="p7 game reviews"
+                        /></a>
+                        <a href="https://parakibara.neocities.org/"
+                            ><img src="https://i.imgur.com/nNvvx3y.png" loading="lazy" alt="parakibara"
+                        /></a>
+                        <a href="https://peony-atelier.j.pl/"
+                            ><img src="https://peony-atelier.j.pl/banners/8831b.png" alt="peony atelier" loading="lazy"
+                        /></a>
+                        <a href="https://petrapixel.neocities.org/"
+                            ><img
+                                src="https://cdn.jsdelivr.net/gh/petracoding/petrapixel.neocities.org@latest/public/img/linkback.gif"
+                                alt="petrapixel"
+                                class="freezeframe"
+                                loading="lazy"
+                        /></a>
+                        <a href="https://philia995.neocities.org/"
+                            ><img src="img/sites/philiabutton3.0.png" alt="philia 995" loading="lazy"
+                        /></a>
+                        <a href="https://pxxels.neocities.org"
+                            ><img src="./img/sites/pxxels.png" alt="pxxels" loading="lazy" />
+                        </a>
+                        <a href="https://razzpixel.neocities.org"
+                            ><img src="./img/sites/razzpixel.gif" loading="lazy" class="freezeframe" alt="razz pixel"
+                        /></a>
+                        <a href="https://sadgrl.online/"
+                            ><img
+                                src="https://i.imgur.com/Kt0qhQ6.gif"
+                                loading="lazy"
+                                alt="sad grl online"
+                                class="freezeframe"
+                        /></a>
+                        <a href="https://sanchoyoscribbles.neocities.org"
+                            ><img alt="sanchoyoscribbles" src="./img/sites/ssws.gif" class="freezeframe" loading="lazy"
+                        /></a>
+                        <a href="https://seafare.neocities.org/"
+                            ><img src="./img/sites/seafare.png" loading="lazy" alt="bughug"
+                        /></a>
+                        <a href="https://seashrine.nekoweb.org/"
+                            ><img
+                                src="https://seashrine.nekoweb.org/gifs/seashrinesitebutton.gif"
+                                alt="seashrine"
+                                loading="lazy"
+                        /></a>
+
+                        <a href="https://shwintykat.neocities.org"
+                            ><img alt="shwintykat" src="./img/sites/meerkatbutton2.png" loading="lazy"
+                        /></a>
+                        <a href="https://slushiecafe.neocities.org/"
+                            ><img
+                                src="img/sites/slushiecafebutton.gif"
+                                alt="slushie cafe"
+                                class="freezeframe"
+                                loading="lazy"
+                        /></a>
+                        <a href="https://sodarain.neocities.org"
+                            ><img src="./img/sites/sodarain.gif" alt="soda rain" loading="lazy" class="freezeframe"
+                        /></a>
+                        <a href="https://soulbox.neocities.org"
+                            ><img src="./img/sites/soulbox.png" alt="soda rain" loading="lazy"
+                        /></a>
+                        <a href="https://starry-knight.neocities.org/">
+                            <img src="img/sites/button-starrys-grove.png" alt="Starry's Grove" loading="lazy"
+                        /></a>
+                        <a href="https://tofutush.neocities.org/"
+                            ><img alt="tofutush" src="./img/sites/tofutush.gif" class="freezeframe" loading="lazy"
+                        /></a>
+                        <a href="https://tophatcats.neocities.org/"
+                            ><img
+                                src="./img/sites/tophatcats.gif"
+                                loading="lazy"
+                                class="freezeframe"
+                                alt="top hat cats"
+                        /></a>
+                        <a href="https://ventablack.neocities.org"
+                            ><img
+                                src="./img/sites/ventablack.png"
+                                width="88"
+                                height="31"
+                                loading="lazy"
+                                alt="ventablack"
+                        /></a>
+                        <a href="https://wizardhell.neocities.org/">
+                            <img src="./img/sites/wizardhellbutton.png" alt="wizard hell" loading="lazy"
+                        /></a>
+                        <a href="https://xandra.cc">
+                            <img src="./img/sites/xandra.png" alt="xandra" loading="lazy"
+                        /></a>
+                        <a href="https://yogomagpie.neocities.org"
+                            ><img src="./img/sites/YMbutton.gif" alt="Yogo Magpie" class="freezeframe" loading="lazy"
+                        /></a>
+                    </div>
+                </section>
+            </aside>
+            <!-- =============================================== -->
+            <!-- ZHONGVIE SIDEBAR. -->
+            <!-- =============================================== -->
+            <div class="side-deco"></div>
+        </div>
+
+        <!-- =============================================== -->
+        <!-- Footer will be loaded per JavaScript! Edit footer.js to change. -->
+        <!-- =============================================== -->
+        <general-footer></general-footer>
+
+        <!-- =============================================== -->
+        <!-- Initialize marquee grid. -->
+        <!-- =============================================== -->
+        <script>
+            marquee.setup();
+        </script>
+
+        <!-- Wedding Ring -->
+        <script type="text/javascript" src="https://weddingring.nekoweb.org/onionring/weddingring.js"></script>
+        <script src="js/weddingring.js"></script>
+
+        <!-- Tippy.js -->
+        <script src="https://unpkg.com/popper.js@1"></script>
+        <script src="https://unpkg.com/tippy.js@5"></script>
+        <script>
+            tippy("[data-tippy-content]", {
+                duration: 500,
+                placement: "top",
+                theme: "character"
+            });
+        </script>
+
+        <!-- Scroll to Top -->
+        <script src="js/scroll-to-top.js"></script>
+
+        <!-- Accessibility Button -->
+        <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
+
+        <!-- Page Specific Scripts -->
+        <script src="js/random-sentence.js"></script>
+        <script src="js/random-dragcave.js"></script>
+        <script src="js/loader.js"></script>
+        <script src="js/accordion.js"></script>
+    </body>
+</html>

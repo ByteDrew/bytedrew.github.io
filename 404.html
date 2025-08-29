@@ -1,0 +1,142 @@
+
+<!doctype html>
+<html lang="en">
+    <!--
+
+    Welcome to my insanity, if you're here, go get a sip of water. Anyway, feel free to
+    peep at my (probably disorganized) coding!! Just don't 1:1 copy.
+
+    --->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Site Title -->
+        <title>oopsies!</title>
+
+        <!-- Site Description -->
+        <meta content="Error page." name="description" />
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="./css/normalize.css" />
+
+        <script>
+            function getNestingString() {
+                // This function prepares the "nesting" variable for your header and footer (see below).
+                // Only change this function if you know what you're doing.
+                const currentUrl = window.location.href
+                    .replace("http://", "")
+                    .replace("https://", "")
+                    .replace("/public/", "/");
+                const numberOfSlahes = currentUrl.split("/").length - 1;
+                if (numberOfSlahes == 1) return ".";
+                if (numberOfSlahes == 2) return "..";
+                return ".." + "/..".repeat(numberOfSlahes - 2);
+            }
+
+            const nesting = getNestingString();
+        </script>
+
+        <style>
+            body {
+                width: 100%;
+                color: white;
+                font-family: "atkinson", sans-serif;
+                line-height: 1.3rem;
+                font-size: 1em;
+                letter-spacing: 0;
+                background-color: #211f1f;
+                opacity: 1;
+                background-size: 10px 10px;
+                background-image: repeating-linear-gradient(45deg, #131212 0, #131212 1px, #211f1f 0, #211f1f 50%);
+            }
+
+            .container {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: 400px;
+                height: fit-content;
+                text-align: center;
+            }
+
+            h1 {
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-size: 2em;
+                color: #687a8b;
+                font-family: "dosis", sans-serif;
+            }
+
+            a {
+                color: #86b4e8;
+                transition: 0.5s;
+            }
+
+            a:hover {
+                color: rgb(255, 255, 255);
+            }
+
+            a:visited {
+                color: #86b9e8;
+            }
+
+            @media (prefers-color-scheme: light) {
+                body {
+                    color: #16190f;
+                    background-color: #dfe0d2;
+                    background-image: repeating-linear-gradient(45deg, #eceeda 0, #eceeda 1px, #dfe0d2 0, #dfe0d2 50%);
+                }
+
+                h1 {
+                    color: #374d61;
+                }
+
+                a {
+                    color: #b67925;
+                    transition: 0.5s;
+                }
+
+                a:hover {
+                    color: black;
+                }
+
+                a:visited {
+                    color: #b67925;
+                }
+            }
+
+            @font-face {
+                font-family: "atkinson";
+                font-display: swap;
+                src: url("../fonts/AtkinsonHyperlegible-Regular.ttf");
+            }
+
+            @font-face {
+                font-family: "dosis";
+                font-display: swap;
+                src: url("../fonts/Dosis-VariableFont_wght.ttf");
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>oopsies!</h1>
+            <p>Somehow you found your way here ... which is not good!</p>
+            <img
+                src="../assets/wipatrick.png"
+                style="width: 300px"
+                aria-hidden="true"
+                alt="" />
+            <p>
+                Most likely this is a work in progress page, <b>or</b> I messed up linking a page somehow, <b>or</b> you
+                do not have <u>JavaScript</u> enabled, as my page heavily relies on it for the layout.
+            </p>
+            <p><a href="https://bytedrew.github.io">Return home?</a></p>
+        </div>
+        <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
+    </body>
+</html>

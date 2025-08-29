@@ -1,0 +1,1074 @@
+<!doctype html>
+<html lang="en">
+    <!--
+
+     ________  ___  ___  ________  ________   ________  ___      ___ ___  _______
+    |\_____  \|\  \|\  \|\   __  \|\   ___  \|\   ____\|\  \    /  /|\  \|\  ___ \
+     \|___/  /\ \  \\\  \ \  \|\  \ \  \\ \  \ \  \___|\ \  \  /  / | \  \ \   __/|
+         /  / /\ \   __  \ \  \\\  \ \  \\ \  \ \  \  __\ \  \/  / / \ \  \ \  \_|/__
+        /  /_/__\ \  \ \  \ \  \\\  \ \  \\ \  \ \  \|\  \ \    / /   \ \  \ \  \_|\ \
+       |\________\ \__\ \__\ \_______\ \__\\ \__\ \_______\ \__/ /     \ \__\ \_______\
+        \|_______|\|__|\|__|\|_______|\|__| \|__|\|_______|\|__|/       \|__|\|_______|
+
+    Welcome to my insanity, if you're here, go get a sip of water. Anyway, feel free to
+    peep at my (probably disorganized) coding!! Just don't 1:1 copy.
+
+    --->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Send to not found page is there's no javascript -->
+        <noscript> <meta http-equiv="Refresh" content="0; URL=not_found.html" /> </noscript>
+
+        <!-- Site Title -->
+        <title>about me!</title>
+
+        <!-- Author -->
+        <meta name="author" content="Asuraid" />
+
+        <!-- Site Description -->
+        <meta content="Personal about me for this website." name="description" />
+
+        <!-- CSS: -->
+        <!-- You will have to change this to "../style.css" if this HTML file is in a subfolder, to "../../style.css"
+        if this HTML file is in 2 subfolders, etc. -->
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/normalize.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+        <!-- JavaScript: -->
+        <!-- You will have to change this to "../layout.js" if this HTML file is in a subfolder, to "../../layout.js"
+        if this HTML file is in 2 subfolders, etc. -->
+        <script src="js/header.js" defer></script>
+        <script src="js/left-sidebar.js" defer></script>
+        <script src="js/footer.js" defer></script>
+        <script src="js/tab-title-suffix.js"></script>
+
+        <!-- Disclosure Menu -->
+        <script src="js/accessibility/disclosure-menu.iife.js"></script>
+        <script src="js/accessibility/accessible-menu.js" type="module"></script>
+
+        <!-- Page Only Styling -->
+        <style>
+            /* Style the tab */
+            .tab {
+                overflow: hidden;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            /* Style the buttons that are used to open the tab content */
+            .tab button {
+                color: var(--font-on-accent);
+                background-color: var(--primary-accent);
+                font-family: "dosis";
+                font-size: inherit;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                border-radius: var(--border-radius);
+                transition: 0.3s;
+                width: calc(20% - 20px) !important;
+            }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: var(--secondary-accent);
+            }
+
+            .tab button:focus {
+                box-shadow: inset 0 0 0 5px var(--link-colour);
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                background-color: var(--secondary-accent);
+            }
+
+            /* Style the tab content */
+            .tabcontentinside {
+                height: fit-content;
+                background-color: var(--body-deco);
+                border-radius: var(--border-radius);
+                margin-top: 10px;
+                padding: 12px;
+                border-top: none;
+                animation: fadeEffect 1s; /* Fading effect takes 1 second */
+            }
+
+            .tabcontentinside .flexbox {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 13px;
+                width: 100%;
+            }
+
+            .flexbox div {
+                width: calc(20% - 13px);
+                text-align: center;
+            }
+
+            .flexbox div img {
+                outline: 2px solid var(--primary-accent);
+                border-radius: var(--border-radius);
+                max-width: 100%;
+                max-height: 180px;
+                object-fit: contain;
+            }
+
+            .flexbox div p {
+                margin-top: 0;
+                font-family: "dosis";
+                font-weight: bold;
+            }
+
+            .flexbox div p i {
+                font-size: 0.8em;
+                font-weight: normal;
+            }
+
+            .flexbox div class .tabcontent .interest-content ul {
+                margin: 0;
+            }
+
+            .tabcontentinside .flexstamps {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 5px;
+                width: 100%;
+            }
+
+            .tabcontentinside .picrews {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 15px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .tabcontentinside .picrews div {
+                width: calc(33% - 10px) !important;
+                object-fit: contain;
+            }
+
+            .tabcontentinside .picrews div img {
+                width: 100%;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+                border-radius: var(--border-radius);
+                outline: 2px solid var(--primary-accent);
+            }
+
+            .flexstamps a {
+                line-height: 0 !important;
+            }
+
+            .tabcontent h1,
+            .tabcontent p {
+                animation: fadeEffect 1s; /* Fading effect takes 1 second */
+            }
+
+            @media screen and (max-width: 800px) {
+                .flexbox div {
+                    width: calc(33% - 10px);
+                    text-align: center;
+                }
+            }
+        </style>
+    </head>
+    <body id="body">
+        <!-- =============================================== -->
+        <!-- Accessibility links. -->
+        <!-- =============================================== -->
+        <a href="#content" id="skip-to-content-link">Skip to content</a>
+
+        <!-- =============================================== -->
+        <!-- Header will be loaded per JavaScript! Edit header.js to change. -->
+        <!-- =============================================== -->
+        <nav-header></nav-header>
+
+        <button onclick="topFunction()" id="backscroll" title="Go to top">Top</button>
+
+        <div class="container-grid">
+            <!-- =============================================== -->
+            <!-- Sidebar will be loaded per JavaScript! Edit left-sidebar.js to change. -->
+            <!-- =============================================== -->
+            <left-sidebar></left-sidebar>
+            <main id="content">
+                <!-- =============================================== -->
+                <!-- ABOUT ME. -->
+                <!-- =============================================== -->
+                <article>
+                    <h1><img src="../assets/hanging_flowers.gif" aria-hidden="true" alt="" /> About the Webmaster</h1>
+                    <div class="columns">
+                        <div style="flex-basis: content">
+                            <div class="image-deco">
+                                <a href="https://picrew.me/image_maker/597356">
+                                    <img
+                                        src="../assets/about_me_2.png"
+                                        style="width: 250px; float: left; margin-bottom: 0"
+                                        alt="a chibi picrew of the webmaster" />
+                                </a>
+                            </div>
+                        </div>
+                        <div style="flex-basis: content">
+                            <ul>
+                                <li><b>Name:</b> Drew / ByteDrew</li>
+                                <li>
+                                    <b>Pronouns:</b>
+                                    <a
+                                        href="https://en.pronouns.page/@asuraid"
+                                        data-tippy-content="Pronoun page. TL;DR I ID as cis, but I'm also very minimally attached to the concept of being a 'girl' (cassgirl)."
+                                        >He / Him</a
+                                    >
+                                </li>
+                                <li><b>Age:</b> 18</li>
+                                <li><b>MBTI:</b> ENFP-A</li>
+                                <li><b>Enneagram:</b> 9w1</li>
+                                <li><b>Time Zone:</b> CDT / CST </li>
+                                <li><b>Location:</b> Missouri</li>
+                                <li><b>Languages:</b> English / German</li>
+                            </ul>
+                    <hr />
+                    <p>
+                        As the info on the front says, hi! Name's <b>Aid</b>, mostly based off <i>Asuraid</i> which is
+                        my usual online handle in
+                        <span
+                            class="tippy"
+                            data-tippy-content="Asuraid is mostly used for my art accounts or general accounts, so sometimes with personal accounts i use different names ... like this site!"
+                            >most places</span
+                        >. Just a gal floating by in life and wishing for her own place one day.
+                    </p>
+                    <p>
+                        I'm on the cusp between a millennial and Gen Z (though honestly I'd rather just call myself a
+                        <u>millennial</u>, I <b>do not</b> relate to zoomers). I
+                        <span
+                            class="tippy"
+                            data-tippy-content="I have no way to get diagnosed right now/not in a comfortable place to do it, but considering I've been looking into it for well over half a year, to a year now, I'm like 99% sure of it ... and been clocked by uh ... multiple people thinking I have traits of it ..."
+                            >think</span
+                        >
+                        I have inattentive ADHD and I'm a chronic 'jumps between fixations like a mad person' sufferer,
+                        which also means I like trying out new things a lot and fixating on them for a set time before
+                        something else hits me like a truck (which also means chronic collection of projects I never
+                        finish fully). Forever stuck with the 'hyperfixation for two weeks' bug even with games
+                        sometimes. But hey, it means I know a lot of random stuff I've tried out and piles of resources
+                        for said things.
+                    </p>
+                    <p>
+                        I've also been an artist since I was a wee bab and a digital artist for most of my lifetime; I
+                        enjoy learning new things and finding ways to put my blorbo into them (like ... making them into
+                        a 3D model using VRoid). I used to be a big
+                        <a href="https://web.archive.org/web/20120120140004/http://cockatiellover.deviantart.com/"
+                            >deviantART kid</a
+                        >
+                        before it went into the shitter. I've also been a chronic tumblr user since 2012 and I still
+                        have my original blog, plus I've roleplayed there a large portion of my lifetime. 🫡
+                    </p>
+                    <p>
+                        Otherwise I actually have a
+                        <span class="tippy" data-tippy-content="Bachelor's degree">BA</span> in Game Design!! As of
+                        writing this, it's kinda been hell getting a job though with this shit market (just as the
+                        internet has been shittified, so has AAA gaming). I don't have many <i>(completed)</i> solo
+                        projects since it's hard for me to do them on my own without a team, but I love consuming games
+                        and analyzing them.
+                    </p>
+                </article>
+                <!-- =============================================== -->
+                <!-- SOCIALS. -->
+                <!-- =============================================== -->
+                <article>
+                    <h1><img src="../assets/hanging_flowers.gif" aria-hidden="true" alt="" /> Socials</h1>
+                    <p>
+                        I tend to be most active on my tumblr. Otherwise these are the other places I'm in + some online
+                        games I play, anything starred (⭐) is what I'm active on, otherwise presume I'm very on and off
+                        with the others. I'm usually under <u>Asuraid</u> on most places!
+                    </p>
+                    <p>My <b>tumblr</b> does have more <u>adult content</u> as a warning.</p>
+                    <div class="columns">
+                        <div class="column" style="flex: 1 1 0; align-self: flex-start">
+                            <b>General Places to Find Me</b>
+                            <div class="interest-content" style="margin-top: -15px">
+                                <ul>
+                                    <li>
+                                        <a href="https://discourse.32bit.cafe/u/sylviegirly/summary">32-bit Cafe</a> ⭐
+                                    </li>
+                                    <li>
+                                        <a href="https://bsky.app/profile/sylviegirly.bsky.social">Bluesky</a>
+                                    </li>
+                                    <li><a href="https://aid.uwu.ai">Carrd</a></li>
+                                    <li><a href="https://www.last.fm/user/Asuraid">Last.fm</a></li>
+                                    <li><a href="https://spacehey.com/profile?id=3749430">SpaceHey</a></li>
+                                    <li><a href="https://toyhou.se/Hideki">Toyhouse</a> ⭐</li>
+                                    <li><a href="https://sylviegirly.tumblr.com">Tumblr</a> ⭐</li>
+                                </ul>
+                            </div>
+                            <b>Petsite / Website Games</b>
+                            <div class="interest-content" style="margin-top: -15px">
+                                <ul>
+                                    <li><a href="https://dappervolk.com/profile/506">Dappervolk</a></li>
+                                    <li>
+                                        <a href="https://formula9.ddns.net/u/Aid/587">DragonAdopters</a>
+                                    </li>
+                                    <li><a href="https://dragcave.net/user/Asuraid">Dragcave</a> ⭐</li>
+                                    <li>
+                                        <a href="https://www1.flightrising.com/clan-profile/68095">Flight Rising</a>
+                                        ⭐
+                                    </li>
+                                    <li><a href="https://gpx.plus/user/Asuraid">GPX Plus</a></li>
+                                    <li>
+                                        <a href="https://www.goatlings.com/profile/u/49999">Goatlings</a>
+                                    </li>
+                                    <li><a href="https://pixpet.net/u/Hideki">Pixpet</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="column" style="flex: 1 1 0; align-self: flex-start">
+                            <b>Art Related Places</b>
+                            <div class="interest-content" style="margin-top: -15px">
+                                <ul>
+                                    <li><a href="https://artfight.net/~Asuraid">Art Fight</a></li>
+                                    <li><a href="https://bsky.app/profile/asuraid.art">Bluesky</a></li>
+                                    <li><a href="https://asuraid.art">Carrd</a></li>
+                                    <li><a href="https://asuraid.itch.io/">Itch.io</a></li>
+                                    <li><a href="https://ko-fi.com/asuraid">Ko-fi</a></li>
+                                    <li><a href="https://asuraid.tumblr.com">Tumblr</a></li>
+                                    <li><a href="https://vgen.co/asuraid">VGen</a> (commissions)</li>
+                                </ul>
+                            </div>
+                            <b>Tracking Sites</b>
+                            <div class="interest-content" style="margin-top: -15px">
+                                <ul>
+                                    <li><a href="https://www.backloggd.com/u/Asuraid/">Backloggd</a> ⭐</li>
+                                    <li>
+                                        <a href="https://www.goodreads.com/user/show/166014392-aid">GoodReads</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://myanimelist.net/profile/Asuraid">MyAnimeList</a>
+                                        ⭐
+                                    </li>
+                                    <li>
+                                        <a href="https://myfigurecollection.net/profile/Asuraid">MyFigureCollection</a>
+                                    </li>
+                                    <li><a href="https://www.serializd.com/user/Asuraid/profile">Serializd</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <!-- =============================================== -->
+                <!-- INTERESTS. -->
+                <!-- =============================================== -->
+                <article>
+                    <div class="tab">
+                        <!-- Tab links -->
+                        <button class="tablinks" onclick="openTab(event, 'Games')" id="defaultOpen">Games</button>
+                        <button class="tablinks" onclick="openTab(event, 'Characters')">Characters</button>
+                        <button class="tablinks" onclick="openTab(event, 'Media')">Media</button>
+                        <button class="tablinks" onclick="openTab(event, 'quizzes')">Quizzes</button>
+                    </div>
+                </article>
+                <article>
+                    <div>
+                        <!-- Tab Content: Games -->
+                        <div id="Games" class="tabcontent">
+                            <h1>
+                                <img src="../assets/hanging_flowers.gif" aria-hidden="true" alt="" /> Favourite Games
+                            </h1>
+                            <div class="tabcontentinside interest-content">
+                                <div class="flexbox">
+                                    <div>
+                                        <img src="img/media/aceattorney.png" alt="" loading="lazy" />
+                                        <p>Ace Attorney Series</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/ao3.png" alt="" loading="lazy" />
+                                        <p>Age of Empires III</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/aoe.png" alt="" loading="lazy" />
+                                        <p>Age of Mythology</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/bg3.png" alt="" loading="lazy" />
+                                        <p>Baldur's Gate 3</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/bayonetta.png" alt="" loading="lazy" />
+                                        <p>Bayonetta Series</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/bioshock2.png" alt="" loading="lazy" />
+                                        <p>Bioshock 2</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/blinx2.png" alt="" loading="lazy" />
+                                        <p>Blinx 2: Masters of Time &amp; Space</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/code_vein.png" alt="" loading="lazy" />
+                                        <p>Code Vein</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/deltarune.png" alt="" loading="lazy" />
+                                        <p>Deltarune</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/da_2.png" alt="" loading="lazy" />
+                                        <p>Dragon Age Series</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/faith.png" alt="" loading="lazy" />
+                                        <p>Faith: The Unholy Trinity</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/FFXIV.png" alt="" loading="lazy" />
+                                        <p>Final Fantasy 14</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/genshin.png" alt="" loading="lazy" />
+                                        <p>Genshin Impact</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/hades.png" alt="" loading="lazy" />
+                                        <p>Hades</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/touhou8.png" alt="" loading="lazy" />
+                                        <p>Imperishable Night</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/insaniquarium.png" alt="" loading="lazy" />
+                                        <p>Insaniquarium! Deluxe</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/jazz2.png" alt="" loading="lazy" />
+                                        <p>Jazz Jackrabbit 2</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/jsrf.png" alt="" loading="lazy" />
+                                        <p>Jet Set Radio Future</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/spyrotrio.png" alt="" loading="lazy" />
+                                        <p>The Legend of Spyro: Dawn of the Dragon</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/nfsmw.png" alt="" loading="lazy" />
+                                        <p>Need for Speed Most Wanted</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/platinum.png" alt="" loading="lazy" />
+                                        <p>Pokemon Platinum</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/pokemon_soulsilver.png" alt="" loading="lazy" />
+                                        <p>Pokemon Soul Silver</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/spore.png" alt="" loading="lazy" />
+                                        <p>Spore</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/ssx3.png" alt="" loading="lazy" />
+                                        <p>SSX 3</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/stardew.png" alt="" loading="lazy" />
+                                        <p>Stardew Valley</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/twewy.png" alt="" loading="lazy" />
+                                        <p>The World Ends With You</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/undertale.png" alt="" loading="lazy" />
+                                        <p>Undertale</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/vampire_survivors.png" alt="" loading="lazy" />
+                                        <p>Vampire Survivors</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/witcher.png" alt="" loading="lazy" />
+                                        <p>The Witcher Series</p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/zt2.png" alt="" loading="lazy" />
+                                        <p>Zoo Tycoon 2</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="Characters" class="tabcontent">
+                            <h1>
+                                <img src="../assets/hanging_flowers.gif" aria-hidden="true" alt="" /> Favourite Characters
+                            </h1>
+
+                            <p>
+                                Anything with a <span role="img" aria-label="moon">&#x1F319;</span> is a character I
+                                relate to (usually in their personality/struggles).
+                            </p>
+                            <div class="tabcontentinside interest-content">
+                                <div class="flexbox">
+                                    <div>
+                                        <img src="img/characters/acheron.png" alt="" loading="lazy" />
+                                        <p>Acheron<br /><i>Honkai Star Rail</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/bluewhale.png" alt="" loading="lazy" />
+                                        <p>Blue Whale Cookie<br /><i>Cookie Run Ovenbreak</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/castorice.png" alt="" loading="lazy" />
+                                        <p>
+                                            Castorice (<span role="img" aria-label="moon">&#x1F319;</span>)<br /><i
+                                                >Honkai Star Rail</i
+                                            >
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/fenris.png" alt="" loading="lazy" />
+                                        <p>Fenris<br /><i>Dragon Age 2</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/furina.png" alt="" loading="lazy" />
+                                        <p>Furina<br /><i>Genshin Impact</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/gale.png" alt="" loading="lazy" />
+                                        <p>Gale<br /><i>Baldur's Gate 3</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/garchomp.jpg" alt="" loading="lazy" />
+                                        <p>Garchomp<br /><i>Pokemon</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/garrus.png" alt="" loading="lazy" />
+                                        <p>Garrus<br /><i>Mass Effect</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/hot_rod.png" alt="" loading="lazy" />
+                                        <p>Hot Rod / Rodimus<br /><i>Transformers</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/ukitake.png" alt="" loading="lazy" />
+                                        <p>Jushiro Ukitake<br /><i>Bleach</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/karna.png" alt="" loading="lazy" />
+                                        <p>Karna<br /><i>FGO / Apocrypha</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/kaveh.png" alt="" loading="lazy" />
+                                        <p>Kaveh<br /><i>Genshin Impact</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/kim_dokja.png" alt="" loading="lazy" />
+                                        <p>
+                                            Kim Dokja<br /><i
+                                                ><span class="tippy" data-tippy-content="Omniscient Reader's Viewpoint"
+                                                    >ORV</span
+                                                ></i
+                                            >
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/knockout.png" alt="" loading="lazy" />
+                                        <p>Knockout<br /><i>Transformers</i></p>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="img/characters/luciel.png"
+                                            alt=""
+                                            loading="lazy"
+                                            data-tippy-content="art by ionite on tumblr" />
+                                        <p>Lu + Ciel<br /><i>Elsword</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/madoka.png" alt="" loading="lazy" />
+                                        <p>
+                                            Madoka Kaname<br /><i
+                                                ><span class="tippy" data-tippy-content="Puella Magi Madoka Magica"
+                                                    >PMMM</span
+                                                ></i
+                                            >
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/maya.png" alt="" loading="lazy" />
+                                        <p>Maya Fey<br /><i>Ace Attorney</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/millennium.png" alt="" loading="lazy" />
+                                        <p>Millennium Tree<br /><i>Cookie Run Ovenbreak</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/ororon.png" alt="" loading="lazy" />
+                                        <p>
+                                            Ororon (<span role="img" aria-label="moon">&#x1F319;</span>)<br /><i
+                                                >Genshin Impact</i
+                                            >
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/phoenix.png" alt="" loading="lazy" />
+                                        <p>Phoenix Wright<br /><i>Ace Attorney</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/queen.png" alt="" loading="lazy" />
+                                        <p>Queen<br /><i>Deltarune</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/sampo.png" alt="" loading="lazy" />
+                                        <p>
+                                            <span
+                                                class="tippy"
+                                                data-tippy-content="My favourite in that I wish my period cramps upon him (lovingly)"
+                                                >Sampo</span
+                                            ><br /><i>Honkai Star Rail</i>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/wei_wuxian.png" alt="" loading="lazy" />
+                                        <p>
+                                            Wei Wuxian<br /><i
+                                                ><span
+                                                    class="tippy"
+                                                    data-tippy-content="Mo Dao Zu Shi / Grandmaster of Demonic Cultivation"
+                                                    >MDZS</span
+                                                ></i
+                                            >
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/characters/xie_lian.png" alt="" loading="lazy" />
+                                        <p>
+                                            Xie Lian<br /><i
+                                                ><span
+                                                    class="tippy"
+                                                    data-tippy-content="Tian Guan Ci Fu / Heaven Official's Blessing"
+                                                    >TGCF</span
+                                                ></i
+                                            >
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/oc/others/zhongli.jpg" alt="" loading="lazy" />
+                                        <p>Zhongli<br /><i>Genshin Impact</i></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="Media" class="tabcontent interest-content">
+                            <h1>
+                                <img src="../assets/hanging_flowers.gif" aria-hidden="true" alt="" /> Favourite Movies +
+                                Shows + Books
+                            </h1>
+                            <p>
+                                The order of what media type it is <u>does</u> matter: the first is the one I got
+                                exposed to first, the rest are other media types I've consumed.
+                            </p>
+                            <div class="tabcontentinside interest-content">
+                                <div class="flexbox">
+                                    <div>
+                                        <img src="img/media/a_sign_of_affection.png" alt="" loading="lazy" />
+                                        <p>A Sign of Affection<br /><i>Show</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/bleach.png" alt="" loading="lazy" />
+                                        <p>Bleach<br /><i>Manga + Show</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/castlevania.png" alt="" loading="lazy" />
+                                        <p>Castlevania<br /><i>Show</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/apocrypha.png" alt="" loading="lazy" />
+                                        <p>Fate/Apocrypha<br /><i>Show</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/fmab.png" alt="" loading="lazy" />
+                                        <p>
+                                            <span
+                                                class="tippy"
+                                                data-tippy-content="Brotherhood more specifically for the show"
+                                                >Fullmetal Alchemist</span
+                                            ><br /><i>Show + Manga</i>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/kaijuu8.png" alt="" loading="lazy" />
+                                        <p>Kaiju No. 8<br /><i>Show</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/klk.png" alt="" loading="lazy" />
+                                        <p>Kill la Kill<br /><i>Show</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/mashle.png" alt="" loading="lazy" />
+                                        <p>Mashle<br /><i>Show</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/orv.png" alt="" loading="lazy" />
+                                        <p>
+                                            <span class="tippy" data-tippy-content="Omniscient Reader's Viewpoint"
+                                                >ORV</span
+                                            ><br /><i>Novel</i>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/promare.png" alt="" loading="lazy" />
+                                        <p>Promare<br /><i>Movie</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/pmmm.png" alt="" loading="lazy" />
+                                        <p>
+                                            <span class="tippy" data-tippy-content="Puella Magi Madoka Magica"
+                                                >PMMM</span
+                                            ><br /><i>Show</i>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/rebellion.png" alt="" loading="lazy" />
+                                        <p>PMMM: Rebellion<br /><i>Movie</i></p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/tgcf.png" alt="" loading="lazy" />
+                                        <p>
+                                            <span
+                                                class="tippy"
+                                                data-tippy-content="Tian Guan Ci Fu / Heaven Official's Blessing"
+                                                >TGCF</span
+                                            ><br /><i>Novel + Show</i>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/tfes.png" alt="" loading="lazy" />
+                                        <p>
+                                            <span class="tippy" data-tippy-content="Transformers">TF</span>:
+                                            EarthSpark<br /><i>Show</i>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <img src="img/media/tfp.png" alt="" loading="lazy" />
+                                        <p>TF: Prime<br /><i>Show</i></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>Mob Psycho 100</li>
+                                <li>Nausicaä of the Valley of the Wind</li>
+                                <li>Parasyte</li>
+                                <li><u>Percy Jackson</u></li>
+                                <li><u>Promare</u></li>
+                                <li>Puella Magi Madoka Magica</li>
+                                <li><u>The Apothecary Diaries</u></li>
+                                <li>The Master of Diabolism / MDZS</li>
+                                <li>The Scum Villain's Self-Saving System / SVSSS</li>
+                                <li><u>The Witcher (books)</u></li>
+                                <li>Welcome to Demon School! Iruma-kun</li>
+                                <li>... <a href="https://myanimelist.net/animelist/Asuraid">+ more</a></li>
+                            </ul>
+                        </div>
+
+                        <div id="quizzes" class="tabcontent">
+                            <h1><img src="../assets/hanging_flowers.gif" aria-hidden="true" alt="" /> Quiz Results</h1>
+                            <div class="tabcontentinside hover-grow">
+                                <div>
+                                    <table
+                                        style="
+                                            font-size: 0.8em;
+                                            border: 0;
+                                            padding: 0;
+                                            border-spacing: 4px;
+                                            background-color: var(--body-deco);
+                                            width: 100%;
+                                        ">
+                                        <tbody>
+                                            <tr>
+                                                <td>Type 1</td>
+                                                <td>Orderliness</td>
+                                                <td style="width: 50px; text-align: left">||||||||||</td>
+                                                <td style="width: 30px">34%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type 2</td>
+                                                <td>Helpfulness</td>
+                                                <td style="width: 50px; text-align: left">||||||||||||||||</td>
+                                                <td style="width: 30px">66%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type 3</td>
+                                                <td>Image Focus</td>
+                                                <td style="width: 50px; text-align: left">||||</td>
+                                                <td style="width: 30px">14%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type 4</td>
+                                                <td>Individualism</td>
+                                                <td style="width: 50px; text-align: left">||||||||||||</td>
+                                                <td style="width: 30px">50%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type 5</td>
+                                                <td>Intellectualism</td>
+                                                <td style="width: 50px; text-align: left">||</td>
+                                                <td style="width: 30px">10%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type 6</td>
+                                                <td>Security Focus</td>
+                                                <td style="width: 50px; text-align: left">||||||||||||</td>
+                                                <td style="width: 30px">50%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type 7</td>
+                                                <td>Adventurousness</td>
+                                                <td style="width: 50px; text-align: left">||||||||||||</td>
+                                                <td style="width: 30px">50%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type 8</td>
+                                                <td>Aggressiveness</td>
+                                                <td style="width: 50px; text-align: left">||</td>
+                                                <td style="width: 30px">10%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Type 9</td>
+                                                <td>Calmness</td>
+                                                <td style="width: 50px; text-align: left">||||||||||||||||||||</td>
+                                                <td style="width: 30px">82%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a href="https://similarminds.com/enneagram-test.html">enneagram test</a>
+                                </div>
+                                <a href="https://10fastfingers.com/typing-test/english"
+                                    ><img
+                                        src="http://img.10fastfingers.com/badge/typing-test_1_DE.png"
+                                        style="max-width: 100%"
+                                        loading="lazy"
+                                        alt="Typing Test"
+                                /></a>
+                                <a href="https://theotaku.com/quizzes/view/2970/which_madoka_magical_girl_are_you%3F"
+                                    ><img
+                                        src="http://www.theotaku.com/guru_results/2970_Tomoe.jpg"
+                                        style="max-width: 100%"
+                                        loading="lazy"
+                                        alt="Which Madoka Magical Girl Are You?" /></a
+                                ><a href="http://www.nerdtests.com/ft_nq.php">
+                                    <img
+                                        src="https://www.nerdtests.com/images/ft/nq/8e3afb633e.gif"
+                                        loading="lazy"
+                                        style="max-width: 100%"
+                                        alt="I am nerdier than 56% of all people. Are you a nerd? Click here to take the Nerd Test, get geeky images and jokes, and write on the nerd forum!" /></a
+                                ><a href="https://linwood.neocities.org/quiz/weirddoll">
+                                    <img
+                                        src="https://i.imgur.com/yMepcUM.png"
+                                        alt="I am a weird doll"
+                                        loading="lazy"
+                                        style="max-width: 100%"
+                                /></a>
+                                <a href="https://troy-sucks.neocities.org/shrines/animalcrossing"
+                                    ><img
+                                        src="https://troy-sucks.neocities.org/shrines/ac/quiz/r3.png"
+                                        alt="Normal"
+                                        loading="lazy"
+                                        style="max-width: 100%"
+                                        data-tippy-content="Ummmmmmm Hi. You're kind of just the default settings for a human. May I reccommend picking up a hobby?"
+                                /></a>
+                                <a
+                                    href="https://www.theotaku.com/quizzes/view/2118/which_phoenix_wright_character_are_you%3F"
+                                    ><img
+                                        src="http://www.theotaku.com/guru_results/2118_You_are_Mia_Fey.jpg"
+                                        loading="lazy"
+                                        style="max-width: 100%"
+                                        alt="Which Phoenix Wright Character Are You?" /><br
+                                /></a>
+                                <a href="http://rice.place/quiz.html"
+                                    ><img
+                                        src="https://rice.place/quiz/sweetrice.png"
+                                        alt="you are sweet rice"
+                                        loading="lazy"
+                                        style="max-width: 100%"
+                                /></a>
+                                <a href="https://www.theotaku.com/quizzes/view/4031/which_undertale_soul_are_you%3F"
+                                    ><img
+                                        loading="lazy"
+                                        style="max-width: 100%"
+                                        src="http://www.theotaku.com/guru_results/4031_Integrity.jpg"
+                                        alt="Which Undertale Soul Are You?" /><br
+                                /></a>
+                                <a href="https://dog-house.neocities.org/quiz/ac/villager_quiz"
+                                    ><img
+                                        loading="lazy"
+                                        style="max-width: 100%"
+                                        src="https://file.garden/Zq0xOX6Iv3i3b1te/Neocities/Other/wade.png"
+                                        alt="Which Undertale Soul Are You?" /><br
+                                /></a>
+                                <a href="https://theotaku.com/quizzes/view/4097/what_dere_type_are_you%3F"
+                                    ><img
+                                        style="border: 0; max-width: 100%"
+                                        loading="lazy"
+                                        src="http://www.theotaku.com/guru_results/4097_Dandere.jpg"
+                                        alt="What Dere Type Are You?" /><br
+                                /></a>
+                                <a href="https://theotaku.com/quizzes/view/4102/which_final_fantasy_job_are_you_1.5"
+                                    ><img
+                                        style="border: 0; max-width: 100%"
+                                        loading="lazy"
+                                        src="http://www.theotaku.com/guru_results/4102_White_Mage.jpg"
+                                        alt="Which Final Fantasy Job Are You 1.5"
+                                /></a>
+                                <a href="https://www.dragonflycave.com/quizzes/what-type-are-you/bug"
+                                    ><img
+                                        src="https://www.dragonflycave.com/typequiz/bug.png"
+                                        alt="Bug"
+                                        loading="lazy"
+                                        title="I am a Bug-type!"
+                                /></a>
+                                <div
+                                    class="results"
+                                    style="
+                                        width: 100%;
+                                        text-align: center;
+                                        background-color: #fff;
+                                        color: #000;
+                                        display: block;
+                                        padding: 10px;
+                                        border: 1px solid;
+                                        margin: 0 auto;
+                                    ">
+                                    <p style="margin: 0">This page is protected by a</p>
+                                    <h3 style="margin: 0">TAPIR</h3>
+                                    <img
+                                        style="
+                                            max-width: 160px;
+                                            border: 1px solid;
+                                            margin-left: auto;
+                                            margin-right: auto;
+                                        "
+                                        alt="TAPIR"
+                                        loading="lazy"
+                                        src="https://i.ibb.co/10FV850/tapir.jpg" />
+                                    <p class="description">
+                                        Tapirs have changed very little over the past 20 million years.
+                                    </p>
+                                    <small>
+                                        <a href="https://hekate.neocities.org"
+                                            >Want your own? Visit hekate.neocities.org!</a
+                                        >
+                                    </small>
+                                </div>
+                                <a href="https://allyratworld.com/quiz/nitrochiral"
+                                    ><img
+                                        src="img/misc/nitrochiral_protag.png"
+                                        alt="Nitro Chiral protag results"
+                                        loading="lazy"
+                                /></a>
+                                <a
+                                    href="https://www.theotaku.com/quizzes/view/3913/which_hatsune_miku_nendoroid_model_are_you%3F"
+                                    ><img
+                                        src="http://www.theotaku.com/guru_results/3913_Sakura_Miku.jpg"
+                                        loading="lazy"
+                                        style="max-width: 100%"
+                                        alt="Which Hatsune Miku Nendoroid Model Are You?"
+                                /></a>
+                                <a
+                                    href="https://www.theotaku.com/quizzes/view/1486/what_are_your_last_words_before_game_over%3F"
+                                    ><img
+                                        src="http://www.theotaku.com/guru_results/1486_well_this_sucks.jpg"
+                                        loading="lazy"
+                                        style="max-width: 100%"
+                                        alt="What Are Your Last Words Before GAME OVER?"
+                                /></a>
+                                <a href="https://swiftyshq.neocities.org/fun/quiz/rock"
+                                    ><img
+                                        src="https://swiftyshq.neocities.org/img/quiz/rock/r6.png"
+                                        alt="mossy guy"
+                                        data-tippy-content="youre really big and really friendly. ur friends think you have inner rage but you have the temperament of a newborn puppy. this rock is as unmoving as you!"
+                                /></a>
+                                <div class="scrollable">
+                                    <b>I Am A:</b> True Neutral Halfling Bard (3rd Level) <br /><br /><u
+                                        >Ability Scores:</u
+                                    ><br />
+                                    <b>Strength-</b>11<br />
+                                    <b>Dexterity-</b>12<br />
+                                    <b>Constitution-</b>12<br />
+                                    <b>Intelligence-</b>13<br />
+                                    <b>Wisdom-</b>13<br />
+                                    <b>Charisma-</b>11 <br /><br /><u>Alignment:</u><br /><b>True Neutral</b> A true
+                                    neutral character does what seems to be a good idea. He doesn't feel strongly one
+                                    way or the other when it comes to good vs. evil or law vs. chaos. Most true neutral
+                                    characters exhibit a lack of conviction or bias rather than a commitment to
+                                    neutrality. Such a character thinks of good as better than evil after all, he would
+                                    rather have good neighbors and rulers than evil ones. Still, he's not personally
+                                    committed to upholding good in any abstract or universal way. Some true neutral
+                                    characters, on the other hand, commit themselves philosophically to neutrality. They
+                                    see good, evil, law, and chaos as prejudices and dangerous extremes. They advocate
+                                    the middle way of neutrality as the best, most balanced road in the long run. True
+                                    neutral is the best alignment you can be because it means you act naturally, without
+                                    prejudice or compulsion. However, true neutral can be a dangerous alignment when it
+                                    represents apathy, indifference, and a lack of conviction.<br />
+                                    <br /><u>Race:</u><br /><b>Halflings</b> are clever, capable and resourceful
+                                    survivors. They are notoriously curious and show a daring that many larger people
+                                    can't match. They can be lured by wealth but tend to spend rather than hoard. They
+                                    prefer practical clothing and would rather wear a comfortable shirt than jewelry.
+                                    Halflings stand about 3 feet tall and commonly live to see 150. <br /><br /><u
+                                        >Class:</u
+                                    ><br /><b>Bards</b>
+                                    often serve as negotiators, messengers, scouts, and spies. They love to accompany
+                                    heroes (and villains) to witness heroic (or villainous) deeds firsthand, since a
+                                    bard who can tell a story from personal experience earns renown among his fellows. A
+                                    bard casts arcane spells without any advance preparation, much like a sorcerer.
+                                    Bards also share some specialized skills with rogues, and their knowledge of item
+                                    lore is nearly unmatched. A high Charisma score allows a bard to cast high-level
+                                    spells.
+                                    <br /><br />Find out
+                                    <a href="http://www.easydamus.com/character.html" target="mt"
+                                        >What Kind of Dungeons and Dragons Character Would You Be?</a
+                                    >, courtesy of Easydamus <a href="mailto:zybstrski@excite.com">(e-mail)</a
+                                    ><br /><br />
+                                </div>
+                            </div>
+                        </div>
+                </article>
+            </main>
+        </div>
+        <!-- =============================================== -->
+        <!-- Footer will be loaded per JavaScript! Edit footer.js to change. -->
+        <!-- =============================================== -->
+        <general-footer></general-footer>
+
+        <!-- Additional JS -->
+        <script src="https://unpkg.com/popper.js@1"></script>
+        <script src="https://unpkg.com/tippy.js@5"></script>
+        <script>
+            tippy("[data-tippy-content]", {
+                duration: 500,
+                placement: "top",
+                theme: "character"
+            });
+        </script>
+
+        <!-- Scroll to Top -->
+        <script src="js/scroll-to-top.js"></script>
+
+        <!-- Accessibility Button -->
+        <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
+
+        <!-- Page Specific -->
+        <script src="js/tabs.js"></script>
+    </body>
+</html>
