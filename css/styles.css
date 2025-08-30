@@ -33,8 +33,8 @@
     @media (prefers-color-scheme: dark) {
         /* HEADERS */
         --header-bg: #211f1f;
-        --header-title: #edf4dd;
-        --header-subtitle: #bdd7a8;
+        --header-title: #DDEFF4;
+        --header-subtitle: #A8D7C3;
 
         /* BACKGROUNDS */
         --background-colour: #211f1f;
