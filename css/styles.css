@@ -19,7 +19,7 @@
     --article-liner: rgba(58, 89, 118, 0.46);
 
     /* PRIMARY ACCENTS */
-    --primary-accent: linear-gradient(to right, #375761, #6a889b);
+    --primary-accent: #375761;
     --secondary-accent: #73582f;
     --font-on-accent: #0d0e0d;
     --letter-glow: rgba(156, 100, 25, 0.51);
