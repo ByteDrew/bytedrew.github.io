@@ -61,7 +61,7 @@ const nesting = getNestingString();
 
 const content = `
 <header>
-    <div class="title">aid's small corner</div>
+    <div class="title">Drew's Small Corner</div>
     <div class="subtext">a little personal site</div>
 </header>
 <!-- =============================================== -->
