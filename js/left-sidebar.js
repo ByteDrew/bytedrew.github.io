@@ -22,7 +22,7 @@ const sidebar = `
     <section>
         <div class="img-floatinganim">
             <img class="dendro"
-                src="./img/dendro_symbol.png" aria-hidden='true' alt='' />
+                src="../img/dendro_symbol.png" aria-hidden='true' alt='' />
         </div>
         <div id="img-load"></div>
         <h4>
@@ -35,13 +35,13 @@ const sidebar = `
                 <b>Drew</b>
                 <img
                     style="padding-left: 5px; padding-right: 5px"
-                    src="https://files.catbox.moe/46vbi9.gif"
+                    src="../assets/umbrellapixel.gif"
                     aria-hidden="true"
                     alt="" />
                 <b>18</b>
                 <img
                     style="padding-left: 5px; padding-right: 5px"
-                    src="https://files.catbox.moe/46vbi9.gif"
+                    src="../assets/umbrellapixel.gif"
                     aria-hidden="true"
                     alt="" />
                 <b>He/Him</b>
