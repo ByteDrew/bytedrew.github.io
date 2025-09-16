@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // define your images here
     const images = [
-        "<img class='full-width-image' src='img/sidebar/sylvie_sunflower.jpg' aria-hidden='true' alt='' title='art by me'/>",
-        "<img class='full-width-image' src='https://f2.toyhou.se/file/f2-toyhou-se/images/85730612_3J07ioqrEo7BBgg.gif' aria-hidden='true' alt='' title='art by me'/>",
+        "<img class='full-width-image' src='158cdefcffa63151890f63ead2115208.jpg' aria-hidden='true' alt='' title='art by me'/>",
     ];
 
     // this chooses a random number from all available image indices
