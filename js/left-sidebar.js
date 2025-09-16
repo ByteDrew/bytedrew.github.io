@@ -27,7 +27,7 @@ const sidebar = `
         <div id="img-load"></div>
         <h4>
             <img src="../assets/plant_bopping.gif" aria-hidden="true" alt="" />
-            Welcome!!
+           ☆ Welcome!! ☆
             <img src="../assets/plant_bopping.gif" aria-hidden="true" alt="" />
         </h4>
         <div>
@@ -57,7 +57,7 @@ const sidebar = `
     <section>
         <h4>
             <img src="../assets/plant_bopping.gif" aria-hidden="true" alt="" />
-            Site Button
+            ☆ Site Button ☆
             <img src="../assets/plant_bopping.gif" aria-hidden="true" alt="" />
         </h4>
         <div class="site-button">
