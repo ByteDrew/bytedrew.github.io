@@ -63,7 +63,7 @@ const sidebar = `
         <div class="site-button">
             <div class="images-row">
                 <a href="https://bytedrew.github.io" target="_blank"
-                    ><img src="https://file.garden/Zq0xOX6Iv3i3b1te/Neocities/sylvieButton.gif" alt="bytedrew button"
+                    ><img src="https://files.catbox.moe/qhc6o6.png" alt="bytedrew button"
                 /></a>
             </div>
             <textarea id="site-button" name="site-button">
