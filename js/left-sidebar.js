@@ -67,10 +67,10 @@ const sidebar = `
                 /></a>
             </div>
             <textarea id="site-button" name="site-button">
-&lt;a href="https://bytedrew.github.io"&gt;&lt;img src="https://file.garden/Zq0xOX6Iv3i3b1te/Neocities/sylvieButton.gif" alt="bytedrew button" loading="lazy"&gt;&lt;/a&gt;</textarea
+&lt;a href="https://bytedrew.github.io"&gt;&lt;img src="https://files.catbox.moe/qhc6o6.png" alt="bytedrew button" loading="lazy"&gt;&lt;/a&gt;</textarea
             >
             <label for="site-button" class="subtle" style="text-align: center; margin-top: 3px;"
-                >Site button; hotlinking is fine; image is on filegarden. Alt buttons can be found <a href="./links.html">here</a></label
+                >Site button; hotlinking is fine; image is on catbox.</label
             >
         </div>
     </section>
