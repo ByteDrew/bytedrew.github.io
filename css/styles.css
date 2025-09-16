@@ -158,7 +158,6 @@ body {
     letter-spacing: 0;
     background-image: var(--background-image);
     background-attachment: fixed;
-    cursor: url(../assets/fishjellyshort.gif), auto;
 }
 
 section,
