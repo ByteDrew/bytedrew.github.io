@@ -1,130 +1,451 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elite Tint</title>
-<link rel="stylesheet" href="styles3.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Elite Tint — Static HTML</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide icons -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/lucide.min.js"></script>
+
+  <style>
+    /* Slight customizations to emulate original look & animations */
+    html { scroll-behavior: smooth; }
+    /* card glass */
+    .glass-card {
+      background: rgba(31, 41, 55, 0.5); /* gray-800/50 */
+      border: 1px solid rgba(55, 65, 81, 1); /* gray-700 */
+      backdrop-filter: blur(6px);
+    }
+    /* subtle entrance animation similar to framer-motion */
+    .reveal-up {
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform .8s cubic-bezier(.2,.9,.3,1), opacity .8s;
+    }
+    .reveal-up.in {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    /* scaled hover effect for cards */
+    .hover-scale:hover { transform: scale(1.05); transition: transform .3s; }
+    /* star fill fix for lucide */
+    svg.star-filled { fill: #f6e05e; stroke: none; }
+    /* small fix for image aspect ratio containers */
+    .aspect-video { aspect-ratio: 16/9; }
+  </style>
 </head>
-<body>
+<body class="min-h-screen bg-gray-950 text-white antialiased">
 
-<!-- Navigation -->
-<nav id="navbar">
-  <div class="nav-container">
-    <div class="logo">
-      <span class="shield-icon">🛡️</span>
-      <span class="brand">Elite Tint</span>
+  <!-- NAV -->
+  <nav id="mainNav" class="fixed top-0 w-full z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shield" class="w-8 h-8 text-blue-500"></i>
+          <span class="text-2xl font-bold">Elite Tint</span>
+        </div>
+
+        <div class="hidden md:flex items-center gap-8">
+          <button onclick="scrollToSection('services')" class="hover:text-blue-400 transition-colors">Services</button>
+          <button onclick="scrollToSection('gallery')" class="hover:text-blue-400 transition-colors">Gallery</button>
+          <button onclick="scrollToSection('benefits')" class="hover:text-blue-400 transition-colors">Benefits</button>
+          <button onclick="scrollToSection('testimonials')" class="hover:text-blue-400 transition-colors">Reviews</button>
+          <button onclick="scrollToSection('contact')" class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">Get Quote</button>
+        </div>
+
+        <!-- Simple mobile menu button (doesn't slide out) -->
+        <div class="md:hidden">
+          <button id="mobileMenuBtn" aria-label="open menu" class="p-2 rounded hover:bg-white/5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="nav-links">
-      <button onclick="scrollToSection('services')">Services</button>
-      <button onclick="scrollToSection('gallery')">Gallery</button>
-      <button onclick="scrollToSection('benefits')">Benefits</button>
-      <button onclick="scrollToSection('testimonials')">Reviews</button>
-      <button class="btn-primary" onclick="scrollToSection('contact')">Get Quote</button>
+
+    <!-- mobile menu content -->
+    <div id="mobileMenu" class="hidden md:hidden bg-gray-950/95 border-t border-gray-800">
+      <div class="px-6 py-4 flex flex-col gap-3">
+        <button onclick="scrollToSection('services'); toggleMobileMenu()" class="text-left">Services</button>
+        <button onclick="scrollToSection('gallery'); toggleMobileMenu()" class="text-left">Gallery</button>
+        <button onclick="scrollToSection('benefits'); toggleMobileMenu()" class="text-left">Benefits</button>
+        <button onclick="scrollToSection('testimonials'); toggleMobileMenu()" class="text-left">Reviews</button>
+        <button onclick="scrollToSection('contact'); toggleMobileMenu()" class="text-left bg-blue-600 rounded px-3 py-2">Get Quote</button>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!-- Hero Section -->
-<section class="hero">
-  <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&q=80" alt="Luxury car" class="hero-bg">
-  <div class="hero-content">
-    <h1>Premium Window Tinting<br><span class="gradient-text">For Your Vehicle</span></h1>
-    <p>Professional installation • Lifetime warranty • UV protection up to 99%</p>
-    <div class="hero-buttons">
-      <button class="btn-primary" onclick="scrollToSection('contact')">Book Appointment</button>
-      <button class="btn-outline" onclick="scrollToSection('services')">View Services</button>
+  <!-- HERO -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-gray-950/70 via-gray-950/50 to-gray-950 z-10"></div>
+      <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&q=80" alt="Luxury car" class="w-full h-full object-cover">
     </div>
-  </div>
-  <div class="scroll-down">⬇</div>
-</section>
 
-<!-- Services Section -->
-<section id="services" class="section">
-  <div class="section-header">
-    <h2>Our Services</h2>
-    <p>Choose the perfect tint package for your vehicle</p>
-  </div>
-  <div class="cards">
-    <div class="card">
-      <h3>Standard Tint</h3>
-      <div class="price">$299</div>
-      <ul>
-        <li>✔ 5-year warranty</li>
-        <li>✔ Basic heat rejection</li>
-        <li>✔ 35% light transmission</li>
-        <li>✔ Professional install</li>
-      </ul>
-      <button class="btn-secondary" onclick="scrollToSection('contact')">Get Started</button>
+    <div class="relative z-20 text-center px-6 max-w-5xl mx-auto">
+      <h1 id="heroTitle" class="text-5xl md:text-7xl font-bold mb-6 leading-tight reveal-up">
+        Premium Window Tinting
+        <br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">For Your Vehicle</span>
+      </h1>
+
+      <p id="heroSub" class="text-xl md:text-2xl text-gray-300 mb-8 reveal-up">
+        Professional installation • Lifetime warranty • UV protection up to 99%
+      </p>
+
+      <div id="heroCTAs" class="flex flex-col sm:flex-row gap-4 justify-center reveal-up">
+        <button onclick="scrollToSection('contact')" class="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-6 rounded">Book Appointment</button>
+        <button onclick="scrollToSection('services')" class="border border-white text-white hover:bg-white hover:text-gray-950 text-lg px-8 py-6 rounded">View Services</button>
+      </div>
     </div>
-    <div class="card popular">
-      <div class="popular-label">MOST POPULAR</div>
-      <h3>Premium Tint</h3>
-      <div class="price">$499</div>
-      <ul>
-        <li>✔ Lifetime warranty</li>
-        <li>✔ Advanced heat rejection</li>
-        <li>✔ Multiple shade options</li>
-        <li>✔ UV protection 99%</li>
-        <li>✔ Fade resistant</li>
-      </ul>
-      <button class="btn-primary" onclick="scrollToSection('contact')">Get Started</button>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+      <i data-lucide="chevron-down" class="w-8 h-8 text-white/60"></i>
     </div>
-    <div class="card">
-      <h3>Ceramic Elite</h3>
-      <div class="price">$799</div>
-      <ul>
-        <li>✔ Lifetime warranty</li>
-        <li>✔ Maximum heat rejection</li>
-        <li>✔ Crystal clear visibility</li>
-        <li>✔ UV protection 99.9%</li>
-        <li>✔ IR blocking</li>
-        <li>✔ No signal interference</li>
-      </ul>
-      <button class="btn-secondary" onclick="scrollToSection('contact')">Get Started</button>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-24 px-6 bg-gradient-to-b from-gray-950 to-gray-900">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Services</h2>
+        <p class="text-xl text-gray-400">Choose the perfect tint package for your vehicle</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- cards generated static like JSX -->
+        <div class="glass-card rounded-xl overflow-hidden hover-scale transition-all duration-300">
+          <div class="text-sm font-semibold text-center bg-blue-600/0 py-2"> </div>
+          <div class="p-8">
+            <h3 class="text-2xl font-bold mb-2">Standard Tint</h3>
+            <div class="text-4xl font-bold text-blue-400 mb-6">$299</div>
+            <ul class="space-y-3 mb-8 text-gray-300">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>5-year warranty</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>Basic heat rejection</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>35% light transmission</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>Professional install</li>
+            </ul>
+            <button onclick="scrollToSection('contact')" class="w-full bg-gray-700 hover:bg-gray-600 py-3 rounded">Get Started</button>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-xl overflow-hidden hover-scale transition-all duration-300 ring-2 ring-blue-500">
+          <div class="bg-blue-600 text-white text-center py-2 text-sm font-semibold">MOST POPULAR</div>
+          <div class="p-8">
+            <h3 class="text-2xl font-bold mb-2">Premium Tint</h3>
+            <div class="text-4xl font-bold text-blue-400 mb-6">$499</div>
+            <ul class="space-y-3 mb-8 text-gray-300">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>Lifetime warranty</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>Advanced heat rejection</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>Multiple shade options</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>UV protection 99%</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>Fade resistant</li>
+            </ul>
+            <button onclick="scrollToSection('contact')" class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded">Get Started</button>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-xl overflow-hidden hover-scale transition-all duration-300">
+          <div class="text-sm font-semibold text-center bg-blue-600/0 py-2"> </div>
+          <div class="p-8">
+            <h3 class="text-2xl font-bold mb-2">Ceramic Elite</h3>
+            <div class="text-4xl font-bold text-blue-400 mb-6">$799</div>
+            <ul class="space-y-3 mb-8 text-gray-300">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>Lifetime warranty</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>Maximum heat rejection</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>Crystal clear visibility</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>UV protection 99.9%</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>IR blocking</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-5 h-5 text-green-500"></i>No signal interference</li>
+            </ul>
+            <button onclick="scrollToSection('contact')" class="w-full bg-gray-700 hover:bg-gray-600 py-3 rounded">Get Started</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Gallery -->
-<section id="gallery" class="section dark">
-  <div class="section-header">
-    <h2>Our Work</h2>
-    <p>See the transformation</p>
-  </div>
-  <div class="gallery-grid">
-    <img src="https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=800&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?w=800&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f34f8?w=800&q=80" alt="">
-    <img src="https://images.unsplash.com/photo-1617531653520-bd466656d0fa?w=800&q=80" alt="">
-  </div>
-</section>
+  <!-- GALLERY -->
+  <section id="gallery" class="py-24 px-6 bg-gray-900">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Work</h2>
+        <p class="text-xl text-gray-400">See the transformation</p>
+      </div>
 
-<!-- Contact -->
-<section id="contact" class="section">
-  <div class="section-header">
-    <h2>Get Your Free Quote</h2>
-    <p>Book your appointment today</p>
-  </div>
-  <form id="quoteForm" class="form">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Email Address" required>
-    <input type="tel" name="phone" placeholder="Phone Number" required>
-    <textarea name="message" rows="4" placeholder="Tell us about your vehicle and preferences..."></textarea>
-    <button type="submit" class="btn-primary">Request Quote</button>
-  </form>
-</section>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- images array -->
+        <div class="relative overflow-hidden rounded-xl aspect-video group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=800&q=80" alt="Gallery 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
 
-<!-- Footer -->
-<footer class="footer">
-  <span class="shield-icon">🛡️</span>
-  <span class="brand">Elite Tint</span>
-  <p>Premium window tinting services for your vehicle</p>
-  <p>© 2024 Elite Tint. All rights reserved.</p>
-</footer>
+        <div class="relative overflow-hidden rounded-xl aspect-video group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?w=800&q=80" alt="Gallery 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
 
-<script src="script3.js"></script>
+        <div class="relative overflow-hidden rounded-xl aspect-video group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80" alt="Gallery 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+
+        <div class="relative overflow-hidden rounded-xl aspect-video group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&q=80" alt="Gallery 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+
+        <div class="relative overflow-hidden rounded-xl aspect-video group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f34f8?w=800&q=80" alt="Gallery 5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+
+        <div class="relative overflow-hidden rounded-xl aspect-video group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1617531653520-bd466656d0fa?w=800&q=80" alt="Gallery 6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefits" class="py-24 px-6 bg-gradient-to-b from-gray-900 to-gray-950">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Why Choose Window Tinting?</h2>
+        <p class="text-xl text-gray-400">Protection, comfort, and style</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="glass-card rounded-xl text-center hover:border-blue-500 transition-all">
+          <div class="p-8">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-600/20 rounded-full flex items-center justify-center">
+              <i data-lucide="sun" class="w-8 h-8 text-blue-400"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">UV Protection</h3>
+            <p class="text-gray-400">Block up to 99.9% of harmful UV rays, protecting your skin and interior</p>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-xl text-center hover:border-blue-500 transition-all">
+          <div class="p-8">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-600/20 rounded-full flex items-center justify-center">
+              <i data-lucide="thermometer" class="w-8 h-8 text-blue-400"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Heat Reduction</h3>
+            <p class="text-gray-400">Keep your car cooler and reduce AC usage by blocking infrared heat</p>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-xl text-center hover:border-blue-500 transition-all">
+          <div class="p-8">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-600/20 rounded-full flex items-center justify-center">
+              <i data-lucide="eye" class="w-8 h-8 text-blue-400"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Privacy & Security</h3>
+            <p class="text-gray-400">Enhanced privacy and protection from prying eyes</p>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-xl text-center hover:border-blue-500 transition-all">
+          <div class="p-8">
+            <div class="w-16 h-16 mx-auto mb-6 bg-blue-600/20 rounded-full flex items-center justify-center">
+              <i data-lucide="shield" class="w-8 h-8 text-blue-400"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Glass Protection</h3>
+            <p class="text-gray-400">Holds shattered glass together in case of accidents</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="py-24 px-6 bg-gray-950">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">What Our Clients Say</h2>
+        <p class="text-xl text-gray-400">Join thousands of satisfied customers</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass-card rounded-xl p-8">
+          <div class="flex gap-1 mb-4">
+            <!-- 5 stars -->
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-6 italic">"Absolutely perfect job! The ceramic tint looks amazing and really keeps the heat out. Professional service from start to finish."</p>
+          <p class="font-semibold">Michael Torres</p>
+        </div>
+
+        <div class="glass-card rounded-xl p-8">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-6 italic">"Best decision I made for my car. The difference in temperature is incredible, and the privacy is a huge plus."</p>
+          <p class="font-semibold">Sarah Johnson</p>
+        </div>
+
+        <div class="glass-card rounded-xl p-8">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+            <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
+          </div>
+          <p class="text-gray-300 mb-6 italic">"Outstanding quality and attention to detail. The team was friendly and the installation was flawless. Highly recommend!"</p>
+          <p class="font-semibold">David Chen</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 px-6 bg-gradient-to-b from-gray-950 to-gray-900">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Get Your Free Quote</h2>
+        <p class="text-xl text-gray-400">Book your appointment today</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <div class="glass-card rounded-xl mb-6">
+            <div class="p-6">
+              <form id="contactForm" class="space-y-4">
+                <input id="name" type="text" placeholder="Your Name" required class="w-full px-4 py-3 rounded bg-gray-900 border border-gray-700 text-white" />
+                <input id="email" type="email" placeholder="Email Address" required class="w-full px-4 py-3 rounded bg-gray-900 border border-gray-700 text-white" />
+                <input id="phone" type="tel" placeholder="Phone Number" required class="w-full px-4 py-3 rounded bg-gray-900 border border-gray-700 text-white" />
+                <textarea id="message" rows="4" placeholder="Tell us about your vehicle and preferences..." class="w-full px-4 py-3 rounded bg-gray-900 border border-gray-700 text-white"></textarea>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-lg py-6 rounded">Request Quote</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <i data-lucide="phone" class="w-6 h-6 text-blue-400"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg mb-1">Call Us</h3>
+              <p class="text-gray-400">(555) 123-4567</p>
+              <p class="text-sm text-gray-500">Mon-Sat: 8AM - 6PM</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <i data-lucide="mail" class="w-6 h-6 text-blue-400"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg mb-1">Email Us</h3>
+              <p class="text-gray-400">info@elitetint.com</p>
+              <p class="text-sm text-gray-500">We reply within 24 hours</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center flex-shrink-0">
+              <i data-lucide="map-pin" class="w-6 h-6 text-blue-400"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg mb-1">Visit Us</h3>
+              <p class="text-gray-400">123 Auto Center Drive</p>
+              <p class="text-gray-400">Your City, ST 12345</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-950 border-t border-gray-800 py-12 px-6">
+    <div class="max-w-7xl mx-auto text-center">
+      <div class="flex items-center justify-center gap-2 mb-4">
+        <i data-lucide="shield" class="w-8 h-8 text-blue-500"></i>
+        <span class="text-2xl font-bold">Elite Tint</span>
+      </div>
+      <p class="text-gray-400 mb-6">Premium window tinting services for your vehicle</p>
+      <p class="text-gray-500 text-sm">© 2024 Elite Tint. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize lucide icons
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      // reveal animations (emulating framer-motion delays)
+      setTimeout(() => document.querySelectorAll('.reveal-up').forEach(el => el.classList.add('in')), 100);
+      setTimeout(() => {
+        const nodes = document.querySelectorAll('.reveal-up');
+        nodes.forEach((el,i) => setTimeout(()=>el.classList.add('in'), i*120));
+      }, 200);
+    });
+
+    // Navbar scroll behavior
+    const nav = document.getElementById('mainNav');
+    function onScroll() {
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-gray-950/95', 'backdrop-blur-lg', 'shadow-lg');
+      } else {
+        nav.classList.remove('bg-gray-950/95', 'backdrop-blur-lg', 'shadow-lg');
+      }
+    }
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+
+    // smooth scroll (also used by buttons)
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // mobile menu toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    function toggleMobileMenu() {
+      if (!mobileMenu) return;
+      mobileMenu.classList.toggle('hidden');
+    }
+    if (mobileBtn) mobileBtn.addEventListener('click', toggleMobileMenu);
+
+    // Contact form handling
+    const form = document.getElementById('contactForm');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        // emulate submission (replace with real request as needed)
+        alert('Thank you! We will contact you soon.');
+        // clear
+        form.reset();
+      });
+    }
+
+    // close mobile menu on resize > md
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && mobileMenu && !mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 </html>
