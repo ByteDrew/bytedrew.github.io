@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #0d0d0d;
+  color: #fff;
+}
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  transition: background 0.3s;
+}
+nav.scrolled {
+  background-color: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(10px);
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+.nav-links button {
+  background: none;
+  color: #fff;
+  margin-left: 1rem;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: #1e40af;
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  cursor: pointer;
+}
+.btn-secondary {
+  background-color: #374151;
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  cursor: pointer;
+}
+.hero {
+  position: relative;
+  height: 100vh;
+  text-align: center;
+}
+.hero-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  top: 40%;
+}
+.gradient-text {
+  background: linear-gradient(to right, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.section {
+  padding: 4rem 2rem;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.cards {
+  display: flex;
+  gap: 1rem;
+}
+.card {
+  background-color: rgba(31, 41, 55, 0.5);
+  padding: 1rem;
+  flex: 1;
+}
+.card.popular {
+  border: 2px solid #3b82f6;
+}
+.price {
+  font-size: 2rem;
+  color: #3b82f6;
+}
+.footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid #374151;
+}
