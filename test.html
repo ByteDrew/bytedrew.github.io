@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Tint</title>
+<link rel="stylesheet" href="styles3.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="nav-container">
+    <div class="logo">
+      <span class="shield-icon">🛡️</span>
+      <span class="brand">Elite Tint</span>
+    </div>
+    <div class="nav-links">
+      <button onclick="scrollToSection('services')">Services</button>
+      <button onclick="scrollToSection('gallery')">Gallery</button>
+      <button onclick="scrollToSection('benefits')">Benefits</button>
+      <button onclick="scrollToSection('testimonials')">Reviews</button>
+      <button class="btn-primary" onclick="scrollToSection('contact')">Get Quote</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&q=80" alt="Luxury car" class="hero-bg">
+  <div class="hero-content">
+    <h1>Premium Window Tinting<br><span class="gradient-text">For Your Vehicle</span></h1>
+    <p>Professional installation • Lifetime warranty • UV protection up to 99%</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="scrollToSection('contact')">Book Appointment</button>
+      <button class="btn-outline" onclick="scrollToSection('services')">View Services</button>
+    </div>
+  </div>
+  <div class="scroll-down">⬇</div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="section">
+  <div class="section-header">
+    <h2>Our Services</h2>
+    <p>Choose the perfect tint package for your vehicle</p>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <h3>Standard Tint</h3>
+      <div class="price">$299</div>
+      <ul>
+        <li>✔ 5-year warranty</li>
+        <li>✔ Basic heat rejection</li>
+        <li>✔ 35% light transmission</li>
+        <li>✔ Professional install</li>
+      </ul>
+      <button class="btn-secondary" onclick="scrollToSection('contact')">Get Started</button>
+    </div>
+    <div class="card popular">
+      <div class="popular-label">MOST POPULAR</div>
+      <h3>Premium Tint</h3>
+      <div class="price">$499</div>
+      <ul>
+        <li>✔ Lifetime warranty</li>
+        <li>✔ Advanced heat rejection</li>
+        <li>✔ Multiple shade options</li>
+        <li>✔ UV protection 99%</li>
+        <li>✔ Fade resistant</li>
+      </ul>
+      <button class="btn-primary" onclick="scrollToSection('contact')">Get Started</button>
+    </div>
+    <div class="card">
+      <h3>Ceramic Elite</h3>
+      <div class="price">$799</div>
+      <ul>
+        <li>✔ Lifetime warranty</li>
+        <li>✔ Maximum heat rejection</li>
+        <li>✔ Crystal clear visibility</li>
+        <li>✔ UV protection 99.9%</li>
+        <li>✔ IR blocking</li>
+        <li>✔ No signal interference</li>
+      </ul>
+      <button class="btn-secondary" onclick="scrollToSection('contact')">Get Started</button>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="section dark">
+  <div class="section-header">
+    <h2>Our Work</h2>
+    <p>See the transformation</p>
+  </div>
+  <div class="gallery-grid">
+    <img src="https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=800&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?w=800&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f34f8?w=800&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1617531653520-bd466656d0fa?w=800&q=80" alt="">
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <div class="section-header">
+    <h2>Get Your Free Quote</h2>
+    <p>Book your appointment today</p>
+  </div>
+  <form id="quoteForm" class="form">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <textarea name="message" rows="4" placeholder="Tell us about your vehicle and preferences..."></textarea>
+    <button type="submit" class="btn-primary">Request Quote</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <span class="shield-icon">🛡️</span>
+  <span class="brand">Elite Tint</span>
+  <p>Premium window tinting services for your vehicle</p>
+  <p>© 2024 Elite Tint. All rights reserved.</p>
+</footer>
+
+<script src="script3.js"></script>
+</body>
+</html>
