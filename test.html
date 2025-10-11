@@ -8,10 +8,10 @@
   <link href="styles3.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/lucide.min.js"></script>
+  <script src="script3.js"></script>
 </head>
 <body class="min-h-screen bg-gray-950 text-white antialiased">
 
-  <!-- NAV -->
   <nav id="mainNav" class="fixed top-0 w-full z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
@@ -28,7 +28,6 @@
           <button onclick="scrollToSection('contact')" class="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">Get Quote</button>
         </div>
 
-        <!-- Simple mobile menu button (doesn't slide out) -->
         <div class="md:hidden">
           <button id="mobileMenuBtn" aria-label="open menu" class="p-2 rounded hover:bg-white/5">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -37,7 +36,6 @@
       </div>
     </div>
 
-    <!-- mobile menu content -->
     <div id="mobileMenu" class="hidden md:hidden bg-gray-950/95 border-t border-gray-800">
       <div class="px-6 py-4 flex flex-col gap-3">
         <button onclick="scrollToSection('services'); toggleMobileMenu()" class="text-left">Services</button>
@@ -49,7 +47,6 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="relative h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
       <div class="absolute inset-0 bg-gradient-to-b from-gray-950/70 via-gray-950/50 to-gray-950 z-10"></div>
@@ -78,7 +75,6 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
   <section id="services" class="py-24 px-6 bg-gradient-to-b from-gray-950 to-gray-900">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
@@ -87,7 +83,6 @@
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <!-- cards generated static like JSX -->
         <div class="glass-card rounded-xl overflow-hidden hover-scale transition-all duration-300">
           <div class="text-sm font-semibold text-center bg-blue-600/0 py-2"> </div>
           <div class="p-8">
@@ -121,7 +116,6 @@
     </div>
   </section>
 
-  <!-- GALLERY -->
   <section id="gallery" class="py-24 px-6 bg-gray-900">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
@@ -130,7 +124,6 @@
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- images array -->
         <div class="relative overflow-hidden rounded-xl aspect-video group cursor-pointer">
           <img src="https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=800&q=80" alt="Gallery 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
           <div class="absolute inset-0 bg-gradient-to-t from-gray-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -164,7 +157,6 @@
     </div>
   </section>
 
-  <!-- BENEFITS -->
   <section id="benefits" class="py-24 px-6 bg-gradient-to-b from-gray-900 to-gray-950">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
@@ -216,7 +208,6 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
   <section id="testimonials" class="py-24 px-6 bg-gray-950">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
@@ -227,7 +218,6 @@
       <div class="grid md:grid-cols-3 gap-8">
         <div class="glass-card rounded-xl p-8">
           <div class="flex gap-1 mb-4">
-            <!-- 5 stars -->
             <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
             <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
             <svg class="w-5 h-5 star-filled" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.789 1.402 8.172L12 18.897 4.664 23.171l1.402-8.172L.132 9.21l8.2-1.192z"/></svg>
@@ -265,7 +255,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact" class="py-24 px-6 bg-gradient-to-b from-gray-950 to-gray-900">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-16">
@@ -326,7 +315,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="bg-gray-950 border-t border-gray-800 py-12 px-6">
     <div class="max-w-7xl mx-auto text-center">
       <div class="flex items-center justify-center gap-2 mb-4">
@@ -337,68 +325,5 @@
       <p class="text-gray-500 text-sm">© 2025 Title. All rights reserved.</p>
     </div>
   </footer>
-
-  <!-- Scripts -->
-  <script>
-    // Initialize lucide icons
-    document.addEventListener('DOMContentLoaded', () => {
-      if (window.lucide) {
-        lucide.createIcons();
-      }
-
-      // reveal animations (emulating framer-motion delays)
-      setTimeout(() => document.querySelectorAll('.reveal-up').forEach(el => el.classList.add('in')), 100);
-      setTimeout(() => {
-        const nodes = document.querySelectorAll('.reveal-up');
-        nodes.forEach((el,i) => setTimeout(()=>el.classList.add('in'), i*120));
-      }, 200);
-    });
-
-    // Navbar scroll behavior
-    const nav = document.getElementById('mainNav');
-    function onScroll() {
-      if (window.scrollY > 50) {
-        nav.classList.add('bg-gray-950/95', 'backdrop-blur-lg', 'shadow-lg');
-      } else {
-        nav.classList.remove('bg-gray-950/95', 'backdrop-blur-lg', 'shadow-lg');
-      }
-    }
-    window.addEventListener('scroll', onScroll);
-    onScroll();
-
-    // smooth scroll (also used by buttons)
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    // mobile menu toggle
-    const mobileBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    function toggleMobileMenu() {
-      if (!mobileMenu) return;
-      mobileMenu.classList.toggle('hidden');
-    }
-    if (mobileBtn) mobileBtn.addEventListener('click', toggleMobileMenu);
-
-    // Contact form handling
-    const form = document.getElementById('contactForm');
-    if (form) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        // emulate submission (replace with real request as needed)
-        alert('Thank you! We will contact you soon.');
-        // clear
-        form.reset();
-      });
-    }
-
-    // close mobile menu on resize > md
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768 && mobileMenu && !mobileMenu.classList.contains('hidden')) {
-        mobileMenu.classList.add('hidden');
-      }
-    });
-  </script>
 </body>
 </html>
