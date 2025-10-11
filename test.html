@@ -5,38 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Impress my dad tint website</title>
 
-  <!-- Tailwind CDN -->
+  <link href="styles3.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Lucide icons -->
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/lucide.min.js"></script>
-
-  <style>
-    /* Slight customizations to emulate original look & animations */
-    html { scroll-behavior: smooth; }
-    /* card glass */
-    .glass-card {
-      background: rgba(31, 41, 55, 0.5); /* gray-800/50 */
-      border: 1px solid rgba(55, 65, 81, 1); /* gray-700 */
-      backdrop-filter: blur(6px);
-    }
-    /* subtle entrance animation similar to framer-motion */
-    .reveal-up {
-      transform: translateY(30px);
-      opacity: 0;
-      transition: transform .8s cubic-bezier(.2,.9,.3,1), opacity .8s;
-    }
-    .reveal-up.in {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    /* scaled hover effect for cards */
-    .hover-scale:hover { transform: scale(1.05); transition: transform .3s; }
-    /* star fill fix for lucide */
-    svg.star-filled { fill: #f6e05e; stroke: none; }
-    /* small fix for image aspect ratio containers */
-    .aspect-video { aspect-ratio: 16/9; }
-  </style>
 </head>
 <body class="min-h-screen bg-gray-950 text-white antialiased">
 
