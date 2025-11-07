@@ -1,335 +1,637 @@
-<!doctype html>
-<html lang="en">
-    <!--
 
-    Welcome to my insanity, if you're here, go get a sip of water. Anyway, feel free to
-    peep at my (probably disorganized) coding!! Just don't 1:1 copy.
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vampire's Nest</title>
+        <link rel="icon" href="icon.png">
+    <link href="/style.css" rel="stylesheet">
+<!--aperturewebring-->    <link rel="stylesheet" href="https://jack-dawlia.neocities.org/page/shrines/portal/aperturewebring/onionring.css">
+  </head>
+  
+  <body>
 
-    -->
-    <head>
-        <!-- Setting character encoding and viewport size. Do not remove. -->
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/x-icon" href="../assets/websitelogo.png">
-        <link
-            href="https://bytedrew.github.io/rss.xml"
-            rel="alternate"
-            type="application/rss+xml"
-            title="What's new on ByteDrew's Website" />
 
-        <!-- Send to not found page is there's no javascript -->
-        <noscript> <meta http-equiv="Refresh" content="0; URL=not_found.html" /> </noscript>
+<style>
+:root {
+   content: red;
+ }
 
-        <!-- Site Title -->
-        <title>ByteDrew's small corner</title>
+  @font-face {
+    font-family: 'SpecialElite';
+    src: url("https://lupinus.neocities.org/SpecialElite.ttf");
+  }
+    
+  @font-face {
+    font-family: 'DDayStencil';
+    src: url("https://lupinus.neocities.org/DDayStencil.ttf");
+  } 
+  
+ body {
+   background-image: url("background.jpg");
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+   font-family: "Special Elite", monospace;
+   color: red;
+  }
+          
+      a:link {
+        color: #d5c1a1;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:visited {
+        color: #d5c1a1;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #d5c1a1;
+        background-color: transparent;
+        text-decoration: underline;
+      }
 
-        <!-- Author -->
-        <meta name="author" content="ByteDrew" />
+        hr {
+          border: 2px dashed red;
+        }
 
-        <!-- Site Description -->
-        <meta content="A personal website." name="description" />
+  .navbuttons {
+   display: inline-block;
+   transition: all 100ms ease;
+   transition-delay: 0ms;
+  }
+  .navbuttons:hover {
+   transform: translateY(-11px);
+  }
 
-        <!-- FavIcon -->
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: red;
+  text-align: center;
+  width: 100px;
+  border-radius: 6px;
+  padding: 6px;
+  border: 1px dashed red;
+  position: absolute;
+  z-index: 4;
+  top: 140px;
+  left: 20px;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 
-        <!-- Lite Youtube -->
-        <!-- Include the CSS & JS.. (This could be direct from the package or bundled) -->
-        <link rel="stylesheet" href="css/lite-yt-embed.css" />
-        <script src="js/lite-yt-embed.js"></script>
+  #navbar {
+   height: 117px;
+   position: relative;
+   z-index: 1;
+   justify-content: center;
+   text-align: center;
+  }
+  
+* {
+ box-sizing: border-box;
+}
 
-        <!-- CSS: -->
-        <!-- You will have to change this to "../style.css" if this HTML file is in a subfolder, to "../../style.css"
-        if this HTML file is in 2 subfolders, etc. -->
-        <link href="css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="css/normalize.css" />
-        <link rel="stylesheet" href="css/siwwidget.css" />
-        <link rel="stylesheet" href="css/weddingring.css" />
+#container {
+ max-width: 1100px;
+ margin: 0 auto;
+}
+  #flex {
+   display: flex;
+   justify-content: space-around;
+  }
 
-        <!-- JavaScript: -->
-        <!-- You will have to change this to "../layout.js" if this HTML file is in a subfolder, to "../../layout.js"
-        if this HTML file is in 2 subfolders, etc. -->
+  aside {
+   width: 255px;
+   justify-content: center;
+   align-items: center;
+  }
 
-        <!-- Menu Items -->
-        <script src="js/left-sidebar.js" defer></script>
-        <script src="js/header.js" defer></script>
-        <script src="js/footer.js" defer></script>
+  main {
+   flex: 1;
+   order: 2;
+   text-align: justify;
+   max-width: 610px;
+   margin-left: 15px;
+   margin-right: 15px;
+   background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/mainbg1.png);
+   /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/orangemainbg1.png);*/
+   background-size: 630px, 2800px;
+   background-repeat: round;
+   height: 3100px;
 
-        <!-- Marquee JS -->
-        <script src="js/marquee-setup.js"></script>
-        <script src="js/marquee.js"></script>
+  }
 
-        <!-- Disclosure Menu -->
-        <script src="js/accessibility/disclosure-menu.iife.js" defer></script>
-        <script src="js/accessibility/accessible-menu.js" type="module"></script>
+  #leftSidebar {
+   order: 1;
+   background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/sidebarbg.png);
+   /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/orangesidebarbg.png);*/
+   background-size: 255px, 3800px;
+   background-repeat: round;
+   height: 3100px;
+  }
 
-        <!-- Font Toggle -->
-        <script src="js/main.js"></script>
+  #rightSidebar {
+   order: 3;
+   background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/sidebarbg2.png);
+   /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/orangesidebarbg2.png);*/
+   background-size: 255px, 3800px;
+   background-repeat: round;
+   height: 3100px;
+  }
 
-        <style>
-            #videoWrapper {
-                position: relative;
-                padding-bottom: 56.25%; /* 16:9 */
-                height: 0;
-                overflow: hidden;
-            }
+  footer {
+   width: 100%;
+   height: 123px;
+   text-align: center;
+   padding: 20px;
+   position: relative;
+  }
 
-            #videoWrapper iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
+    #floatyliv {
+    background-image: url(oliverpaint.png);
+    /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Graphics/oliverspookyghost.png);*/
+    background-size: 312px, 535px;
+    width: 312px;
+    height: 535px;
+    margin-left: 25px;
+    margin-top: 65px;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 3;
+    image-rendering: initial;
+    filter: drop-shadow(3px 3px 4px rgba(0,0,0,0.5));
+    }
+    
+    #skrilli {
+      position: absolute;
+      z-index: 3;
+      background-image: url(skrilliantfloaternew.png);
+      background-size: cover;
+      width: 177px;
+      height: 350px;
+      margin-left: 1280px;
+      margin-top: 900px;
+    animation: skrilli 1s infinite;
+    animation-timing-function: ease-in-out;
+    }
+@keyframes skrilli {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }    
+}
+    #arrow {
+      background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Graphics/arrowfloater.png);
+      /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangearrowfloater.png);*/
+      background-size: 90px, 100px;
+      width: 90px;
+      height: 100px;
+      position: absolute;
+      z-index: 3;
+      margin-top: 1850px;
+      margin-left: 1000px;
+      filter: drop-shadow(3px 3px 4px rgba(0,0,0,0.5));
+    }
+    #coolartofdaweek {
+      background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/coolartoftheweek.png);
+      /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangecoolartoftheweek.png);*/
+      background-size: 500px, 227px;
+      width: 500px;
+      height: 227px;
+      position: absolute;
+      z-index: 3;
+      margin-top: 2550px;
+      margin-left: 525px;
+    }
+    .nestbox {
+      width: 205px;
+      height: 40px;
+      overflow: scroll;
+      background-color: rgb(255, 0, 0, 0.2);
+      /*background-color: rgb(190, 9, 255, 0.2);*/
+      padding: 3px;
+      font-size: x-small;
+    }
+    
+    .linkback {
+      width: 200px;
+      font-size: small;
+    }
+.abtme { /*<-forhalloween*/
+  background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/abtme.png);
+  background-size: cover;
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  z-index: 2;
+  top: 400px;
+  left: 235px;
+}
+.box {
+ padding: 40px;
+ text-align: justify;
+}
+  
+  /*.borderedbox {*/
+  /* padding: 10px;*/
+  /* border: 2px dashed red;*/
+  /* border-radius: 10px;*/
+  /*}*/
+  
+.aboutme {
+  padding: 40px;
+  font-size: small;
+  text-align: justify;
+  color: red;
+}
+.freepalestine {
+  background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/mainbox13b.png);
+  /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/orangemainbox13.png);*/
+  background-size: 600px, 597px;
+  width: 600px;
+  height: 610px;
+  text-align: justify;
+  padding: 40px;
+  background-repeat: no-repeat;
+}
+.manifesto {
+  background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/mainbox9.png);
+  /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/orangemainbox9.png);*/
+  background-size: 600px, 550px;
+  width: 600px;
+  height: 570px;
+  overflow: scroll;
+  text-align: justify;
+  padding: 40px, 10px;
+  background-repeat: no-repeat;
+} 
+.coolart {
+  background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/mainbox10.png);
+  /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/orangemainbox10.png);*/
+  background-size: 600px, 783px;
+  width: 620px;
+  height: 800px;
+  background-repeat: no-repeat;
+}
+.coolarttext {
+  overflow: scroll;
+  text-align: justify;
+  padding: 40px;
+  height: 750px;
+}
+.todolist {
+  background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/mainbox3.png);
+  /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/orangemainbox3.png);*/
+  background-size: 250px, 250px;
+  width: 260px;
+  height: 250px;
+  overflow: scroll;
+  padding: 20px;
+  font-size: smaller;
+  background-repeat: no-repeat;
+}
+.updatelog {
+  background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/mainbox4.png);
+  /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/orangemainbox4.png);*/
+  background-size: 250px, 250px;
+  width: 260px;
+  height: 250px;
+  background-repeat: no-repeat;
+}
+.updatetext {
+  padding: 25px;
+  overflow: scroll;
+  font-size: smaller;
+  height: 200px;
+}
+.webrings {
+  background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/mainbox12b.png);
+  /*background-image: url(https://file.garden/aAdIXYazImdyc4Ee/Backgrounds/orangemainbox12b.png);*/
+  background-size: 250px, 410px;
+  width: 250px;
+  height: 410px;
+}
+  big {
+    font-family: 'DDayStencil', monospace;
+    font-size: 40px;
+    color: red;
+  }
+  .little {
+    font-family: 'DDayStencil', monospace;
+    font-size: 20px;
+    width: 200px;
+    text-align: left;
+  }
+.shadows {
+  text-shadow: 1px 2px 3px black;
+}
+.shadows img {
+  filter:drop-shadow(5px 4px 4px rgba(0,0,0,.7));
+}
         </style>
-    </head>
-    <body id="body">
-        <!-- =============================================== -->
-        <!-- Preloader. -->
-        <!-- =============================================== -->
-        <div id="preloader"></div>
+              
+  <div class="tooltip"><span class="tooltiptext">say hi to Oliver! They/them!</span><div id="floatyliv"></div></div>
+  <div id="skrilli"></div>
+  <div id="arrow"></div>
+  <div id="coolartofdaweek"></div>
+<!--<div class="abtme"></div>-->
+    
+        <center><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/vampiresdentitle.png" width="1200" height="240">        
+    
+               
+        <nav id="navbar">
+    <div class="navbuttons"><a href="https://lupinus.neocities.org"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/homebutton.png" width="150"></a></div>
+    <div class="navbuttons"><a href="https://lupinus.neocities.org/gallery"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/gallerybutton.png" width="150"></a></div>
+    <div class="navbuttons"><a href="https://lupinus.neocities.org/cast"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/castbutton.png" width="150"></a></div>
+    <div class="navbuttons"><a href="https://lupinus.neocities.org/blinkies"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/blinkiesbutton.png" width="150"></a></div>
+    <div class="navbuttons"><a href="https://lupinus.neocities.org/shrinedirectory"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/shrinesbutton.png" width="150"></a></div>
+    <div class="navbuttons"><a href="https://lupinus.neocities.org/ecology"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/ecologybutton.png" width="150"></a></div>
+    <div class="navbuttons"><a href="https://lupinus.neocities.org/readz"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/reads.png" width="150"></a></div>
+          </nav>
+            </center> 
+            
+               <div id="container">               
+    <div id="flex">
+        <aside id="leftSidebar">
+             <div class="aboutme">
+     <center><div class="navbuttons"><a href="https://lupinus.neocities.org/businesscard"><img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/abtme1.png" width="190"><!--<img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/meskeleton.png" width="190">--></a></div></center>
+   <div class="shadows">Hello! My name's Loopy. I'm a white twenty-something full time wage slave from California who loves art, history, ecology, botany, counterculture, metal music, cowboys & vampires. <strong>They/Them!</strong>
+    <center><br><img src="progressflagpixel.png"><img src="nonbinaryflagpixel.png"><img src="agenderflagpixel.png"><img src="lesbianflagpixel.png">
+    <img src="skeleton.gif" width="150" height="20">
+    <img src="skullnbones.gif" width="150" height="20">
+    <img src="rip.gif" width="150" height="20">
+    <img src="butch4butch.gif" width="150" height="20">
+    <!--<img src="spookyseason.gif">-->
+    <!--<img src="greenbats.gif">-->
+    <!--<img src="happyhalloween2.gif">-->
+    <!--<img src="happyhaunting.gif">-->
+    <!--<img src="happyhalloween5.gif">-->
+    <!--<img src="ajphantomzrule.gif" width="150">-->
+    <!--<img src="happyhalloween10.gif">-->
+    </center></div>
+            </div>
+<br>
+          <center><div class="shadows">
+<big>PALESTINE INFO, ANARCHIST READING</big>
+    <div class="navbuttons"><a href="https://docs.google.com/document/d/e/2PACX-1vSAmbw_I7OhXeu2oSZK_ToAAhWihK0yxTUYAZXSNlaJ3hVyezFuGi-i25M1cFPOf42kcrC5Co538HFE/pub"><img src="esimsforgaza2.png" width="200" alt="E-Sims for Gaza: Keep Gaza Connected"></a></div>
+    <div class="navbuttons"><a href="https://gazafunds.com"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/gazafundsbutton2.png" width="200" alt="Gaza funds"></a></div>
+    <div class="navbuttons"><a href="https://decolonizepalestine.com/"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/decolonizepalestine.png" width="200" alt="Decolonize Palestine"></a></div>
+    <div class="navbuttons"><br><a href="https://bdsmovement.net/Act-Now-Against-These-Companies-Profiting-From-Genocide"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/bdsboycottbutton.png" width="200" alt="Palestinian BDS Movement Boycotts"></a></div>
+    <div class="little">
+    <br><img src="palestineflagpixel.png" style="float:left;"> 
+    <a href="https://free-palestine.carrd.co">-FREE PALESTINE: AN INTRODUCTION</a>
+    <br><img src="palestineflagpixel.png" style="float:left;"> 
+    <a href="https://imeu.org/article/the-nakba-65-years-of-dispossession-and-apartheid">-THE NAKBA & THE ESTABLISHMENT OF ISRAELI APARTHEID</a>
+    <br><img src="palestineflagpixel.png" style="float:left;"> 
+    <a href="https://yplus.ps/wp-content/uploads/2021/01/Said-Edward-The-Question-of-Palestine.pdf">-THE QUESTION OF PALESTINE by EDWARD SAID</a>
+    <br><img src="palestineflagpixel.png" style="float:left;"> 
+    <a href="https://ia601600.us.archive.org/14/items/Eng-books/Palestine%2C%20A%20Four%20Thousand%20Year%20History%20-%20-%20Nur%20Masalha.pdf">-PALESTINE: A FOUR THOUSAND YEAR HISTORY by NUR MASALHA</a>
+    <br><img src="palestineflagpixel.png" style="float:left;"> 
+    <a href="https://newyorkwarcrimes.com/">-THE NEW YORK (WAR) CRIMES</a>
+    <br><img src="blackflagpixel.png" style="float:left;"> 
+    <a href="https://bfpnola.notion.site/Social-Justice-Resources-52c85ac36a1541ac80a0c164a371a9a3">-SOCIAL JUSTICE RESOURCES FOR BEGINNERS</a>
+    <br><img src="blackflagpixel.png" style="float:left;"> 
+    <a href="https://laurel-lynn-leake.itch.io/why-we-mask">-WHY WE MASK: IT'S NOT JUST A COLD</a>
+    <br><img src="blackflagpixel.png" style="float:left;"> 
+    <a href="https://files.libcom.org/files/Vitale%20-%20The%20End%20of%20Policing%20(Police)%20(2017).pdf">-THE END OF POLICING by ALEX VITALE</a>
+    <br><img src="blackflagpixel.png" style="float:left;">
+    <a href="https://www.scollingsworthenglish.com/uploads/3/8/4/2/38422447/the-new-jim-crow-alexander-michelle.pdf">-THE NEW JIM CROW by MICHELLE ALEXANDER</a>
+    <br><img src="blackflagpixel.png" style="float:left;">
+    <a href="https://blackrosefed.org/wp-content/uploads/2023/04/brrn-program-2023.pdf">TURNING THE TIDE: ANARCHIST PROGRAM by THE BLACK ROSE FEDERATION</a>
+    </div>Find more topics on<br> the <a href="https://lupinus.neocities.org/readz">READZ</a> page!</div></center>
+    
+    <p><center><img src="https://file.garden/aAdIXYazImdyc4Ee/Divs/redline.png" style="width:200px;object-fit:fill;"></center> 
 
-        <!-- =============================================== -->
-        <!-- Accessibility links. -->
-        <!-- =============================================== -->
-        <a href="#content" id="skip-to-content-link">Skip to content</a>
+      <p><center><div class="linkback">LINK BACK TO VAMP'S NEST!
+    <br><img src="vampiresnestbutton1.gif">
+    <div class="nestbox">&lt;a href="https://lupinus.neocities.org/"&gt; &lt;img src="https://lupinus.neocities.org/vampiresnestbutton1.gif"&gt; &lt;/a&gt;</div>
+    </div>
+    <p><img src="https://file.garden/aAdIXYazImdyc4Ee/Divs/redline.png" style="width:200px;object-fit:fill;"> 
+    <p><div class="shadows"><big>NEONEIGHBORS</big>
+        <p><div class="navbuttons"><a href="https://kornloser.neocities.org/"><img src="https://kornloser.neocities.org/pics/sitebutton.png" width="88" height="31"></a></div>
+        <div class="navbuttons"><a href="https://itai-yo.neocities.org/"><img src="itai yo.gif" width="88" height="31"></a></div>
+        <div class="navbuttons"><a href="https://vulturpolitik.neocities.org/"><img src="vulturblinkie.gif" width="88"></a></div>
+        <div class="navbuttons"><a href="https://vampirefacts.neocities.org/"><img src="vampirefactsbutton.png"></a></div>
+        <div class="navbuttons"><a href="https://draggianuniverse.neocities.org"><img src="draggianuniverse.gif"></a></div>
+        <div class="navbuttons"><a href="https://alexorcist.neocities.org/"><img src="https://alexorcist.neocities.org/images/neo%20button%20done.gif" width="88" height="31"></a></div>
+        <div class="navbuttons"><a href="https://scumsuck.com/"><img src="scumsuck.png"></a></div>
+        <div class="navbuttons"><a href="https://bearsjunkjournal.neocities.org/welcomepage"><img src="bearsjunkjournal.gif" width="88" height="31"></a></div>
+        <div class="navbuttons"><a href="https://dreadromantic.neocities.org/"><img src="dreadromantic.png"></a></div>
+        <div class="navbuttons"><a href="https://ultra-tetra.neocities.org/"><img src="neopananimated.gif"></a></div>
+        <div class="navbuttons"><a href="https://bugcreature.neocities.org/queercore"><img src="https://bugcreature.neocities.org/images/queercore/queercore.gif" width="88" height="31"></a></div>
+        <div class="navbuttons"><a href="https://montysmortuary.neocities.org/"><img src="https://montysmortuary.neocities.org/images/ezgif.com-resize.gif"></a></div>
+        <div class="navbuttons"><a href="https://capstasher.neocities.org/"><img src="capscorner.png"></a></div>
+        <div class="navbuttons"><a href="https://mercurymushroom.neocities.org/"><img src="mercuryspill.gif"></a></div>
+        <div class="navbuttons"><a href="https://bog-necropolis.neocities.org/"><img src="bognecropolis.gif"></a></div>
+        <div class="navbuttons"><a href="https://coffeeplant.neocities.org/"><img src="coffeeplant.png"></a></div>
+        <div class="navbuttons"><a href="https://murderscene.neocities.org/"><img src="murderscene.gif"></a></div>
+        <div class="navbuttons"><a href="https://mioasis.neocities.org/"><img src="mioasisbutton.gif"></a></div>
+        <div class="navbuttons"><a href="https://asters-asterisms.neocities.org/hi"><img src="astersasterisms.gif"></a></div>
+        <div class="navbuttons"><a href="https://bumblingbats.neocities.org/"><img src="bumblingbats.png"></a></div>
+        <div class="navbuttons"><a href="https://n-razm.neocities.org/"><img src="https://n-razm.neocities.org/resources/images/buttons/n-razm_button_v2.png"></a></div>
+        <div class="navbuttons"><a href="https://datoxicwaltz.neocities.org/"><img src="datoxicwaltz.gif"></a></div>
+        <div class="navbuttons"><a href="https://cowgrls.neocities.org/"><img src="jimbosbarnyard.gif"></a></div>
+        <div class="navbuttons"><a href="https://ghostscape.neocities.org/"><img src="https://ghostscape.neocities.org/button.gif"></a></div>
+        <div class="navbuttons"><a href="https://shadowmoses.neocities.org/"><img src="shadowmoses.gif" width="88" height="31"></a></div>
+        <div class="navbuttons"><a href="https://fortisarbor.neocities.org"><img src="https://fortisarbor.neocities.org/graphics/sitebutton.png" alt="Fortis Arbor button"></a></div>
+        <div class="navbuttons"><a href="https://kyomakus.online/"><img src="kyomakusonline.gif"></a></div>
+        <div class="navbuttons"><a href="https://humanfinny.neocities.org/"><img src="humanfinny.gif"></a></div>
+        <div class="navbuttons"><a href="https://mimikitty49.neocities.org/"><img src="mimikitty.gif"></a></div>
+        <div class="navbuttons"><a href="https://confetticake.neocities.org/"><img src="confetticake.gif"></a></div>
+        <div class="navbuttons"><a href="https://zombiie.neocities.org/"><img src="https://zombiie.neocities.org/images/button.gif" width="88" height="31"></a></div>
+        <div class="navbuttons"><a href="https://bensect.neocities.org/"><img src="https://bensect.neocities.org/site%20button.png"></a></div>
+        <div class="navbuttons"><a href="https://scilab.neocities.org" target="_blank"><img src="https://res.cloudinary.com/dpdevbgml/image/upload/v1704396511/button_3_ei0vtc.png"></a></div>
+        <div class="navbuttons"><a href="https://worm-lungs.neocities.org/"><img src="https://worm-lungs.neocities.org/worm-lungs-button.gif"></a></div>
+        <div class="navbuttons"><a href="https://lovevy.neocities.org/"><img src="https://lovevy.neocities.org/images/arobutton.gif"></a></div>
+        <div class="navbuttons"><a href="https://skeltrr.neocities.org/"><img src="skeltrr.gif"></a></div>
+      </div>
+      </center>
 
-        <!-- =============================================== -->
-        <!-- Header will be loaded per JavaScript! Edit header.js to change. -->
-        <!-- =============================================== -->
-        <nav-header></nav-header>
+        <p><center><div class="shadows"><a href="https://lupinus.neocities.org/biscuitshrine"><small>This site is dedicated to our <br>beloved BISCUIT! 2009—2023</small>
+        <br><div class="navbuttons"><img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/biscuitheart.png" width="200"></div></a></div></center>
 
-        <button onclick="topFunction()" id="backscroll" title="Go to top">Top</button>
+        </aside>
+            
+            
+  <main>
+    <div class="box"><center><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/welcomesign.png" height="191" alt="WELCOME!"><!--<img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangewelcomesign1.png" height="191" alt="WELCOME!">--></center><div class="shadows">
+The Vampire's Nest is a personal site for artwork, shrines, ocs, and cool stuff I salvage. The usual warnings for <strong>eyestrain</strong> and <strong>flashing images</strong> apply to all pages, in addition to warnings for <strong>blood, gore, swearing, crude humor,</strong> and <strong>suggestive themes</strong>. You can find some resources to help Palestine during the ongoing genocide on the left sidebar; below that, some site buttons for really cool fellow Neocities users. On the right sidebar you can find Vampire! Magazine (an OC zine) and the personalized OC pages. Feel free to steal my blinkies! No credit needed! 
+    Hail satan, and have a lovely Hallows Eve! <br><center><img src="sudanflagpixel.png"><img src="ukraineflagpixel.png"><img src="palestineflagpixel.png"></center></div></div>
 
-        <!-- =============================================== -->
-        <!-- BODY BEGINS. -->
-        <!-- =============================================== -->
-        <div class="container-grid">
-            <!-- =============================================== -->
-            <!-- Sidebar will be loaded per JavaScript! Edit left-sidebar.js to change. -->
-            <!-- =============================================== -->
-            <left-sidebar></left-sidebar>
+      <p><center><img src="https://file.garden/aAdIXYazImdyc4Ee/Divs/redline.png" width="570"></center>
 
-            <main id="content">
-                <!-- =============================================== -->
-                <!-- SITE INTRODUCTION. -->
-                <!-- =============================================== -->
-                <article>
-                    <!-- HEADER -->
-                    <h1>
-                        <img src="../assets/hanging_flowers.gif" loading="lazy" aria-hidden="true" alt="" />
-                        Site Introduction
-                    </h1>
+    <p><center><div class="shadows"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/freepalestinenow.png" width="500" alt="Free Palestine NOW!"><!--<img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangefreepalestinenow.png" width="500" alt="Free Palestine NOW!">--></div>
 
-                    <blockquote>
-                        <div id="quote-spit"></div>
-                        <a onclick="generateQuote()" style="float: right; margin-top: -16px" title="New Quote">+</a>
-                    </blockquote>
-                    <p>Welcome to my little personal corner!</p>
-                    <p>
-                        Some part of me has gotten super tired with social media/how online spheres feel, so I wanted to
-                        use my knowledge of CSS, JS and HTML to make a site that's my own little hidey hole for
-                        myself, and whoever passes by. This site is <u>relatively optimized for mobile</u>, but it's not
-                        perfect, and it does make heavy use of <i>javascript</i> (though it'll probably look ugly
-                        already if it's disabled for yall).
-                    </p>
-                    <p>As this will mostly be a <mark>personal site</mark>, you can expect these things: </p>
-                    <ul>
-                        <li><a href="about.html">Information</a> about me</li>
-                        <li>My <a href="https://bytedrew.atabook.org/">My Guestbook</a></li>
-                        <li>Any art I post on here</li>
-                        <li>My favourite things</li>
-                        <li>Game related things</li>
-                        </li>
-                    </ul>
-                        <img
-                            src="../assets/pixel_stump.gif"
-                            loading="lazy"
-                            style="float: left; margin-right: 20px; width: 77px; height: auto"
-                            alt="pixel tree stump" />
-                    <p>
-                        Slowly making my dent in working on this over time...
-                    </p>
-                    <hr />
-                </article>
-                <!-- =============================================== -->
-                <!-- ABOUT ME. -->
-                <!-- =============================================== -->
-                <article>
-                    <!-- HEADER -->
-                    <h1>
-                        <img src="../assets/hanging_flowers.gif" loading="lazy" aria-hidden="true" alt="" />
-                        About the Webmaster
-                    </h1>
-                    <div class="columns">
-                        <div class="column" style="flex: 0 0 29%">
-                            <div class="image-deco" style="padding: 0; width: 100%">
-                                    <img
-                                        src="../assets/8642d7a358cb83c9040f846ea9d2799b.jpg"
-                                        style="width: 100%; height: 100%; margin-left: auto; margin-right: auto"
-                                        loading="lazy"
-                                        alt="thinking cat" />
-                                </a>
-                            </div>
-                        </div>
-                        <div class="column" style="flex: 0 0 65%">
-                            <a href="../assets/pixel_divider.gif">
-                                <img
-                                    src="../assets/pixel_divider.gif"
-                                    class="center-img"
-                                    alt="A pixel divider made up of four leaf clovers"
-                            /></a>
-                            <p>
-                                Hello, name's <b>Drew</b>; I'm an <u>artist</u> and <u>game designer</u> and suck at
-                                introducing myself usually cause I forget what I like LOL. I like a ton of types of games which can be found at <a href="about.html">my about page</a>, not much about me to say. You can read more about me
-                                <a href="about.html">on this page</a>! You can usually find me on discord primarily.
-                            </p>
-                            <a href="../assets/pixel_divider.gif">
-                                <img
-                                    src="../assets/pixel_divider.gif"
-                                    class="center-img"
-                                    alt="A pixel divider made up of four leaf clovers"
-                            /></a>
-                        </div>
-                    </div>
-                </article>
-                <!-- =============================================== -->
-                <!-- SITE UPDATES. -->
-                <!-- =============================================== -->
-                <article>
-                        <img
-                            src="../assets/nukoBigHeart.gif"
-                            loading="lazy"
-                            alt="RSS feed icon"
-                            style="float: right; margin-top: 3px; width: 47px"/>
-                    <!-- HEADER -->
-                    <h1>
-                        <img src="../assets/hanging_flowers.gif" loading="lazy" aria-hidden="true" alt="" />
-                        Site Updates
-                    </h1>
-                    <div class="scrollable" style="height: 310px">
-                         <p>
-                            <b>09/15/25:</b> Website finally released!
-                        </p>
-                        <p>
-                            <b>08/29/25:</b> Finally released my website! It's been in development and had multiple layout and design interations but hopefully this one stick now that every device can view it!
-                        </p>
-                    </div>
-                </article>
-            </main>
-            <!-- =============================================== -->
-            <!-- RIGHT SIDEBAR CONTENT -->
-            <!-- =============================================== -->
-            <aside class="right-sidebar hide-mobile">
-                <!-- =============================================== -->
-                <!-- WATCHING / PLAYING. -->
-                <!-- =============================================== -->
-                <section>
-                    <!-- HEADER -->
-                    <h4>
-                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
-                        ☆ Currently ☆
-                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
-                    </h4>
-                    <p>
-                        <span class="highlight">Watching:</span>
-                        Reacher Season 3
-                    </p>
-                    <p>
-                        <span class="highlight">Playing:</span>
-                        <span class="tippy" data-tippy-content="3, 4, 76">Fallout</span>, Deltarune
-                    </p>
-                    <p>
-                        <span class="highlight">Reading:</span>
-                        Jurassic Park Series
-                    </p>
-                    <p>
-                        <span class="highlight">Feeling:</span>
-                        <a href="https://www.imood.com/users/bytedrew">
-                            <img
-                                src="https://moods.imood.com/display/uname-bytedrew/fg-788b68/trans-1/imood.gif"
-                                alt="The current mood of ByteDrew at www.imood.com"
-                                style="border: 0; color: var(--text-colour)"
-                        /></a>
-                    </p>
-                </section>
-                <!-- =============================================== -->
-                <!-- PICLOG. -->
-                <!-- =============================================== -->
-                <section>
-                    <!-- HEADER -->
-                    <h4>
-                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
-                        ☆ Piclog ☆
-                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
-                    </h4>
-                        ><img
-                            src="../assets/latest.jpg"
-                            class="full-width-image"
-                            loading="lazy"
-                            style="margin-bottom: 0; margin-top: 10px"
-                            alt="Piclog entry"
-                    />
-                </section>
-                <!-- =============================================== -->
-                <!-- NEIGHBOURS. -->
-                <!-- =============================================== -->
-                <section style="padding-bottom: 5px">
-                    <!-- HEADER -->
-                    <h4>
-                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
-                        ☆ Neighbours ☆
-                        <img src="../assets/plant_bopping.gif" loading="lazy" aria-hidden="true" alt="" />
-                    </h4>
-                    <div class="marquee" style="--hover: paused" data-speed="70">
-                        <a href="https://bytedrew.github.io"
-                            ><img alt="bytedrew" src="../assets/bytedrewbutton.png" class="freezeframe" loading="lazy"
-                        /></a>
-                    </div>
-                </section>
-            </aside>
-            <!-- =============================================== -->
-            <!-- ZHONGVIE SIDEBAR. -->
-            <!-- =============================================== -->
-            <div class="side-deco"></div>
-        </div>
+      <p><div class="freepalestine">
+        <center><div class="navbuttons"><a href="https://gazafunds.com"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/gazafundsbutton.png" width="200" alt="Gaza Funds"><!--<img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangegazafunds2.png" width="200" alt="Gaza Funds">--></a></div></center>
+      <br>GAZAFUNDS.COM loads a random vetted Palestinian fundraiser on every refresh. Donating even just the price of your morning coffee goes toward helping families survive, evacuate, and rebuild.
+      <p><center><div class="navbuttons"><a href="https://www.pcrf.net/"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/PCRFbutton.png" width="150" alt="PCRF: Palestine Children's Relief Fund charity donation button"><!--<img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangePCRFbutton.png" width="150" alt="PCRF: Palestine Children's Relief Fund charity donation button">--></a></div>
+      <div class="buttons"><a href="https://docs.google.com/spreadsheets/d/1-DDMFyn-ttboPXrz1bB3MFk7BlzCwfugh4259Wh7U1s/htmlview#"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/evacbutton.png" width="150" alt="Evacuation Fundraisers button"><!--<img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangeevacbutton.png" width="150" alt="Evacuation Fundraisers button">--></a></div>
+      <div class="navbuttons"><a href="https://helpgazachildren.notion.site/8517fdaec81a4568a0c1d1ddd0496732?v=59c939b12256426398ab7056b201e952"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/HELPGAZACHILDRENbutton.png" width="150" alt="Help Gaza Children: Notion site central hub charity donation button"><!--<img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangeHELPGAZACHILDRENbutton.png" width="150" alt="Help Gaza Children: Notion site central hub charity donation button">--></a></div></center>
+      <p>(7/8/25) THE ZIONAZIS CONTINUE TO USE STARVATION TO FURTHER THEIR GENOCIDE IN GAZA UNHINDERED BY LAW, CONVENTION, OR CONSCIENCE. WE IN THE WEST FUND AND ENABLE THIS ATROCITY EVERY DAY WE LET OUR POLITICIANS WALK WITH THEIR HEADS HELD HIGH. TAKE RESPONSIBILITY.
+      <p>Keep yourself updated: <a href="https://www.aljazeera.com/">Al Jazeera News (English)</a>
+      <br><center><img src="palestineflagpixel.png"> <img src="https://64.media.tumblr.com/1ad757bf44965a5fdfdc889942f0c674/97e0582dfe651544-b4/s250x400/d25d392835240498f7fd9b11a6721cc790a2f831.gif" alt="Free Palestine"> <img src="palestineflagpixel.png">
+      </center></div>
+      
+      <br><img src="https://file.garden/aAdIXYazImdyc4Ee/Divs/redline.png" width="570"></center>
+    
+    
+    <div class="shadows"><div class="box"><center><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/sitemanifesto.png" width="500" alt="The Site Manifesto"><!--<img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangesitemanifesto.png" width="500" alt="The Site Manifesto">--></center></div>
+      <div class="box"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/political.png" alt="Why does it always have to be political?" style="float:left;width:300px;">
+This page (and the website as a whole) is a love letter to anarchy and punk culture. Why focus so strongly on lefty politics? A punk that DOESN'T is either a poseur or a nazi. Frankly I wish I COULD live in a world where I could focus on doodling all day, but, "In order for me to write poetry that isn't political, I must listen to the birds, and in order to hear the birds, the warplanes must be silent." <a href="https://tracyabell.com/2023/11/11/palestinian-poetry/">—Marwan Makhoul</a>
+<br>I could go on and on about how politics effects everything we do, but at the end of the day, punk is political because we got done dirty by the status quo in myriad ways and we just want to live our lives and listen to bangin' music. A big part of being punk is realizing the world as we know it is built on training people to be polite and digressing while the rich and powerful step on their necks and tell them it's supposed to be this way (that it's always been this way).<img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/denydefenddepose.png" width="150" style="float:right;" alt="Deny Defend Depose"> All the bullshit we live under is a symptom of a sick society running the planet into the ground — and taking as many innocent people with it as possible. So, why NOT make it political? Use your space and time on this earth to scream to power, on behalf of the people who are dying by the thousands in the name of a handful of rich cunts' bottom lines. Find your representatives, show up to protests, graffiti something, start a garden, talk to your neighbors. Do everything you can to make everyone's lives a little better.
+</div></div>
+    <!--<p><img src="https://file.garden/aAdIXYazImdyc4Ee/Divs/orangediv2.gif" width="600">-->
 
-        <!-- =============================================== -->
-        <!-- Footer will be loaded per JavaScript! Edit footer.js to change. -->
-        <!-- =============================================== -->
-        <general-footer></general-footer>
+         <p><div class="coolart"><div class="coolarttext"> 
+      <div class="shadows"><center>
+      <br><img src="https://64.media.tumblr.com/ab116b8d63875c58fe82cd1d83a7ce1a/f3edcf589efed903-fe/s1280x1920/88c56931c3c5421dc724f49b9259bcaf5edfcea0.jpg" width="500"></center>
+      <br>"Blue Moon" by Jamie Wyeth.
+      <br>Another banger from the Wyeth family! I love the washed out watercolor style of this mischievous little jack-o-lantern. God I wish I knew how to use watercolors.
+      
+     <br><img src="https://file.garden/aAdIXYazImdyc4Ee/Divs/redline.png" width="550">
+    
+      <br><strong>I'm always a little disappointed I can't put MORE art on here but I do have limited space. For more cool art, check out my <a href="https://lupinus-bicolor.tumblr.com/archive/tagged/aesthetic">Tumblr tag!</a></strong></div>
+          </div></div>
+  </main>
+                
+                
+  <aside id="rightSidebar">
+    <center>
+      <img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/button1.png" width="200" height="92" alt="Best viewed on desktop">
+      <img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/button2.png" width="200" height="89" alt="Image heavy">
+      <img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/button3.png" width="200" height="90" alt="Work in progress">    
+      <p><img src="https://file.garden/aAdIXYazImdyc4Ee/Divs/redline.png" width="200">
+      <p><div class="navbuttons"><a href="https://lupinus.neocities.org/vampiremagazine"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/vampstamp.png" alt="Vampire! Magazine"></a></div>
+      <br><div class="navbuttons"><a href="https://lupinus.neocities.org/oliverspage"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/oliverspagebutton.png" width="200" alt="Oliver's Page"></a></div>
+      <br><div class="navbuttons"><a href="https://lupinus.neocities.org/salierispage"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/salierispagebutton.png" width="200" alt="Salieri's Page"></a></div>
+      <br><div class="navbuttons"><a href="https://lupinus.neocities.org/skrilliantspage"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/skrilliantspagebutton.png" width="200" alt="Skrilliant's Page"></a></div>
+    </center>
 
-        <!-- =============================================== -->
-        <!-- Initialize marquee grid. -->
-        <!-- =============================================== -->
-        <script>
-            marquee.setup();
-        </script>
+              <p><div class="updatelog"><div class="updatetext">
+                <div class="shadows"><h3>UPDATE LOG!</h3>
+    
+    <p>October 7th, 2025:
+    <br>-New Cool Art of the Week!
+    <br>-Blinkies page is still down (sorry D:)
+    <p>October 1st, 2025:
+    <br>-HAPPY HALLOWEEN! check out the new festive look of the homepage!
+    <br>-Banging out the new look of the Blinkies page
+    <br>-New Jack London books added to the Readz page
+    <br>-New Cool Art of the Week!
+    <p>September 24th, 2025:
+    <br>-Work has finished on the Raindrops on Roses/Favorite Shit page!! New thumbnail will link it in the Shrine Directory for easier access
+    <br>-Added a little circlejerk page banner to the bottom of the homepage (for all your Vampire's Nest advertising needs!)
+    <br>-Past updates have been moved to the <a href="https://lupinus.neocities.org/pastupdates">Past Updates</a> page
+    <p>September 10th, 2025:
+    <br>-New site buttons added to the NeoNeighbors section! 
+    <br>-New art and fun facts added to Salieri's OC page!
+    <br>-Work continues on the Favorite Shit page
+    <br>-New Cool Art of the Week!
+    <p>September 2nd, 2025:
+    <br>-Revamped Oliver's Page!
+    <br>-New stickers added to the Favorite Shit page
+    <br>-New Cool Art of the Week!
+      <p><a href="https://lupinus.neocities.org/pastupdates">SEE ALL PAST UPDATES?</a>
+              </div></div></div>
 
-        <!-- Wedding Ring -->
-        <script type="text/javascript" src="js/weddingring2.js"></script>
-        <script src="js/weddingring.js"></script>
+     <p><center><div class="shadows"><big>GOODIES!!!</big>
+      <img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/idealbodyad.png" width="200" alt="Why don't YOU look like THIS? (skeleton) THIS IS THE IDEAL BODY">
+      <img src="https://file.garden/aAdIXYazImdyc4Ee/VampireMagazine8/vampwolf.png" width="200" alt="Say no to false dichotomies! Join the vampire warewolf alliance">
+      <img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/oliverbubblegum.png" width="200" alt="Suck on this! Barry's Bloody Bubblegum Pops">
+      <img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/scrrd.jpg" width="200" alt="I'm scared and I'm not having any fun">
+      <img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/sleepingvampire.png" width="200" alt="If you find a sleeping vampire, draw on its face. It won't ever know.">
+      <img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/vampireshavemorefun.png" width="200" alt="vampires have more fun">
 
-        <!-- Tippy.js -->
-        <script src="js/popper.min.js"></script>
-        <script src="js/tippy-bundle.iife.min.js"></script>
-        <script>
-            tippy("[data-tippy-content]", {
-                duration: 500,
-                placement: "top",
-                theme: "character"
-            });
-        </script>
+      <!--<br><img src="happyhalloweenstamp1.gif"><img src="greenstamp1.png">-->
+      <!--<br><img src="halloweenstamp2.gif"><img src="halloweenstamp10.png">-->
+      <!--<br><img src="purplepumpkinstamp.gif"><img src="halloweenstamp8.png">-->
+      <!--<br><img src="halloweenstamp7.png"><img src="spookystamp.gif">-->
+      <!--<br><img src="ilovemonsters.png"><img src="happyweenstamp.gif">-->
+      <!--<br><img src="halloweenstamp1.gif" width="96"><img src="happyhalloweenstamp.gif" width="96">-->
+      <!--<br><img src="halloweenstamp4.png" width="96"><img src="halloweenstamp3.png" width="96">-->
+      <!--<br><img src="ihearthalloweenstamp.png" width="96"><img src="purpleweenstamp.gif" width="96">-->
+      <!--<br><img src="halloweenstamp5.png" width="96"><img src="halloweenstamp6.gif" width="96">-->
+      <!--<br><img src="autumnstamp.gif"><img src="purplepumpkinstamp1.png">-->
+      <!--<br><img src="spookyspongestamp.gif"><img src="autumnstamp1.gif">-->
+      <!--<br><img src="halloweenstamp9.png"><img src="candystamp.png">-->
+    </div></center>
+    
+    <p><div class="todolist">
+      TO DO LIST:
+      <br>-More films in the Favorite Movies page
+      <br>-Revamp the Blinkies page
+      <br>-Finish rdr2 shrine
+      <br>-Look at this Tiny Desk Engineer →<img src="https://file.garden/aAdIXYazImdyc4Ee/Graphics/tinydeskengie.gif" style="float:right;">
+      <br>-Work on the Bone Shrine!!!!!!!
+    </div>
 
-        <!-- Scroll to Top -->
-        <script src="js/scroll-to-top.js"></script>
+  <p><div class="webrings">
+    <center><h3>FANLISTS AND WEBRINGS:</h3>
+    <br><div class="shadows">
+    <div class="navbuttons"><a href="https://thewildrose.org/vendetta/index.php"><img src="vforvendettabutton.png"></a></div>
+    <div class="navbuttons"><a href="http://lectersgirl.altervista.org/psycho/index.php"><img src="americanpsychofanbuttonsmall.png"></a></div>
+    <div class="navbuttons"><a href="https://fanlistings.nickifaulk.com/skulls/"><img src="skullfanbuttonsmall.png"></a></div>
+    <br>
+    <div class="navbuttons"><a href="http://theatregirl.net/vampire"><img src="vampirefanbuttonsmall.jpg"></a></div>
+    <div class="navbuttons"><a href="https://fan.glast-heim.net/glados/"><img src="gladosfanlistbutton.png"></a></div>
+    <div class="navbuttons"><a href="https://mikh.net/elvira"><img src="elvirafanbuttonsmall.jpg"></a></div>
+    <br>
+    <div class="navbuttons"><a href="http://lectersgirl.altervista.org/sotl"><img src="silenceofthelambsfanbuttonsmall.png"></a></div>
+    <div class="navbuttons"><a href="https://www.heartofsnow.net/alice"><img src="alicecooperfanbuttonsmall.jpg"></a></div>
+    <div class="navbuttons"><a href="http://lectersgirl.altervista.org/htv"><img src="hannibalfanbutton.png"></a></div>
+    <br>
+    <div class="navbuttons"><a href="https://www.purifiedfiction.com/repothegeneticopera/"><img src="repofanbuttonsmall.gif"></a></div>
+    <div class="navbuttons"><a href="https://thewildrose.org/movies/index.php"><img src="moviesbutton.jpg"></a></div>
+    <div class="navbuttons"><a href="http://fan.koukeisha.net/eq-fanlisting/"><img src="egyptqueenfanbuttonsmall.JPG"></a></div>
+    <br>
+    <div class="navbuttons"><a href="https://fan.sleety.org/mgs/index.php"><img src="mgsbutton.png"></a></div>
+    <div class="navbuttons"><a href="https://10-31.net/fans/rhps/buttons.php"><img src="rockyhorrorfanbuttonsmall.png"></a></div>
+    <div class="navbuttons"><a href="https://fan.lotr-fan.net/lotr.php"><img src="lotrfanbuttonsmall.png"></a></div>
+    <br>
+    <div class="navbuttons"><a href="https://gryffindors.com/lindy/bbmountain/"><img src="brokebackmountainbuttonsmall.png"></a></div>
+    <div class="navbuttons"><a href="http://saw3.tanfana.net/index.php"><img src="saw3fanbutton.jpg"></a></div>
+    <div class="navbuttons"><a href="https://fanacular.net/jigsaw/index.php"><img src="sawseriesfanbuttonsmall.jpg"></a></div>
+    <br>
+    <div class="navbuttons"><a href="http://gore.dead-ish.net/"><img src="gorefanbuttonsmall.jpg"></a></div>
+    <div class="navbuttons"><a href="https://10-31.net/fans/spooky/buttons.php"><img src="halloweendecorfanbuttonsmall.png"></a></div>
+    <div class="navbuttons"><a href="https://10-31.net/halloween/buttons.php"><img src="halloweenfanbutton.png"></a></div>
+    <br><!--webrings-->
+    <script src="https://transring.neocities.org/ring.js" data-widget="nb" width="200"></script>
+    <br><a href="https://jack-dawlia.neocities.org/page/shrines/portal/aperturewebring"><img src="aperture-webring-orange.png" width="200"></a>
+    <br><script data-widget="images" src="https://rock-webring.neocities.org/webstring.js"></script> 
+    <br>
+    <map name="noaimini4b">
+    <area href="https://baccyflap.com/noai" shape="rect" coords="44,6,126,34" target="_blank" alt="no ai webring" title="no ai webring">
+    <area href="https://baccyflap.com/noai/?prv&s=lup" target="_top" shape="poly" coords="0,30,20,10,36,10,36,50,20,50" alt="previous" title="previous">
+    <area href="https://baccyflap.com/noai/?nxt&s=lup" target="_top" shape="poly" coords="174,30,154,10,138,10,138,50,154,50" alt="next" title="next">
+    </map>
+    <img style="width:176px;image-rendering:pixelated" usemap="#noaimini4b" src="https://baccyflap.com/noai/miniwidget4.gif" alt="a pink rounded rectangle with soft red borders. in the centre is the text NO AI / WEB / RING and to either side are two hearts, changing colour from white to red to pink">
+    <center><a href="https://cs.sjoy.lol/"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangecssjoy1.png" width="200" alt="CSS Joy Webring"></a>
+    <br><div class="navbuttons"><a href="https://webri.ng/webring/cssjoy/previous?via=https://lupinus.neocities.org/path"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangecssjoyleft.png" width="100" style="margin-top:-7px;" alt="Previous"></a></div>
+    <div class="navbuttons"><a href="https://webri.ng/webring/cssjoy/next?via=https://lupinus.neocities.org/path"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/orangecssjoyright.png" width="100" style="margin-top:-7px;" alt="Next"></a></div></center>
 
-        <!-- Accessibility Button -->
-        <script src="js/sienna.min.js" defer></script>
-
-        <!-- Page Specific Scripts -->
-        <script src="js/random-sentence.js"></script>
-        <script src="js/random-dragcave.js"></script>
-        <script src="js/loader.js"></script>
-        <script src="js/accordion.js"></script>
-    </body>
+    </div></center></div>
+    </aside>
+ </div><!--flex end ;3-->
+      
+    <footer id="footer">
+        <div class="navbuttons"><a href="https://letterboxd.com/LupinusBicolor/"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/letterboxd.png" width="90" height="90"></a></div>
+        <div class="navbuttons"><a href="https://lupinus-bicolor.tumblr.com/"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/tumblr.png" width="90" height="90"></a></div>
+        <div class="navbuttons"><a href="https://bsky.app/profile/lupinusb.bsky.social"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/bskybutton.png" height="90"></a></div>
+        <p><div class="navbuttons"><a href="https://lupinus.neocities.org/directory"><img src="https://file.garden/aAdIXYazImdyc4Ee/Titles%26Buttons/directorybutton.png" width="200" height="123"></a></div>
+        <p><img src="vampsnestbanner1frfr.gif">
+      <p>Construction began: August 26th, 2023</p>
+    </footer>
+                </div><!--container end :3c-->
+      
+  </body>
 </html>
