@@ -1,508 +1,1179 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { createPageUrl } from '../utils';
-import { Home, Heart, Gamepad2, Briefcase, BookOpen, Menu, X, Moon, Sun, Star, Plus, Clock, Trash2 } from 'lucide-react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-
-export default function GameShrines() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('darkMode');
-    return saved ? JSON.parse(saved) : false;
-  });
-  const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    platform: '',
-    genre: '',
-    hours_played: '',
-    favorite_moment: '',
-    rating: 10,
-    cover_image: ''
-  });
-
-  useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode]);
-
-  const navItems = [
-    { name: 'Home', icon: Home, path: 'Home' },
-    { name: 'Interests', icon: Heart, path: 'Interests' },
-    { name: 'Game Shrines', icon: Gamepad2, path: 'GameShrines' },
-    { name: 'Projects', icon: Briefcase, path: 'Projects' },
-    { name: 'Blog', icon: BookOpen, path: 'Blog' }
-  ];
-
-  const queryClient = useQueryClient();
-
-  const { data: games = [], isLoading } = useQuery({
-    queryKey: ['gameshrines'],
-    queryFn: () => base44.entities.GameShrine.list('-created_date')
-  });
-
-  const createMutation = useMutation({
-    mutationFn: (data) => base44.entities.GameShrine.create(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['gameshrines']);
-      setShowForm(false);
-      setFormData({
-        title: '',
-        description: '',
-        platform: '',
-        genre: '',
-        hours_played: '',
-        favorite_moment: '',
-        rating: 10,
-        cover_image: ''
-      });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Shrines - Your Personal Site</title>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    :root {
+      --color-primary: #e55ae7;
+      --color-secondary: #f5983c;
+      --bg-card-light: #ffffff;
+      --bg-card-dark: #1f2937;
+      --text-primary-light: #1f2937;
+      --text-primary-dark: #f3f4f6;
+      --text-secondary-light: #4b5563;
+      --text-secondary-dark: #9ca3af;
     }
-  });
 
-  const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.GameShrine.delete(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries(['gameshrines']);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createMutation.mutate({
-      ...formData,
-      hours_played: formData.hours_played ? parseFloat(formData.hours_played) : undefined,
-      rating: parseInt(formData.rating)
-    });
-  };
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      transition: all 0.3s ease;
+      min-height: 100vh;
+    }
 
-  return (
-    <div className={`min-h-screen transition-colors duration-300 ${
-      darkMode 
-        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
-        : 'bg-gradient-to-br from-purple-50 via-white to-orange-50'
-    }`}>
-      <style>{`
-        :root {
-          --color-primary: #e55ae7;
-          --color-secondary: #f5983c;
-          --bg-card-light: #ffffff;
-          --bg-card-dark: #1f2937;
-          --text-primary-light: #1f2937;
-          --text-primary-dark: #f3f4f6;
-          --text-secondary-light: #4b5563;
-          --text-secondary-dark: #9ca3af;
-        }
-        
-        .dark-mode h1,
-        .dark-mode h2,
-        .dark-mode h3,
-        .dark-mode h4 {
-          color: var(--text-primary-dark);
-        }
-        
-        .dark-mode p,
-        .dark-mode span,
-        .dark-mode div {
-          color: var(--text-secondary-dark);
-        }
-        
-        .dark-mode .bg-white {
-          background-color: var(--bg-card-dark) !important;
-        }
-        
-        .dark-mode .shadow-lg,
-        .dark-mode .shadow-xl,
-        .dark-mode .shadow-2xl {
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
-        }
-        
-        .dark-mode .text-gray-700 {
-          color: #d1d5db !important;
-        }
-        
-        .dark-mode .text-gray-600 {
-          color: #9ca3af !important;
-        }
-        
-        .dark-mode .text-gray-500 {
-          color: #6b7280 !important;
-        }
-        
-        .dark-mode .bg-gradient-to-r.from-purple-100 {
-          background: linear-gradient(to right, rgba(139, 92, 246, 0.2), rgba(245, 158, 11, 0.2)) !important;
-        }
-        
-        .dark-mode .border-gray-200 {
-          border-color: #374151 !important;
-        }
-        
-        .gradient-text {
-          background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-        
-        .gradient-border {
-          position: relative;
-        }
-        
-        .gradient-border::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          padding: 2px;
-          background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          border-radius: inherit;
-        }
-        
-        .nav-link-active {
-          background: linear-gradient(135deg, rgba(229, 90, 231, 0.1), rgba(245, 152, 60, 0.1));
-          border-left: 3px solid var(--color-primary);
-        }
-        
-        .glow-effect {
-          box-shadow: 0 0 20px rgba(229, 90, 231, 0.3), 0 0 40px rgba(245, 152, 60, 0.2);
-        }
+    /* Light Mode */
+    body.light {
+      background: linear-gradient(to bottom right, #f5f3ff, #ffffff, #fdf4f3);
+      color: var(--text-primary-light);
+    }
 
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-fade-in {
-          animation: fadeIn 0.6s ease-out forwards;
-        }
-      `}</style>
+    /* Dark Mode */
+    body.dark {
+      background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
+      color: var(--text-primary-dark);
+    }
 
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        className={`lg:hidden fixed top-6 left-6 z-50 p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${
-          darkMode ? 'bg-gray-800' : 'bg-white'
-        }`}
-        style={{ background: darkMode ? undefined : 'linear-gradient(135deg, rgba(229, 90, 231, 0.1), rgba(245, 152, 60, 0.1))' }}
-      >
-        {mobileMenuOpen ? (
-          <X className="w-6 h-6" style={{ color: 'var(--color-primary)' }} />
-        ) : (
-          <Menu className="w-6 h-6" style={{ color: 'var(--color-primary)' }} />
-        )}
+    body.dark h1, body.dark h2, body.dark h3, body.dark h4 {
+      color: var(--text-primary-dark);
+    }
+
+    body.dark p, body.dark span, body.dark div:not([class*="gradient"]):not([class*="glow"]) {
+      color: var(--text-secondary-dark);
+    }
+
+    body.dark .bg-card {
+      background-color: var(--bg-card-dark) !important;
+    }
+
+    body.dark .shadow-lg,
+    body.dark .shadow-xl,
+    body.dark .shadow-2xl {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    body.dark .text-gray-700 {
+      color: #d1d5db !important;
+    }
+
+    body.dark .text-gray-600 {
+      color: #9ca3af !important;
+    }
+
+    body.dark .text-gray-500 {
+      color: #6b7280 !important;
+    }
+
+    body.dark .bg-gradient-light {
+      background: linear-gradient(to right, rgba(139, 92, 246, 0.2), rgba(245, 158, 11, 0.2)) !important;
+    }
+
+    body.dark .border-light {
+      border-color: #374151 !important;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glow-effect {
+      box-shadow: 0 0 20px rgba(229, 90, 231, 0.3), 0 0 40px rgba(245, 152, 60, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 50;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      border: none;
+      background: white;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      display: none;
+      cursor: pointer;
+    }
+
+    body.dark .mobile-menu-btn {
+      background: #1f2937;
+    }
+
+    .mobile-menu-btn:hover {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 1024px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    /* Sidebar - SAME AS PREVIOUS PAGES */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 20rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      z-index: 40;
+      transform: translateX(-100%);
+      transition: all 0.3s ease-in-out;
+      border-right: 1px solid #e5e7eb;
+      background: white;
+    }
+
+    body.dark .sidebar {
+      background: #111827;
+      border-right-color: #374151;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    @media (min-width: 1025px) {
+      .sidebar {
+        transform: translateX(0);
+      }
+    }
+
+    .sidebar-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    .profile-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .profile-img-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .profile-img {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+      border: 4px solid white;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .profile-img {
+      border-color: #374151;
+    }
+
+    .profile-sparkle {
+      position: absolute;
+      bottom: -0.5rem;
+      right: -0.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
+
+    body.dark .profile-sparkle {
+      background: #374151;
+    }
+
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .profile-subtitle {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    body.dark .profile-subtitle {
+      color: #9ca3af;
+    }
+
+    .theme-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    body.dark .theme-toggle {
+      color: #f3f4f6;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.02);
+    }
+
+    .nav {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    body.dark .nav-link {
+      color: #d1d5db;
+    }
+
+    .nav-link:hover {
+      transform: scale(1.05);
+      background: rgba(229, 90, 231, 0.1);
+    }
+
+    .nav-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      color: #6b7280;
+    }
+
+    body.dark .nav-icon {
+      color: #9ca3af;
+    }
+
+    .nav-link-active {
+      background: linear-gradient(135deg, rgba(229, 90, 231, 0.1), rgba(245, 152, 60, 0.1));
+      border-left: 3px solid var(--color-primary);
+    }
+
+    body.dark .nav-link-active {
+      background: linear-gradient(135deg, rgba(229, 90, 231, 0.2), rgba(245, 152, 60, 0.2));
+    }
+
+    .nav-link-active .nav-icon {
+      color: var(--color-primary) !important;
+    }
+
+    .nav-link-active span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #6b7280;
+      padding-bottom: 2rem;
+    }
+
+    body.dark .sidebar-footer {
+      border-top-color: #374151;
+      color: #9ca3af;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 30;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Main Content */
+    main {
+      min-height: 100vh;
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+      padding-top: 2rem;
+    }
+
+    @media (min-width: 1025px) {
+      main {
+        margin-left: 20rem;
+      }
+    }
+
+    .main-container {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    @media (min-width: 1025px) {
+      .main-container {
+        padding: 3rem;
+      }
+    }
+
+    /* Header */
+    .header-section {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .header-icon {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, #e9d5ff, #fed7aa);
+    }
+
+    body.dark .header-icon {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(245, 158, 11, 0.2));
+    }
+
+    .header h1 {
+      font-size: clamp(2.5rem, 8vw, 3rem);
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .header p {
+      font-size: 1.25rem;
+      color: #6b7280;
+      max-width: 32rem;
+      margin: 0 auto 2rem;
+    }
+
+    body.dark .header p {
+      color: #9ca3af;
+    }
+
+    .add-game-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: white;
+    }
+
+    .add-game-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(229, 90, 231, 0.4);
+    }
+
+    /* Form */
+    .form-card {
+      background: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-bottom: 3rem;
+    }
+
+    body.dark .form-card {
+      background: #1f2937;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .form-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    body.dark .form-header {
+      border-bottom-color: #374151;
+    }
+
+    .form-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .form-content {
+      padding: 2rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+
+    body.dark .form-label {
+      color: #d1d5db;
+    }
+
+    .form-input, .form-textarea {
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .form-input,
+    body.dark .form-textarea {
+      background: #374151;
+      border-color: #4b5563;
+      color: #f3f4f6;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(229, 90, 231, 0.1);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      grid-column: 1 / -1;
+    }
+
+    .btn-primary {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(229, 90, 231, 0.4);
+    }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.75rem;
+      background: transparent;
+      color: #374151;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .btn-secondary {
+      border-color: #4b5563;
+      color: #d1d5db;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(229, 90, 231, 0.1);
+      border-color: var(--color-primary);
+    }
+
+    .btn-danger {
+      padding: 0.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: #ef4444;
+      border-radius: 0.25rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-danger:hover {
+      color: #dc2626;
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Loading & Empty States */
+    .loading-spinner {
+      width: 3rem;
+      height: 3rem;
+      border: 4px solid #e5e7eb;
+      border-top: 4px solid var(--color-primary);
+      border-radius: 50%;
+      margin: 3rem auto;
+    }
+
+    .empty-state {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 3rem;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark .empty-state {
+      background: #1f2937;
+    }
+
+    /* Games Grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .game-card {
+      background: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .game-card {
+      background: #1f2937;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .game-card:hover {
+      transform: translateY(-0.5rem);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .game-cover {
+      height: 12rem;
+      overflow: hidden;
+    }
+
+    .game-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .game-content {
+      padding: 1.5rem;
+    }
+
+    .game-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .game-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .game-meta {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+
+    body.dark .game-meta {
+      color: #9ca3af;
+    }
+
+    .game-description {
+      color: #374151;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    body.dark .game-description {
+      color: #d1d5db;
+    }
+
+    .favorite-moment {
+      background: linear-gradient(135deg, #e9d5ff, #fed7aa);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    body.dark .favorite-moment {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(245, 158, 11, 0.2));
+    }
+
+    .favorite-moment-label {
+      font-weight: 500;
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+    }
+
+    body.dark .favorite-moment-label {
+      color: #9ca3af;
+    }
+
+    .favorite-moment-text {
+      font-style: italic;
+      color: #374151;
+      font-size: 0.875rem;
+    }
+
+    body.dark .favorite-moment-text {
+      color: #d1d5db;
+    }
+
+    .game-stats {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #6b7280;
+    }
+
+    body.dark .stat-item {
+      color: #9ca3af;
+    }
+
+    .rating {
+      color: var(--color-secondary);
+      font-weight: 600;
+    }
+
+    .heart-filled {
+      color: var(--color-primary);
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body class="light">
+  <!-- Mobile Menu Button -->
+  <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">
+    <i data-lucide="menu"></i>
+  </button>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+      <!-- Profile Section -->
+      <div class="profile-section animate-fade-in">
+        <div class="profile-img-container">
+          <div class="profile-img glow-effect">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop" alt="Profile" class="w-full h-full object-cover">
+          </div>
+          <div class="profile-sparkle">
+            <span>✨</span>
+          </div>
+        </div>
+        <h1 class="profile-name gradient-text">Your Name</h1>
+        <p class="profile-subtitle">Digital Creator & Dreamer</p>
+      </div>
+
+      <!-- Dark Mode Toggle -->
+      <button id="themeToggle" class="theme-toggle">
+        <span>Theme</span>
+        <div id="themeIconContainer" class="flex items-center gap-2">
+          <i data-lucide="sun" class="w-5 h-5"></i>
+          <span class="text-sm">Light</span>
+        </div>
       </button>
 
-      {/* Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 h-full w-80 shadow-2xl z-40 transform transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 ${
-          darkMode ? 'bg-gray-900 border-r border-gray-700' : 'bg-white'
-        }`}
-      >
-        <div className="h-full flex flex-col p-8">
-          {/* Profile Section */}
-          <div className="text-center mb-8 animate-fade-in">
-            <div className="relative inline-block mb-4">
-              <div className={`w-32 h-32 rounded-full overflow-hidden glow-effect mx-auto border-4 transition-colors duration-300 ${darkMode ? 'border-gray-700' : 'border-white'}`}>
-                <img
-                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop"
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className={`absolute -bottom-2 -right-2 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-colors duration-300 ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
-                <span className="text-2xl">✨</span>
-              </div>
-            </div>
-            <h1 className="text-2xl font-bold gradient-text mb-1">Your Name</h1>
-            <p className={`text-sm transition-colors duration-300 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Digital Creator & Dreamer</p>
-          </div>
+      <!-- Navigation -->
+      <nav class="nav" role="navigation">
+        <a href="index.html" class="nav-link" data-path="Home">
+          <i data-lucide="home" class="nav-icon"></i>
+          <span>Home</span>
+        </a>
+        <a href="interests.html" class="nav-link" data-path="Interests">
+          <i data-lucide="heart" class="nav-icon"></i>
+          <span>Interests</span>
+        </a>
+        <a href="gameshrines.html" class="nav-link nav-link-active" data-path="GameShrines">
+          <i data-lucide="gamepad-2" class="nav-icon"></i>
+          <span>Game Shrines</span>
+        </a>
+        <a href="projects.html" class="nav-link" data-path="Projects">
+          <i data-lucide="briefcase" class="nav-icon"></i>
+          <span>Projects</span>
+        </a>
+        <a href="blog.html" class="nav-link" data-path="Blog">
+          <i data-lucide="book-open" class="nav-icon"></i>
+          <span>Blog</span>
+        </a>
+      </nav>
 
-          {/* Dark Mode Toggle */}
-          <div className="mb-6">
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 ${
-                darkMode 
-                  ? 'bg-gray-800 hover:bg-gray-700 text-gray-200' 
-                  : 'bg-gradient-to-r from-purple-50 to-orange-50 hover:from-purple-100 hover:to-orange-100 text-gray-700'
-              }`}
-            >
-              <span className="font-medium">Theme</span>
-              <div className="flex items-center gap-2">
-                {darkMode ? (
-                  <>
-                    <Moon className="w-5 h-5 text-purple-400" />
-                    <span className="text-sm">Dark</span>
-                  </>
-                ) : (
-                  <>
-                    <Sun className="w-5 h-5 text-orange-500" />
-                    <span className="text-sm">Light</span>
-                  </>
-                )}
-              </div>
-            </button>
-          </div>
-
-          {/* Navigation */}
-          <nav className="flex-1 space-y-2">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.path}
-                to={createPageUrl(item.path)}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 hover:scale-105 ${
-                  'GameShrines' === item.path 
-                    ? 'nav-link-active' 
-                    : darkMode 
-                      ? 'hover:bg-gray-800' 
-                      : 'hover:bg-gradient-to-r hover:from-purple-50 hover:to-orange-50'
-                }`}
-                style={{
-                  animationDelay: `${index * 0.1}s`,
-                  opacity: 0,
-                  animation: 'fadeIn 0.6s ease-out forwards'
-                }}
-              >
-                <item.icon
-                  className="w-5 h-5"
-                  style={{ color: 'GameShrines' === item.path ? 'var(--color-primary)' : '#6b7280' }}
-                />
-                <span
-                  className={`font-medium ${
-                    'GameShrines' === item.path 
-                      ? 'gradient-text' 
-                      : darkMode 
-                        ? 'text-gray-300' 
-                        : 'text-gray-700'
-                  }`}
-                >
-                  {item.name}
-                </span>
-              </Link>
-            ))}
-          </nav>
-
-          {/* Footer */}
-          <div className={`mt-8 pt-6 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-            <p className={`text-xs text-center ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>
-              Made with <span className="gradient-text">♥</span> and creativity
-            </p>
-          </div>
-        </div>
-      </aside>
-
-      {/* Overlay for mobile */}
-      {mobileMenuOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Main Content */}
-      <main className="lg:ml-80 min-h-screen">
-        <div className="max-w-6xl mx-auto p-6 lg:p-12 animate-fade-in">
-          <div className={darkMode ? 'dark-mode' : ''}>
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4 animate-fade-in">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-purple-100 to-orange-100 mb-4 glow-effect">
-                  <Gamepad2 className="w-10 h-10" style={{ color: 'var(--color-primary)' }} />
-                </div>
-                <h1 className="text-5xl font-bold gradient-text">Game Shrines</h1>
-                <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto transition-colors duration-300">
-                  A tribute to the games that shaped my journey and stole my heart
-                </p>
-                <Button
-                  onClick={() => setShowForm(!showForm)}
-                  className="mt-4"
-                  style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' }}
-                >
-                  <Plus className="w-5 h-5 mr-2" />
-                  Add Game Shrine
-                </Button>
-              </div>
-
-              {/* Add Game Form */}
-              {showForm && (
-                <Card className="animate-fade-in glow-effect">
-                  <CardHeader>
-                    <CardTitle className="gradient-text">Create a New Game Shrine</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label>Game Title *</Label>
-                          <Input
-                            value={formData.title}
-                            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                            placeholder="Enter game title"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label>Platform</Label>
-                          <Input
-                            value={formData.platform}
-                            onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-                            placeholder="PC, PlayStation, Xbox, etc."
-                          />
-                        </div>
-                        <div>
-                          <Label>Genre</Label>
-                          <Input
-                            value={formData.genre}
-                            onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
-                            placeholder="RPG, Action, Adventure, etc."
-                          />
-                        </div>
-                        <div>
-                          <Label>Hours Played</Label>
-                          <Input
-                            type="number"
-                            value={formData.hours_played}
-                            onChange={(e) => setFormData({ ...formData, hours_played: e.target.value })}
-                            placeholder="0"
-                          />
-                        </div>
-                        <div>
-                          <Label>Your Rating (1-10)</Label>
-                          <Input
-                            type="number"
-                            min="1"
-                            max="10"
-                            value={formData.rating}
-                            onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
-                          />
-                        </div>
-                        <div>
-                          <Label>Cover Image URL</Label>
-                          <Input
-                            value={formData.cover_image}
-                            onChange={(e) => setFormData({ ...formData, cover_image: e.target.value })}
-                            placeholder="https://..."
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <Label>Why You Love This Game *</Label>
-                        <Textarea
-                          value={formData.description}
-                          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                          placeholder="Share your passion..."
-                          rows={4}
-                          required
-                        />
-                      </div>
-                      <div>
-                        <Label>Favorite Moment</Label>
-                        <Textarea
-                          value={formData.favorite_moment}
-                          onChange={(e) => setFormData({ ...formData, favorite_moment: e.target.value })}
-                          placeholder="That unforgettable scene or achievement..."
-                          rows={3}
-                        />
-                      </div>
-                      <div className="flex gap-3">
-                        <Button type="submit" style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' }}>
-                          Create Shrine
-                        </Button>
-                        <Button type="button" variant="outline" onClick={() => setShowForm(false)}>
-                          Cancel
-                        </Button>
-                      </div>
-                    </form>
-                  </CardContent>
-                </Card>
-              )}
-
-              {/* Games Grid */}
-              {isLoading ? (
-                <div className="text-center py-12">
-                  <div className="animate-spin w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full mx-auto"></div>
-                </div>
-              ) : games.length === 0 ? (
-                <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-3xl shadow-lg transition-colors duration-300">
-                  <Gamepad2 className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-                  <p className="text-gray-500 dark:text-gray-400 text-lg transition-colors duration-300">No game shrines yet. Add your first favorite game!</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {games.map((game, index) => (
-                    <div
-                      key={game.id}
-                      className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden animate-fade-in"
-                      style={{ animationDelay: `${index * 0.05}s`, opacity: 0 }}
-                    >
-                      {game.cover_image && (
-                        <div className="h-48 overflow-hidden">
-                          <img
-                            src={game.cover_image}
-                            alt={game.title}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      )}
-                      <div className="p-6">
-                        <div className="flex items-start justify-between mb-4">
-                          <div className="flex-1">
-                            <h3 className="text-2xl font-bold gradient-text mb-1">{game.title}</h3>
-                            {game.platform && (
-                              <p className="text-sm text-gray-500">{game.platform} • {game.genre}</p>
-                            )}
-                          </div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => deleteMutation.mutate(game.id)}
-                            className="text-red-500 hover:text-red-700"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-
-                        <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed transition-colors duration-300">{game.description}</p>
-
-                        {game.favorite_moment && (
-                          <div className="bg-gradient-to-r from-purple-50 to-orange-50 dark:from-purple-900/30 dark:to-orange-900/30 rounded-xl p-4 mb-4 transition-colors duration-300">
-                            <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1 transition-colors duration-300">Favorite Moment:</p>
-                            <p className="text-gray-700 dark:text-gray-300 text-sm italic transition-colors duration-300">{game.favorite_moment}</p>
-                          </div>
-                        )}
-
-                        <div className="flex items-center gap-4 text-sm">
-                          {game.hours_played && (
-                            <div className="flex items-center gap-1 text-gray-600">
-                              <Clock className="w-4 h-4" />
-                              <span>{game.hours_played} hours</span>
-                            </div>
-                          )}
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-current" style={{ color: 'var(--color-secondary)' }} />
-                            <span className="font-medium">{game.rating}/10</span>
-                          </div>
-                          <Heart className="w-4 h-4 fill-current ml-auto" style={{ color: 'var(--color-primary)' }} />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </main>
+      <!-- Footer -->
+      <div class="sidebar-footer">
+        Made with <span class="gradient-text">♥</span> and creativity
+      </div>
     </div>
-  );
-}
+  </aside>
+
+  <!-- Overlay for mobile -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Main Content -->
+  <main id="main">
+    <div class="main-container">
+      <!-- Header -->
+      <div class="header-section animate-fade-in">
+        <div class="header-icon glow-effect">
+          <i data-lucide="gamepad-2" class="w-10 h-10" style="color: var(--color-primary)"></i>
+        </div>
+        <div class="header">
+          <h1 class="gradient-text">Game Shrines</h1>
+          <p>A tribute to the games that shaped my journey and stole my heart</p>
+          <button id="addGameBtn" class="add-game-btn">
+            <i data-lucide="plus" class="w-5 h-5"></i>
+            Add Game Shrine
+          </button>
+        </div>
+      </div>
+
+      <!-- Add Game Form -->
+      <div id="gameForm" class="form-card animate-fade-in" style="display: none">
+        <div class="form-header">
+          <h2 class="form-title gradient-text">Create a New Game Shrine</h2>
+        </div>
+        <div class="form-content">
+          <form id="gameFormElement">
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Game Title *</label>
+                <input type="text" class="form-input" id="gameTitle" required placeholder="Enter game title">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Platform</label>
+                <input type="text" class="form-input" id="gamePlatform" placeholder="PC, PlayStation, Xbox, etc.">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Genre</label>
+                <input type="text" class="form-input" id="gameGenre" placeholder="RPG, Action, Adventure, etc.">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Hours Played</label>
+                <input type="number" class="form-input" id="gameHours" placeholder="0" min="0">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Your Rating (1-10)</label>
+                <input type="number" class="form-input" id="gameRating" placeholder="10" min="1" max="10" value="10">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cover Image URL</label>
+                <input type="url" class="form-input" id="gameCover" placeholder="https://...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Why You Love This Game *</label>
+                <textarea class="form-textarea" id="gameDescription" required placeholder="Share your passion..." rows="4"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Favorite Moment</label>
+                <textarea class="form-textarea" id="gameMoment" placeholder="That unforgettable scene or achievement..." rows="3"></textarea>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Create Shrine</button>
+              <button type="button" class="btn-secondary" id="cancelForm">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Games Grid -->
+      <div id="gamesContainer">
+        <!-- Sample games for demo -->
+        <div class="games-grid">
+          <div class="game-card animate-fade-in" style="animation-delay: 0.1s">
+            <div class="game-cover">
+              <img src="https://images.unsplash.com/photo-1592876543944-00ef4e274d7d?w=400&h=300&fit=crop" alt="The Legend of Zelda">
+            </div>
+            <div class="game-content">
+              <div class="game-header">
+                <div>
+                  <h3 class="game-title gradient-text">The Legend of Zelda: Breath of the Wild</h3>
+                  <p class="game-meta">Nintendo Switch • Action-Adventure</p>
+                </div>
+                <button class="btn-danger" onclick="deleteGame(this)">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+              <p class="game-description">An open-world masterpiece that redefined exploration and freedom in gaming. Every moment felt like discovery.</p>
+              <div class="favorite-moment">
+                <p class="favorite-moment-label">Favorite Moment:</p>
+                <p class="favorite-moment-text">Gliding down from the Great Plateau at sunrise - pure magic ✨</p>
+              </div>
+              <div class="game-stats">
+                <div class="stat-item">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  <span>250+ hours</span>
+                </div>
+                <div class="stat-item rating">
+                  <i data-lucide="star" class="w-4 h-4"></i>
+                  <span>10/10</span>
+                </div>
+                <i data-lucide="heart" class="w-4 h-4 heart-filled"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card animate-fade-in" style="animation-delay: 0.15s">
+            <div class="game-cover">
+              <img src="https://images.unsplash.com/photo-1611746804143-6cc96b7b4532?w=400&h=300&fit=crop" alt="Hades">
+            </div>
+            <div class="game-content">
+              <div class="game-header">
+                <div>
+                  <h3 class="game-title gradient-text">Hades</h3>
+                  <p class="game-meta">PC • Roguelike</p>
+                </div>
+                <button class="btn-danger" onclick="deleteGame(this)">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+              <p class="game-description">Perfect blend of tight gameplay, incredible writing, and addictive progression. Every run tells a story.</p>
+              <div class="game-stats">
+                <div class="stat-item">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  <span>120 hours</span>
+                </div>
+                <div class="stat-item rating">
+                  <i data-lucide="star" class="w-4 h-4"></i>
+                  <span>10/10</span>
+                </div>
+                <i data-lucide="heart" class="w-4 h-4 heart-filled"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State (hidden by default) -->
+      <div id="loadingState" class="text-center py-12" style="display: none">
+        <div class="loading-spinner"></div>
+      </div>
+
+      <!-- Empty State (hidden by default) -->
+      <div id="emptyState" class="empty-state animate-fade-in" style="display: none">
+        <i data-lucide="gamepad-2" class="w-16 h-16 mx-auto mb-4" style="color: #d1d5db"></i>
+        <p class="text-lg">No game shrines yet. Add your first favorite game!</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Wait for DOM and Lucide to load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // State
+      let mobileMenuOpen = false;
+      let darkMode = localStorage.getItem('darkMode') === 'true';
+      let showForm = false;
+
+      // DOM elements
+      const body = document.body;
+      const sidebar = document.getElementById('sidebar');
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const overlay = document.getElementById('overlay');
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIconContainer = document.getElementById('themeIconContainer');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const addGameBtn = document.getElementById('addGameBtn');
+      const gameForm = document.getElementById('gameForm');
+      const cancelForm = document.getElementById('cancelForm');
+      const gameFormElement = document.getElementById('gameFormElement');
+
+      // Initialize theme
+      function initTheme() {
+        if (darkMode) {
+          body.classList.remove('light');
+          body.classList.add('dark');
+          themeIconContainer.innerHTML = '<i data-lucide="moon" class="w-5 h-5" style="color: #a855f7"></i><span class="text-sm">Dark</span>';
+          themeToggle.style.background = '#1f2937';
+        } else {
+          body.classList.remove('dark');
+          body.classList.add('light');
+          themeIconContainer.innerHTML = '<i data-lucide="sun" class="w-5 h-5" style="color: #f97316"></i><span class="text-sm">Light</span>';
+          themeToggle.style.background = 'linear-gradient(135deg, #f3e8ff, #fed7aa)';
+        }
+        setTimeout(() => lucide.createIcons(), 50);
+      }
+
+      // Toggle mobile menu
+      function toggleMobileMenu() {
+        mobileMenuOpen = !mobileMenuOpen;
+        if (mobileMenuOpen) {
+          sidebar.classList.add('open');
+          overlay.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        } else {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('show');
+          document.body.style.overflow = '';
+        }
+      }
+
+      // Toggle dark mode
+      function toggleDarkMode() {
+        darkMode = !darkMode;
+        localStorage.setItem('darkMode', darkMode);
+        initTheme();
+      }
+
+      // Toggle form
+      function toggleForm() {
+        showForm = !showForm;
+        gameForm.style.display = showForm ? 'block' : 'none';
+      }
+
+      // Update active nav link
+      function updateActiveNav() {
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        navLinks.forEach(link => {
+          link.classList.remove('nav-link-active');
+          const icon = link.querySelector('.nav-icon');
+          const text = link.querySelector('span');
+          icon.style.color = '';
+          text.classList.remove('gradient-text');
+        });
+
+        const activeLink = Array.from(navLinks).find(link => {
+          const href = link.getAttribute('href');
+          return href === currentPath;
+        });
+
+        if (activeLink) {
+          activeLink.classList.add('nav-link-active');
+          const icon = activeLink.querySelector('.nav-icon');
+          const text = activeLink.querySelector('span');
+          icon.style.color = 'var(--color-primary)';
+          text.classList.add('gradient-text');
+        }
+      }
+
+      // Handle form submit (demo - stores in localStorage)
+      function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        const formData = {
+          id: Date.now(),
+          title: document.getElementById('gameTitle').value,
+          platform: document.getElementById('gamePlatform').value,
+          genre: document.getElementById('gameGenre').value,
+          hours_played: document.getElementById('gameHours').value || null,
+          rating: parseInt(document.getElementById('gameRating').value),
+          cover_image: document.getElementById('gameCover').value,
+          description: document.getElementById('gameDescription').value,
+          favorite_moment: document.getElementById('gameMoment').value
+        };
+
+        // Save to localStorage
+        let games = JSON.parse(localStorage.getItem('gameshrines') || '[]');
+        games.unshift(formData);
+        localStorage.setItem('gameshrines', JSON.stringify(games));
+
+        // Reset form
+        gameFormElement.reset();
+        document.getElementById('gameRating').value = '10';
+
+        // Hide form
+        toggleForm();
+
+        // Refresh games
+        loadGames();
+      }
+
+      // Load games from localStorage
+      function loadGames() {
+        const games = JSON.parse(localStorage.getItem('gameshrines') || '[]');
+        const container = document.getElementById('gamesContainer');
+        
+        if (games.length === 0) {
+          document.getElementById('emptyState').style.display = 'block';
+          container.style.display = 'none';
+          return;
+        }
+
+        document.getElementById('emptyState').style.display = 'none';
+        container.innerHTML = `
+          <div class="games-grid">
+            ${games.map((game, index) => `
+              <div class="game-card animate-fade-in" style="animation-delay: ${0.1 + index * 0.05}s">
+                ${game.cover_image ? `
+                  <div class="game-cover">
+                    <img src="${game.cover_image}" alt="${game.title}">
+                  </div>
+                ` : ''}
+                <div class="game-content">
+                  <div class="game-header">
+                    <div>
+                      <h3 class="game-title gradient-text">${game.title}</h3>
+                      ${game.platform || game.genre ? `
+                        <p class="game-meta">${game.platform || ''} ${game.genre ? '• ' + game.genre : ''}</p>
+                      ` : ''}
+                    </div>
+                    <button class="btn-danger" onclick="deleteGame(this, '${game.id}')">
+                      <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                  </div>
+                  <p class="game-description">${game.description}</p>
+                  ${game.favorite_moment ? `
+                    <div class="favorite-moment">
+                      <p class="favorite-moment-label">Favorite Moment:</p>
+                      <p class="favorite-moment-text">${game.favorite_moment}</p>
+                    </div>
+                  ` : ''}
+                  <div class="game-stats">
+                    ${game.hours_played ? `
+                      <div class="stat-item">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span>${game.hours_played} hours</span>
+                      </div>
+                    ` : ''}
+                    <div class="stat-item rating">
+                      <i data-lucide="star" class="w-4 h-4"></i>
+                      <span>${game.rating}/10</span>
+                    </div>
+                    <i data-lucide="heart" class="w-4 h-4 heart-filled"></i>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.style.display = 'block';
+        lucide.createIcons();
+      }
+
+      // Delete game
+      window.deleteGame = function(btn, gameId) {
+        if (confirm('Delete this game shrine?')) {
+          let games = JSON.parse(localStorage.getItem('gameshrines') || '[]');
+          games = games.filter(game => game.id != gameId);
+          localStorage.setItem('gameshrines', JSON.stringify(games));
+          loadGames();
+        }
+      }
+
+      // Event listeners
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+      overlay.addEventListener('click', toggleMobileMenu);
+      themeToggle.addEventListener('click', toggleDarkMode);
+      addGameBtn.addEventListener('click', toggleForm);
+      cancelForm.addEventListener('click', toggleForm);
+      gameFormElement.addEventListener('submit', handleFormSubmit);
+      navLinks.forEach(link => link.addEventListener('click', () => {
+        if (window.innerWidth >= 1025 && mobileMenuOpen) toggleMobileMenu();
+      }));
+
+      // Initialize
+      initTheme();
+      updateActiveNav();
+      loadGames();
+
+      // Window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1025 && mobileMenuOpen) {
+          toggleMobileMenu();
+        }
+      });
+
+      setTimeout(() => lucide.createIcons(), 100);
+    });
+  </script>
+</body>
+</html>
