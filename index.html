@@ -9,6 +9,8 @@
     :root {
       --color-primary: #e55ae7;
       --color-secondary: #f5983c;
+      --color-name1: #e75a5a;
+      --color-name2: ##e7a35a;
       --bg-card-light: #ffffff;
       --bg-card-dark: #1f2937;
       --text-primary-light: #1f2937;
@@ -81,6 +83,13 @@
 
     .gradient-text {
       background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .gradient-name {
+      background: linear-gradient(135deg, var(--color-name1), var(--color-name2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -561,7 +570,7 @@
             <span>✨</span>
           </div>
         </div>
-        <h1 class="profile-name gradient-text">bytedrew</h1>
+        <h1 class="profile-name gradient-name">bytedrew</h1>
         <p class="profile-subtitle">C# SWE | Webmaster</p>
       </div>
 
