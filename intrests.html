@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interests - Your Personal Site</title>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    :root {
+      --color-primary: #e55ae7;
+      --color-secondary: #f5983c;
+      --bg-card-light: #ffffff;
+      --bg-card-dark: #1f2937;
+      --text-primary-light: #1f2937;
+      --text-primary-dark: #f3f4f6;
+      --text-secondary-light: #4b5563;
+      --text-secondary-dark: #9ca3af;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      transition: all 0.3s ease;
+      min-height: 100vh;
+    }
+
+    /* Light Mode */
+    body.light {
+      background: linear-gradient(to bottom right, #f5f3ff, #ffffff, #fdf4f3);
+      color: var(--text-primary-light);
+    }
+
+    /* Dark Mode */
+    body.dark {
+      background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
+      color: var(--text-primary-dark);
+    }
+
+    body.dark h1, body.dark h2, body.dark h3, body.dark h4 {
+      color: var(--text-primary-dark);
+    }
+
+    body.dark p, body.dark span, body.dark div:not([class*="gradient"]):not([class*="glow"]) {
+      color: var(--text-secondary-dark);
+    }
+
+    body.dark .bg-card {
+      background-color: var(--bg-card-dark) !important;
+    }
+
+    body.dark .shadow-lg,
+    body.dark .shadow-xl,
+    body.dark .shadow-2xl {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    body.dark .text-gray-700 {
+      color: #d1d5db !important;
+    }
+
+    body.dark .text-gray-600 {
+      color: #9ca3af !important;
+    }
+
+    body.dark .text-gray-500 {
+      color: #6b7280 !important;
+    }
+
+    body.dark .bg-gradient-light {
+      background: linear-gradient(to right, rgba(139, 92, 246, 0.2), rgba(245, 158, 11, 0.2)) !important;
+    }
+
+    body.dark .border-light {
+      border-color: #374151 !important;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .glow-effect {
+      box-shadow: 0 0 20px rgba(229, 90, 231, 0.3), 0 0 40px rgba(245, 152, 60, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 50;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      border: none;
+      background: white;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      display: none;
+      cursor: pointer;
+    }
+
+    body.dark .mobile-menu-btn {
+      background: #1f2937;
+    }
+
+    .mobile-menu-btn:hover {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 1024px) {
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 20rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      z-index: 40;
+      transform: translateX(-100%);
+      transition: all 0.3s ease-in-out;
+      border-right: 1px solid #e5e7eb;
+      background: white;
+    }
+
+    body.dark .sidebar {
+      background: #111827;
+      border-right-color: #374151;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    @media (min-width: 1025px) {
+      .sidebar {
+        transform: translateX(0);
+      }
+    }
+
+    .sidebar-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    /* Profile Section */
+    .profile-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .profile-img-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .profile-img {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+      border: 4px solid white;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .profile-img {
+      border-color: #374151;
+    }
+
+    .profile-sparkle {
+      position: absolute;
+      bottom: -0.5rem;
+      right: -0.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .profile-sparkle {
+      background: #374151;
+    }
+
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+
+    .profile-subtitle {
+      font-size: 0.875rem;
+      color: #6b7280;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .profile-subtitle {
+      color: #9ca3af;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    body.dark .theme-toggle {
+      color: #f3f4f6;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.02);
+    }
+
+    /* Navigation */
+    .nav {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    body.dark .nav-link {
+      color: #d1d5db;
+    }
+
+    .nav-link:hover {
+      transform: scale(1.05);
+      background: rgba(229, 90, 231, 0.1);
+    }
+
+    body.dark .nav-link:hover {
+      background: rgba(229, 90, 231, 0.2);
+    }
+
+    .nav-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      color: #6b7280;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .nav-icon {
+      color: #9ca3af;
+    }
+
+    .nav-link-active {
+      background: linear-gradient(135deg, rgba(229, 90, 231, 0.1), rgba(245, 152, 60, 0.1));
+      border-left: 3px solid var(--color-primary);
+    }
+
+    body.dark .nav-link-active {
+      background: linear-gradient(135deg, rgba(229, 90, 231, 0.2), rgba(245, 152, 60, 0.2));
+    }
+
+    .nav-link-active .nav-icon {
+      color: var(--color-primary) !important;
+    }
+
+    .nav-link-active span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Sidebar Footer */
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #6b7280;
+      padding-bottom: 2rem;
+    }
+
+    body.dark .sidebar-footer {
+      border-top-color: #374151;
+      color: #9ca3af;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 30;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Main Content */
+    main {
+      min-height: 100vh;
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+      padding-top: 2rem;
+    }
+
+    @media (min-width: 1025px) {
+      main {
+        margin-left: 20rem;
+      }
+    }
+
+    .main-container {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    @media (min-width: 1025px) {
+      .main-container {
+        padding: 3rem;
+      }
+    }
+
+    /* Header Section */
+    .header-section {
+      text-align: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .header-icon {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, #e9d5ff, #fed7aa);
+    }
+
+    body.dark .header-icon {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(245, 158, 11, 0.2));
+    }
+
+    .header h1 {
+      font-size: clamp(2.5rem, 8vw, 3rem);
+      font-weight: bold;
+    }
+
+    .header p {
+      font-size: 1.25rem;
+      color: #6b7280;
+      max-width: 32rem;
+      margin: 0 auto;
+    }
+
+    body.dark .header p {
+      color: #9ca3af;
+    }
+
+    /* Interests Grid */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .interests-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .interest-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    body.dark .interest-card {
+      background: #1f2937;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .interest-card:hover {
+      transform: translateY(-0.5rem);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    body.dark .interest-card:hover {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    .interest-content {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .interest-icon {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .interest-text h3 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .interest-text p {
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    body.dark .interest-text p {
+      color: #9ca3af;
+    }
+
+    /* Fun Fact Section */
+    .fun-fact-wrapper {
+      background: linear-gradient(135deg, #8b5cf6, #f97316);
+      border-radius: 1.5rem;
+      padding: 0.25rem;
+      margin: 3rem 0;
+    }
+
+    .fun-fact-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .fun-fact-card {
+        padding: 3rem;
+      }
+    }
+
+    body.dark .fun-fact-card {
+      background: #1f2937;
+    }
+
+    .fun-fact h2 {
+      font-size: 1.875rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .fun-fact p {
+      font-size: 1.125rem;
+      color: #374151;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    body.dark .fun-fact p {
+      color: #d1d5db;
+    }
+
+    /* Currently Exploring */
+    .exploring-card {
+      background: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .exploring-card {
+        padding: 3rem;
+      }
+    }
+
+    body.dark .exploring-card {
+      background: #1f2937;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .exploring h2 {
+      font-size: 1.875rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    .exploring-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .exploring-dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8b5cf6, #f97316);
+      animation: pulse 2s infinite;
+    }
+
+    .exploring-dot:nth-child(1) { animation-delay: 0s; }
+    .exploring-dot:nth-child(3) { animation-delay: 0.5s; }
+    .exploring-dot:nth-child(5) { animation-delay: 1s; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    .exploring-text {
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    body.dark .exploring-text {
+      color: #d1d5db;
+    }
+  </style>
+</head>
+<body class="light">
+  <!-- Mobile Menu Button -->
+  <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">
+    <i data-lucide="menu"></i>
+  </button>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+      <!-- Profile Section -->
+      <div class="profile-section animate-fade-in">
+        <div class="profile-img-container">
+          <div class="profile-img glow-effect">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop" alt="Profile" class="w-full h-full object-cover">
+          </div>
+          <div class="profile-sparkle">
+            <span>✨</span>
+          </div>
+        </div>
+        <h1 class="profile-name gradient-text">Your Name</h1>
+        <p class="profile-subtitle">Digital Creator & Dreamer</p>
+      </div>
+
+      <!-- Dark Mode Toggle -->
+      <button id="themeToggle" class="theme-toggle">
+        <span>Theme</span>
+        <div id="themeIconContainer" class="flex items-center gap-2">
+          <i data-lucide="sun" class="w-5 h-5"></i>
+          <span class="text-sm">Light</span>
+        </div>
+      </button>
+
+      <!-- Navigation -->
+      <nav class="nav" role="navigation">
+        <a href="index.html" class="nav-link" data-path="Home">
+          <i data-lucide="home" class="nav-icon"></i>
+          <span>Home</span>
+        </a>
+        <a href="interests.html" class="nav-link nav-link-active" data-path="Interests">
+          <i data-lucide="heart" class="nav-icon"></i>
+          <span>Interests</span>
+        </a>
+        <a href="gameshrines.html" class="nav-link" data-path="GameShrines">
+          <i data-lucide="gamepad-2" class="nav-icon"></i>
+          <span>Game Shrines</span>
+        </a>
+        <a href="projects.html" class="nav-link" data-path="Projects">
+          <i data-lucide="briefcase" class="nav-icon"></i>
+          <span>Projects</span>
+        </a>
+        <a href="blog.html" class="nav-link" data-path="Blog">
+          <i data-lucide="book-open" class="nav-icon"></i>
+          <span>Blog</span>
+        </a>
+      </nav>
+
+      <!-- Footer -->
+      <div class="sidebar-footer">
+        Made with <span class="gradient-text">♥</span> and creativity
+      </div>
+    </div>
+  </aside>
+
+  <!-- Overlay for mobile -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Main Content -->
+  <main id="main">
+    <div class="main-container">
+      <!-- Header -->
+      <div class="header-section">
+        <div class="header-icon glow-effect animate-fade-in">
+          <i data-lucide="heart" class="w-10 h-10" style="color: var(--color-primary)"></i>
+        </div>
+        <div class="header animate-fade-in">
+          <h1 class="gradient-text">Things I Love</h1>
+          <p>A collection of passions, hobbies, and interests that make life colorful</p>
+        </div>
+      </div>
+
+      <!-- Interests Grid -->
+      <div class="interests-grid">
+        <div class="interest-card animate-fade-in" style="animation-delay: 0.1s">
+          <div class="interest-content">
+            <div class="interest-icon" style="background: linear-gradient(135deg, #e55ae722, #e55ae711)">
+              <i data-lucide="music" class="w-8 h-8" style="color: #e55ae7"></i>
+            </div>
+            <div class="interest-text">
+              <h3 style="color: #e55ae7">Music</h3>
+              <p>From lo-fi beats to epic soundtracks, music fuels my creativity and keeps me going.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="interest-card animate-fade-in" style="animation-delay: 0.15s">
+          <div class="interest-content">
+            <div class="interest-icon" style="background: linear-gradient(135deg, #f5983c22, #f5983c11)">
+              <i data-lucide="camera" class="w-8 h-8" style="color: #f5983c"></i>
+            </div>
+            <div class="interest-text">
+              <h3 style="color: #f5983c">Photography</h3>
+              <p>Capturing moments and finding beauty in the everyday through the lens.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="interest-card animate-fade-in" style="animation-delay: 0.2s">
+          <div class="interest-content">
+            <div class="interest-icon" style="background: linear-gradient(135deg, #e55ae722, #e55ae711)">
+              <i data-lucide="book" class="w-8 h-8" style="color: #e55ae7"></i>
+            </div>
+            <div class="interest-text">
+              <h3 style="color: #e55ae7">Reading</h3>
+              <p>Getting lost in stories, learning new things, and expanding perspectives.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="interest-card animate-fade-in" style="animation-delay: 0.25s">
+          <div class="interest-content">
+            <div class="interest-icon" style="background: linear-gradient(135deg, #f5983c22, #f5983c11)">
+              <i data-lucide="coffee" class="w-8 h-8" style="color: #f5983c"></i>
+            </div>
+            <div class="interest-text">
+              <h3 style="color: #f5983c">Coffee Culture</h3>
+              <p>Exploring different brews, roasts, and the art of the perfect cup.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="interest-card animate-fade-in" style="animation-delay: 0.3s">
+          <div class="interest-content">
+            <div class="interest-icon" style="background: linear-gradient(135deg, #e55ae722, #e55ae711)">
+              <i data-lucide="mountain" class="w-8 h-8" style="color: #e55ae7"></i>
+            </div>
+            <div class="interest-text">
+              <h3 style="color: #e55ae7">Adventure</h3>
+              <p>Hiking, exploring, and finding peace in nature's beauty.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="interest-card animate-fade-in" style="animation-delay: 0.35s">
+          <div class="interest-content">
+            <div class="interest-icon" style="background: linear-gradient(135deg, #f5983c22, #f5983c11)">
+              <i data-lucide="palette" class="w-8 h-8" style="color: #f5983c"></i>
+            </div>
+            <div class="interest-text">
+              <h3 style="color: #f5983c">Art & Design</h3>
+              <p>Appreciating and creating visual art in all its forms.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="interest-card animate-fade-in" style="animation-delay: 0.4s">
+          <div class="interest-content">
+            <div class="interest-icon" style="background: linear-gradient(135deg, #e55ae722, #e55ae711)">
+              <i data-lucide="headphones" class="w-8 h-8" style="color: #e55ae7"></i>
+            </div>
+            <div class="interest-text">
+              <h3 style="color: #e55ae7">Podcasts</h3>
+              <p>Learning from conversations, stories, and deep dives into fascinating topics.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fun Fact Section -->
+      <div class="fun-fact-wrapper animate-fade-in" style="animation-delay: 0.5s">
+        <div class="fun-fact-card">
+          <h2 class="gradient-text fun-fact">Fun Fact</h2>
+          <p class="fun-fact">
+            I believe that life is about collecting experiences, not things. Every interest here represents
+            a journey of discovery, and I'm always looking for the next adventure! 🚀
+          </p>
+        </div>
+      </div>
+
+      <!-- Currently Exploring -->
+      <div class="exploring-card animate-fade-in" style="animation-delay: 0.6s">
+        <h2 class="gradient-text exploring">Currently Exploring</h2>
+        <div class="exploring-list">
+          <div class="exploring-item">
+            <div class="exploring-dot"></div>
+            <p class="exploring-text">Learning new design patterns and UI/UX principles</p>
+          </div>
+          <div class="exploring-item">
+            <div class="exploring-dot"></div>
+            <p class="exploring-text">Diving deeper into game development and interactive experiences</p>
+          </div>
+          <div class="exploring-item">
+            <div class="exploring-dot"></div>
+            <p class="exploring-text">Experimenting with digital art and creative coding</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Wait for DOM and Lucide to load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // State
+      let mobileMenuOpen = false;
+      let darkMode = localStorage.getItem('darkMode') === 'true';
+
+      // DOM elements
+      const body = document.body;
+      const sidebar = document.getElementById('sidebar');
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const overlay = document.getElementById('overlay');
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIconContainer = document.getElementById('themeIconContainer');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      // Initialize theme
+      function initTheme() {
+        if (darkMode) {
+          body.classList.remove('light');
+          body.classList.add('dark');
+          themeIconContainer.innerHTML = '<i data-lucide="moon" class="w-5 h-5" style="color: #a855f7"></i><span class="text-sm">Dark</span>';
+          themeToggle.style.background = '#1f2937';
+        } else {
+          body.classList.remove('dark');
+          body.classList.add('light');
+          themeIconContainer.innerHTML = '<i data-lucide="sun" class="w-5 h-5" style="color: #f97316"></i><span class="text-sm">Light</span>';
+          themeToggle.style.background = 'linear-gradient(135deg, #f3e8ff, #fed7aa)';
+        }
+        // Re-render icons after theme change
+        setTimeout(() => lucide.createIcons(), 50);
+      }
+
+      // Toggle mobile menu
+      function toggleMobileMenu() {
+        mobileMenuOpen = !mobileMenuOpen;
+        if (mobileMenuOpen) {
+          sidebar.classList.add('open');
+          overlay.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        } else {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('show');
+          document.body.style.overflow = '';
+        }
+      }
+
+      // Toggle dark mode
+      function toggleDarkMode() {
+        darkMode = !darkMode;
+        localStorage.setItem('darkMode', darkMode);
+        initTheme();
+      }
+
+      // Update active nav link based on current page
+      function updateActiveNav() {
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        navLinks.forEach(link => {
+          link.classList.remove('nav-link-active');
+          const icon = link.querySelector('.nav-icon');
+          const text = link.querySelector('span');
+          icon.style.color = '';
+          text.classList.remove('gradient-text');
+        });
+
+        // Find matching link and activate it
+        const activeLink = Array.from(navLinks).find(link => {
+          const href = link.getAttribute('href');
+          return href === currentPath;
+        });
+
+        if (activeLink) {
+          activeLink.classList.add('nav-link-active');
+          const icon = activeLink.querySelector('.nav-icon');
+          const text = activeLink.querySelector('span');
+          icon.style.color = 'var(--color-primary)';
+        }
+      }
+
+      // Navigation handler
+      function handleNavClick(e) {
+        if (window.innerWidth >= 1025 && mobileMenuOpen) {
+          toggleMobileMenu();
+        }
+      }
+
+      // Event listeners
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+      overlay.addEventListener('click', toggleMobileMenu);
+      themeToggle.addEventListener('click', toggleDarkMode);
+      navLinks.forEach(link => link.addEventListener('click', handleNavClick));
+
+      // Initialize everything
+      initTheme();
+      updateActiveNav();
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1025 && mobileMenuOpen) {
+          toggleMobileMenu();
+        }
+      });
+
+      // Re-initialize icons
+      setTimeout(() => lucide.createIcons(), 100);
+    });
+  </script>
+</body>
+</html>
