@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog</title>
+  <link rel="stylesheet" href="https://unpkg.com/lucide-static@latest/font/lucide.css">
+  <style>
+    :root {
+      --color-primary: #e55ae7;
+      --color-secondary: #f5983c;
+      --bg-light: #ffffff;
+      --bg-dark: #1f2937;
+      --text-light: #1f2937;
+      --text-dark: #f3f4f6;
+    }
+
+    html, body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      transition: background 0.3s, color 0.3s;
+      min-height: 100%;
+    }
+
+    body.light {
+      background: linear-gradient(135deg, #fff, #fef6f0);
+      color: var(--text-light);
+    }
+
+    body.dark {
+      background: linear-gradient(135deg, #111, #222);
+      color: var(--text-dark);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 280px;
+      height: 100%;
+      background: var(--bg-light);
+      overflow-y: auto;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      padding: 2rem;
+    }
+
+    body.dark .sidebar {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .sidebar.closed { transform: translateX(-100%); }
+
+    .menu-toggle {
+      position: fixed;
+      top: 1rem; left: 1rem;
+      z-index: 100;
+      cursor: pointer;
+      background: white;
+      border-radius: 10px;
+      padding: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .profile {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .profile img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+    }
+
+    nav a:hover {
+      background: rgba(229, 90, 231, 0.1);
+    }
+
+    nav a.active {
+      border-left: 3px solid var(--color-primary);
+      background: rgba(229, 90, 231, 0.08);
+    }
+
+    .theme-toggle {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      background: rgba(245,152,60,0.1);
+      transition: background 0.2s;
+    }
+
+    .theme-toggle:hover { background: rgba(229,90,231,0.1); }
+
+    main {
+      margin-left: 280px;
+      padding: 2rem;
+      transition: margin-left 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      main { margin-left: 0; padding: 1rem; }
+    }
+
+    .blog-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .blog-post {
+      background: var(--bg-light);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      transition: background 0.3s;
+    }
+
+    body.dark .blog-post {
+      background: var(--bg-dark);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    }
+
+    .blog-post h2 {
+      margin: 0 0 .5rem;
+    }
+
+    .blog-post p {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body class="light">
+  <div class="menu-toggle" id="menuToggle">
+    <i class="lucide-menu"></i>
+  </div>
+
+  <aside class="sidebar closed" id="sidebar">
+    <div class="profile">
+      <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150" alt="Profile">
+      <h2 class="gradient-text">Your Name</h2>
+      <p>Digital Creator & Dreamer</p>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle">
+      <i class="lucide-sun"></i> Toggle Light/Dark
+    </div>
+
+    <nav>
+      <a href="home.html"><i class="lucide-home"></i> Home</a>
+      <a href="interests.html"><i class="lucide-heart"></i> Interests</a>
+      <a href="gameshrines.html"><i class="lucide-gamepad-2"></i> Game Shrines</a>
+      <a href="projects.html"><i class="lucide-briefcase"></i> Projects</a>
+      <a href="blog.html" class="active"><i class="lucide-book-open"></i> Blog</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="blog-header">
+      <div class="gradient-text" style="font-size: 3em; font-weight: bold;">My Blog</div>
+      <p>Thoughts, stories, and ideas worth sharing.</p>
+    </section>
+
+    <article class="blog-post">
+      <h2 class="gradient-text">First Post</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non est vel odio ullamcorper consectetur. Suspendisse euismod commodo placerat.</p>
+    </article>
+
+    <article class="blog-post">
+      <h2 class="gradient-text">Another Post</h2>
+      <p>Praesent in est lacinia, faucibus est at, elementum sapien. Nunc maximus magna vel commodo laoreet.</p>
+    </article>
+  </main>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menuToggle');
+    const themeToggle = document.getElementById('themeToggle');
+    const icon = menuToggle.querySelector('i');
+
+    // Load dark mode from storage
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.replace('light', 'dark');
+    }
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      icon.classList.toggle('lucide-x');
+      icon.classList.toggle('lucide-menu');
+    });
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
