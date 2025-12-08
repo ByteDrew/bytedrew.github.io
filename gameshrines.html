@@ -1,0 +1,508 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '../utils';
+import { Home, Heart, Gamepad2, Briefcase, BookOpen, Menu, X, Moon, Sun, Star, Plus, Clock, Trash2 } from 'lucide-react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { base44 } from '@/api/base44Client';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+
+export default function GameShrines() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode');
+    return saved ? JSON.parse(saved) : false;
+  });
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    platform: '',
+    genre: '',
+    hours_played: '',
+    favorite_moment: '',
+    rating: 10,
+    cover_image: ''
+  });
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  const navItems = [
+    { name: 'Home', icon: Home, path: 'Home' },
+    { name: 'Interests', icon: Heart, path: 'Interests' },
+    { name: 'Game Shrines', icon: Gamepad2, path: 'GameShrines' },
+    { name: 'Projects', icon: Briefcase, path: 'Projects' },
+    { name: 'Blog', icon: BookOpen, path: 'Blog' }
+  ];
+
+  const queryClient = useQueryClient();
+
+  const { data: games = [], isLoading } = useQuery({
+    queryKey: ['gameshrines'],
+    queryFn: () => base44.entities.GameShrine.list('-created_date')
+  });
+
+  const createMutation = useMutation({
+    mutationFn: (data) => base44.entities.GameShrine.create(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['gameshrines']);
+      setShowForm(false);
+      setFormData({
+        title: '',
+        description: '',
+        platform: '',
+        genre: '',
+        hours_played: '',
+        favorite_moment: '',
+        rating: 10,
+        cover_image: ''
+      });
+    }
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id) => base44.entities.GameShrine.delete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['gameshrines']);
+    }
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createMutation.mutate({
+      ...formData,
+      hours_played: formData.hours_played ? parseFloat(formData.hours_played) : undefined,
+      rating: parseInt(formData.rating)
+    });
+  };
+
+  return (
+    <div className={`min-h-screen transition-colors duration-300 ${
+      darkMode 
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
+        : 'bg-gradient-to-br from-purple-50 via-white to-orange-50'
+    }`}>
+      <style>{`
+        :root {
+          --color-primary: #e55ae7;
+          --color-secondary: #f5983c;
+          --bg-card-light: #ffffff;
+          --bg-card-dark: #1f2937;
+          --text-primary-light: #1f2937;
+          --text-primary-dark: #f3f4f6;
+          --text-secondary-light: #4b5563;
+          --text-secondary-dark: #9ca3af;
+        }
+        
+        .dark-mode h1,
+        .dark-mode h2,
+        .dark-mode h3,
+        .dark-mode h4 {
+          color: var(--text-primary-dark);
+        }
+        
+        .dark-mode p,
+        .dark-mode span,
+        .dark-mode div {
+          color: var(--text-secondary-dark);
+        }
+        
+        .dark-mode .bg-white {
+          background-color: var(--bg-card-dark) !important;
+        }
+        
+        .dark-mode .shadow-lg,
+        .dark-mode .shadow-xl,
+        .dark-mode .shadow-2xl {
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+        }
+        
+        .dark-mode .text-gray-700 {
+          color: #d1d5db !important;
+        }
+        
+        .dark-mode .text-gray-600 {
+          color: #9ca3af !important;
+        }
+        
+        .dark-mode .text-gray-500 {
+          color: #6b7280 !important;
+        }
+        
+        .dark-mode .bg-gradient-to-r.from-purple-100 {
+          background: linear-gradient(to right, rgba(139, 92, 246, 0.2), rgba(245, 158, 11, 0.2)) !important;
+        }
+        
+        .dark-mode .border-gray-200 {
+          border-color: #374151 !important;
+        }
+        
+        .gradient-text {
+          background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .gradient-border {
+          position: relative;
+        }
+        
+        .gradient-border::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          padding: 2px;
+          background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          border-radius: inherit;
+        }
+        
+        .nav-link-active {
+          background: linear-gradient(135deg, rgba(229, 90, 231, 0.1), rgba(245, 152, 60, 0.1));
+          border-left: 3px solid var(--color-primary);
+        }
+        
+        .glow-effect {
+          box-shadow: 0 0 20px rgba(229, 90, 231, 0.3), 0 0 40px rgba(245, 152, 60, 0.2);
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+          animation: fadeIn 0.6s ease-out forwards;
+        }
+      `}</style>
+
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className={`lg:hidden fixed top-6 left-6 z-50 p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ${
+          darkMode ? 'bg-gray-800' : 'bg-white'
+        }`}
+        style={{ background: darkMode ? undefined : 'linear-gradient(135deg, rgba(229, 90, 231, 0.1), rgba(245, 152, 60, 0.1))' }}
+      >
+        {mobileMenuOpen ? (
+          <X className="w-6 h-6" style={{ color: 'var(--color-primary)' }} />
+        ) : (
+          <Menu className="w-6 h-6" style={{ color: 'var(--color-primary)' }} />
+        )}
+      </button>
+
+      {/* Sidebar */}
+      <aside
+        className={`fixed top-0 left-0 h-full w-80 shadow-2xl z-40 transform transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        } lg:translate-x-0 ${
+          darkMode ? 'bg-gray-900 border-r border-gray-700' : 'bg-white'
+        }`}
+      >
+        <div className="h-full flex flex-col p-8">
+          {/* Profile Section */}
+          <div className="text-center mb-8 animate-fade-in">
+            <div className="relative inline-block mb-4">
+              <div className={`w-32 h-32 rounded-full overflow-hidden glow-effect mx-auto border-4 transition-colors duration-300 ${darkMode ? 'border-gray-700' : 'border-white'}`}>
+                <img
+                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop"
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className={`absolute -bottom-2 -right-2 w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-colors duration-300 ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
+                <span className="text-2xl">✨</span>
+              </div>
+            </div>
+            <h1 className="text-2xl font-bold gradient-text mb-1">Your Name</h1>
+            <p className={`text-sm transition-colors duration-300 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Digital Creator & Dreamer</p>
+          </div>
+
+          {/* Dark Mode Toggle */}
+          <div className="mb-6">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 ${
+                darkMode 
+                  ? 'bg-gray-800 hover:bg-gray-700 text-gray-200' 
+                  : 'bg-gradient-to-r from-purple-50 to-orange-50 hover:from-purple-100 hover:to-orange-100 text-gray-700'
+              }`}
+            >
+              <span className="font-medium">Theme</span>
+              <div className="flex items-center gap-2">
+                {darkMode ? (
+                  <>
+                    <Moon className="w-5 h-5 text-purple-400" />
+                    <span className="text-sm">Dark</span>
+                  </>
+                ) : (
+                  <>
+                    <Sun className="w-5 h-5 text-orange-500" />
+                    <span className="text-sm">Light</span>
+                  </>
+                )}
+              </div>
+            </button>
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex-1 space-y-2">
+            {navItems.map((item, index) => (
+              <Link
+                key={item.path}
+                to={createPageUrl(item.path)}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 hover:scale-105 ${
+                  'GameShrines' === item.path 
+                    ? 'nav-link-active' 
+                    : darkMode 
+                      ? 'hover:bg-gray-800' 
+                      : 'hover:bg-gradient-to-r hover:from-purple-50 hover:to-orange-50'
+                }`}
+                style={{
+                  animationDelay: `${index * 0.1}s`,
+                  opacity: 0,
+                  animation: 'fadeIn 0.6s ease-out forwards'
+                }}
+              >
+                <item.icon
+                  className="w-5 h-5"
+                  style={{ color: 'GameShrines' === item.path ? 'var(--color-primary)' : '#6b7280' }}
+                />
+                <span
+                  className={`font-medium ${
+                    'GameShrines' === item.path 
+                      ? 'gradient-text' 
+                      : darkMode 
+                        ? 'text-gray-300' 
+                        : 'text-gray-700'
+                  }`}
+                >
+                  {item.name}
+                </span>
+              </Link>
+            ))}
+          </nav>
+
+          {/* Footer */}
+          <div className={`mt-8 pt-6 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+            <p className={`text-xs text-center ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>
+              Made with <span className="gradient-text">♥</span> and creativity
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      {/* Overlay for mobile */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Main Content */}
+      <main className="lg:ml-80 min-h-screen">
+        <div className="max-w-6xl mx-auto p-6 lg:p-12 animate-fade-in">
+          <div className={darkMode ? 'dark-mode' : ''}>
+            <div className="space-y-12">
+              {/* Header */}
+              <div className="text-center space-y-4 animate-fade-in">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-purple-100 to-orange-100 mb-4 glow-effect">
+                  <Gamepad2 className="w-10 h-10" style={{ color: 'var(--color-primary)' }} />
+                </div>
+                <h1 className="text-5xl font-bold gradient-text">Game Shrines</h1>
+                <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto transition-colors duration-300">
+                  A tribute to the games that shaped my journey and stole my heart
+                </p>
+                <Button
+                  onClick={() => setShowForm(!showForm)}
+                  className="mt-4"
+                  style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' }}
+                >
+                  <Plus className="w-5 h-5 mr-2" />
+                  Add Game Shrine
+                </Button>
+              </div>
+
+              {/* Add Game Form */}
+              {showForm && (
+                <Card className="animate-fade-in glow-effect">
+                  <CardHeader>
+                    <CardTitle className="gradient-text">Create a New Game Shrine</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <Label>Game Title *</Label>
+                          <Input
+                            value={formData.title}
+                            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                            placeholder="Enter game title"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label>Platform</Label>
+                          <Input
+                            value={formData.platform}
+                            onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
+                            placeholder="PC, PlayStation, Xbox, etc."
+                          />
+                        </div>
+                        <div>
+                          <Label>Genre</Label>
+                          <Input
+                            value={formData.genre}
+                            onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
+                            placeholder="RPG, Action, Adventure, etc."
+                          />
+                        </div>
+                        <div>
+                          <Label>Hours Played</Label>
+                          <Input
+                            type="number"
+                            value={formData.hours_played}
+                            onChange={(e) => setFormData({ ...formData, hours_played: e.target.value })}
+                            placeholder="0"
+                          />
+                        </div>
+                        <div>
+                          <Label>Your Rating (1-10)</Label>
+                          <Input
+                            type="number"
+                            min="1"
+                            max="10"
+                            value={formData.rating}
+                            onChange={(e) => setFormData({ ...formData, rating: e.target.value })}
+                          />
+                        </div>
+                        <div>
+                          <Label>Cover Image URL</Label>
+                          <Input
+                            value={formData.cover_image}
+                            onChange={(e) => setFormData({ ...formData, cover_image: e.target.value })}
+                            placeholder="https://..."
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <Label>Why You Love This Game *</Label>
+                        <Textarea
+                          value={formData.description}
+                          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                          placeholder="Share your passion..."
+                          rows={4}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label>Favorite Moment</Label>
+                        <Textarea
+                          value={formData.favorite_moment}
+                          onChange={(e) => setFormData({ ...formData, favorite_moment: e.target.value })}
+                          placeholder="That unforgettable scene or achievement..."
+                          rows={3}
+                        />
+                      </div>
+                      <div className="flex gap-3">
+                        <Button type="submit" style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' }}>
+                          Create Shrine
+                        </Button>
+                        <Button type="button" variant="outline" onClick={() => setShowForm(false)}>
+                          Cancel
+                        </Button>
+                      </div>
+                    </form>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Games Grid */}
+              {isLoading ? (
+                <div className="text-center py-12">
+                  <div className="animate-spin w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full mx-auto"></div>
+                </div>
+              ) : games.length === 0 ? (
+                <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-3xl shadow-lg transition-colors duration-300">
+                  <Gamepad2 className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+                  <p className="text-gray-500 dark:text-gray-400 text-lg transition-colors duration-300">No game shrines yet. Add your first favorite game!</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {games.map((game, index) => (
+                    <div
+                      key={game.id}
+                      className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden animate-fade-in"
+                      style={{ animationDelay: `${index * 0.05}s`, opacity: 0 }}
+                    >
+                      {game.cover_image && (
+                        <div className="h-48 overflow-hidden">
+                          <img
+                            src={game.cover_image}
+                            alt={game.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                      <div className="p-6">
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex-1">
+                            <h3 className="text-2xl font-bold gradient-text mb-1">{game.title}</h3>
+                            {game.platform && (
+                              <p className="text-sm text-gray-500">{game.platform} • {game.genre}</p>
+                            )}
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => deleteMutation.mutate(game.id)}
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+
+                        <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed transition-colors duration-300">{game.description}</p>
+
+                        {game.favorite_moment && (
+                          <div className="bg-gradient-to-r from-purple-50 to-orange-50 dark:from-purple-900/30 dark:to-orange-900/30 rounded-xl p-4 mb-4 transition-colors duration-300">
+                            <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1 transition-colors duration-300">Favorite Moment:</p>
+                            <p className="text-gray-700 dark:text-gray-300 text-sm italic transition-colors duration-300">{game.favorite_moment}</p>
+                          </div>
+                        )}
+
+                        <div className="flex items-center gap-4 text-sm">
+                          {game.hours_played && (
+                            <div className="flex items-center gap-1 text-gray-600">
+                              <Clock className="w-4 h-4" />
+                              <span>{game.hours_played} hours</span>
+                            </div>
+                          )}
+                          <div className="flex items-center gap-1">
+                            <Star className="w-4 h-4 fill-current" style={{ color: 'var(--color-secondary)' }} />
+                            <span className="font-medium">{game.rating}/10</span>
+                          </div>
+                          <Heart className="w-4 h-4 fill-current ml-auto" style={{ color: 'var(--color-primary)' }} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
