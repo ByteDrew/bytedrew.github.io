@@ -1,217 +1,596 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My World</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Welcome to My World</title>
 
-<style>
-  /* ========== Base Reset ========== */
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f7;
-    color: #111;
-    padding: 40px;
-  }
+  <!-- Lucide icons CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.265.0/dist/lucide.min.js"></script>
 
-  .dark body { background: #111; color: #eee; }
+  <style>
+    /* ---- Root variables & resets ---- */
+    :root{
+      --color-primary: #e55ae7;
+      --color-secondary: #f5983c;
+      --bg: #f7f7fb;
+      --text: #111827;
+      --card: #ffffff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body,#app{height:100%}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
 
-  /* ========== Layout Helpers ========== */
-  .space-y-12 > * + * { margin-top: 3rem; }
-  .space-y-6 > * + * { margin-top: 1.5rem; }
+    /* ---- Layout helpers ---- */
+    .min-h-screen{min-height:100vh}
+    .transition-colors{transition:background .3s,color .3s}
+    .duration-300{transition-duration:.3s}
+    .space-y-12 > * + *{margin-top:3rem}
+    .space-y-6 > * + *{margin-top:1.5rem}
+    .text-center{text-align:center}
+    .mx-auto{margin-left:auto;margin-right:auto}
+    .max-w-6xl{max-width:96rem; /* ~1536px */ }
+    .p-6{padding:1.5rem}
+    .p-8{padding:2rem}
+    .p-12{padding:3rem}
+    .py-12{padding-top:3rem;padding-bottom:3rem}
+    .rounded-2xl{border-radius:1rem}
+    .rounded-3xl{border-radius:1.5rem}
+    .rounded-xl{border-radius:.75rem}
+    .rounded-full{border-radius:9999px}
+    .flex{display:flex}
+    .items-center{align-items:center}
+    .justify-between{justify-content:space-between}
+    .justify-center{justify-content:center}
+    .gap-3{gap:.75rem}
+    .gap-4{gap:1rem}
+    .gap-8{gap:2rem}
+    .w-12{width:3rem}
+    .h-12{height:3rem}
+    .w-32{width:8rem}
+    .h-32{height:8rem}
+    .w-10{width:2.5rem}
+    .h-10{height:2.5rem}
+    .text-xs{font-size:.75rem}
+    .text-sm{font-size:.875rem}
+    .text-base{font-size:1rem}
+    .text-xl{font-size:1.125rem}
+    .text-2xl{font-size:1.5rem}
+    .text-3xl{font-size:1.875rem}
+    .text-5xl{font-size:3rem}
+    .font-bold{font-weight:700}
+    .prose p{margin-bottom:1rem;color:var(--text)}
 
-  .text-center { text-align: center; }
-  .mx-auto { margin-left: auto; margin-right: auto; }
-  .leading-relaxed { line-height: 1.6; }
+    /* ---- Grid responsive ---- */
+    .grid{display:grid}
+    .grid-cols-1{grid-template-columns:1fr}
+    .grid-cols-2{grid-template-columns:repeat(2,1fr)}
+    .gap-4{gap:1rem}
+    .gap-8{gap:2rem}
+    @media(min-width:1024px){
+      .lg\\:grid-cols-3{grid-template-columns:repeat(3,1fr)}
+      .lg\\:col-span-2{grid-column:span 2}
+      .lg\\:col-span-1{grid-column:span 1}
+      .lg\\:ml-80{margin-left:20rem} /* leaving room for sidebar */
+      .lg\\:hidden{display:none}
+    }
 
-  /* Grid */
-  .grid { display: grid; }
-  .grid-cols-1 { grid-template-columns: 1fr; }
-  .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .lg-grid-cols-3 { }
-  @media (min-width: 1024px) {
-    .lg-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-    .lg-col-span-2 { grid-column: span 2; }
-    .lg-col-span-1 { grid-column: span 1; }
-  }
+    /* ---- Card & shadows ---- */
+    .shadow-lg{box-shadow:0 8px 30px rgba(2,6,23,0.08)}
+    .shadow-xl{box-shadow:0 18px 50px rgba(2,6,23,0.12)}
+    .shadow-2xl{box-shadow:0 30px 80px rgba(2,6,23,0.14)}
+    .hover\\:-translate-y-2{transition:transform .3s; }
+    .hover\\:-translate-y-2:hover{transform:translateY(-8px)}
 
-  /* Spacing */
-  .gap-8 { gap: 2rem; }
-  .gap-4 { gap: 1rem; }
-  .p-4 { padding: 1rem; }
-  .p-8 { padding: 2rem; }
-  .p-12 { padding: 3rem; }
-  .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .glow-effect{box-shadow:0 0 20px rgba(229,90,231,0.12), 0 0 40px rgba(245,152,60,0.08)}
 
-  /* Card styling */
-  .card {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    transition: all 0.3s;
-  }
-  body.dark .card { background: #222; }
+    /* ---- Gradient text & border ---- */
+    .gradient-text{
+      background: linear-gradient(135deg,var(--color-primary),var(--color-secondary));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
 
-  .hover-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 18px 35px rgba(0,0,0,0.15);
-  }
+    .gradient-border{position:relative}
+    .gradient-border::before{
+      content:'';position:absolute;inset:0;padding:2px;border-radius:inherit;
+      background:linear-gradient(135deg,var(--color-primary),var(--color-secondary));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor; mask-composite:exclude;
+      pointer-events:none;
+    }
 
-  /* Headline Gradient */
-  .gradient-text {
-    background: linear-gradient(90deg, #e55ae7, #f5983c);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+    /* ---- Buttons and toggles ---- */
+    .btn {
+      display:inline-flex; align-items:center; gap:.5rem; padding:.5rem .75rem;
+      border-radius:.75rem; cursor:pointer; border:0; font-weight:600;
+    }
 
-  /* Animations */
-  @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(12px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-  .animate-fade-in {
-    animation: fadeIn 0.8s forwards;
-  }
+    /* ---- Fade-in animation ---- */
+    @keyframes fadeIn {
+      from{opacity:0; transform:translateY(20px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+    .animate-fade-in{animation:fadeIn .6s ease-out forwards}
 
-  /* Quick link item */
-  .quick-card {
-    background: white;
-    border-radius: 16px;
-    padding: 1rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  }
-  .quick-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 14px 25px rgba(0,0,0,0.2);
-  }
+    /* ---- Color variants & dark-mode overrides ---- */
+    .bg-white{background:#fff}
+    .text-gray-600{color:#4b5563}
+    .text-gray-700{color:#374151}
+    .text-gray-400{color:#9ca3af}
+    .border-t{border-top:1px solid #e6e7ee}
+    .border-gray-200{border-color:#e6e7ee}
 
-  /* Philosophy section */
-  .philosophy {
-    border-radius: 28px;
-    background: linear-gradient(90deg, #f3d1ff, #ffe1c9);
-    padding: 3rem;
-  }
+    /* Dark mode styles (applied on .dark-mode wrapper) */
+    .dark-mode{ --bg: linear-gradient(180deg,#0b1020,#0b1020); color: #e6eef8; }
+    .dark-mode .bg-white{ background: #111827 !important; }
+    .dark-mode .text-gray-700{ color: #d1d5db !important; }
+    .dark-mode .text-gray-600{ color: #9ca3af !important; }
+    .dark-mode .text-gray-400{ color: #6b7280 !important; }
+    .dark-mode .border-gray-200{ border-color:#374151 !important; }
+    .dark-mode .shadow-lg,
+    .dark-mode .shadow-xl,
+    .dark-mode .shadow-2xl { box-shadow:0 10px 30px rgba(0,0,0,0.5) !important; }
 
-</style>
+    /* ---- Sidebar ---- */
+    aside.sidebar{
+      position:fixed; left:0; top:0; height:100vh; width:20rem; z-index:40;
+      padding:2rem; background:var(--card); box-shadow:0 30px 80px rgba(2,6,23,0.08);
+      transform:translateX(0); transition:transform .3s ease-in-out;
+    }
+    aside.sidebar.hidden{ transform:translateX(-120%); } /* mobile hidden state */
+    /* mobile-only menu button */
+    .mobile-menu-btn{
+      position:fixed; left:1.5rem; top:1.5rem; z-index:50; padding:.6rem; border-radius:1rem;
+      box-shadow:0 10px 30px rgba(2,6,23,0.08); background:var(--card); cursor:pointer;
+    }
+
+    /* overlay (mobile) */
+    .overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:30; display:block; }
+
+    /* quick cards */
+    .quick-card{ background:var(--card); border-radius:1rem; padding:1rem; text-align:center; transition:all .3s; box-shadow:0 8px 30px rgba(2,6,23,0.06); cursor:pointer; }
+    .quick-card:hover{ transform:translateY(-8px); box-shadow:0 18px 40px rgba(2,6,23,0.12); }
+
+    /* hero text sizes responsive */
+    h1.text-5xl{ font-size:3rem; font-weight:800 }
+    @media(min-width:768px){ h1.md\\:text-7xl{ font-size:4rem } }
+
+    /* utility for center content on main */
+    main .container{ max-width:1100px; margin:0 auto; }
+
+    /* nav link active style */
+    .nav-link{ display:flex; align-items:center; gap:.75rem; padding:.75rem 1rem; border-radius: .75rem; text-decoration:none; color:inherit; }
+    .nav-link:hover{ transform:scale(1.02); transition:transform .15s; }
+    .nav-link-active{ background: linear-gradient(135deg, rgba(229,90,231,0.08), rgba(245,152,60,0.06)); border-left:3px solid var(--color-primary); }
+    .small{ font-size:.85rem }
+  </style>
 </head>
 <body>
+  <div id="app" class="min-h-screen transition-colors duration-300">
+    <!-- Mobile menu button -->
+    <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Open menu" title="Menu">
+      <!-- icon injected by JS -->
+    </button>
 
-<script src="js/layout.js" defer></script>
-  
-<div class="space-y-12">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <div style="height:100%; display:flex; flex-direction:column;">
+        <!-- Profile -->
+        <div class="text-center" style="margin-bottom:1.5rem;">
+          <div style="position:relative; display:inline-block; margin-bottom:1rem;">
+            <div style="width:8rem;height:8rem;border-radius:9999px;overflow:hidden;margin:0 auto; border:4px solid var(--card); box-shadow:0 0 20px rgba(229,90,231,0.12);">
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop" alt="Profile" style="width:100%;height:100%;object-fit:cover" />
+            </div>
+            <div style="position:absolute; right:-.5rem; bottom:-.5rem; width:2.5rem;height:2.5rem;border-radius:9999px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px rgba(2,6,23,0.12); background:var(--card)">
+              <span style="font-size:1.1rem">✨</span>
+            </div>
+          </div>
+          <h1 class="text-2xl font-bold gradient-text" style="margin-bottom:.25rem">Your Name</h1>
+          <p id="profileSubtitle" class="text-sm text-gray-600">Digital Creator &amp; Dreamer</p>
+        </div>
 
-  <!-- Hero -->
-  <div class="text-center space-y-6 py-12">
-    <h1 class="gradient-text animate-fade-in" style="font-size: 3rem; font-weight: 800;">
-      Welcome to My World
-    </h1>
-    <p class="animate-fade-in" style="animation-delay:0.2s; opacity:0; font-size:1.3rem; color:#666; max-width:700px;" class="mx-auto">
-      A digital space where creativity meets passion, and dreams take shape
-    </p>
-  </div>
+        <!-- Theme toggle -->
+        <div style="margin-bottom:1.5rem;">
+          <button id="themeToggle" class="btn" style="width:100%; justify-content:space-between; padding:.75rem 1rem; border-radius:.75rem;">
+            <span class="small">Theme</span>
+            <span id="themeToggleInner" style="display:flex; align-items:center; gap:.5rem">
+              <!-- icon + text injected by JS -->
+            </span>
+          </button>
+        </div>
 
-  <!-- Main Grid -->
-  <div class="grid grid-cols-1 lg-grid-cols-3 gap-8">
+        <!-- Navigation -->
+        <nav id="nav" style="flex:1; display:flex; flex-direction:column; gap:.5rem;">
+          <!-- nav items injected by JS -->
+        </nav>
 
-    <!-- About Me -->
-    <div class="lg-col-span-2 card animate-fade-in" style="animation-delay:0.3s; opacity:0;">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
-        <!-- Sparkles Icon -->
-        <svg width="32" height="32" stroke="#e55ae7" fill="none" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364l-1.414-1.414M7.05 7.05 5.636 5.636m12.728 0-1.414 1.414M7.05 16.95l-1.414 1.414M8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"/>
-        </svg>
-        <h2 class="gradient-text" style="font-size:2rem; font-weight:700;">About Me</h2>
+        <!-- Footer -->
+        <div style="margin-top:1.5rem; border-top:1px solid #e6e7ee; padding-top:1.25rem;">
+          <p class="text-xs text-center" style="color: #6b7280;">Made with <span class="gradient-text">♥</span> and creativity</p>
+        </div>
       </div>
+    </aside>
 
-      <p class="leading-relaxed" style="color:#555;">
-        Hey there! I'm a passionate creator, explorer, and eternal student of life. This is my little corner
-        of the internet where I share my journey, interests, and the things that make me tick.
-      </p>
+    <!-- Mobile overlay (inserted dynamically) -->
 
-      <p class="leading-relaxed" style="margin-top:1rem; color:#555;">
-        Whether I'm diving deep into code, losing myself in games, or working on exciting projects,
-        I'm always looking for new ways to express myself and connect with others who share similar passions.
-      </p>
+    <!-- Main content -->
+    <main class="lg:ml-80 min-h-screen" style="padding:1.5rem 1.5rem 3rem;">
+      <div class="container animate-fade-in" style="animation-delay:.05s;">
+        <div id="contentWrapper" class="">
+          <div class="space-y-12">
+            <!-- Hero Section -->
+            <div class="text-center space-y-6 py-12">
+              <h1 class="text-5xl md:text-7xl font-bold gradient-text animate-fade-in">Welcome to My World</h1>
+              <p id="heroSub" class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto animate-fade-in" style="animation-delay:0.2s; opacity:0;">
+                A digital space where creativity meets passion, and dreams take shape
+              </p>
+            </div>
 
-      <p class="leading-relaxed" style="margin-top:1rem; color:#555;">
-        Feel free to explore around, check out my projects, or just see what I'm currently obsessing over.
-        Welcome to my digital sanctuary! ✨
-      </p>
-    </div>
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <!-- About Me (2 columns on desktop) -->
+              <div class="lg:col-span-2 bg-white rounded-3xl shadow-xl p-8 md:p-12 animate-fade-in glow-effect transition-colors duration-300" style="animation-delay:0.3s; opacity:0;">
+                <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:1rem;">
+                  <span data-lucide="sparkles" style="color:var(--color-primary)" aria-hidden="true"></span>
+                  <h2 class="text-3xl font-bold gradient-text" style="margin:0">About Me</h2>
+                </div>
 
-    <!-- Quick Links -->
-    <div class="grid grid-cols-2 gap-4 lg-col-span-1">
+                <div class="prose prose-lg max-w-none">
+                  <p class="text-gray-700 leading-relaxed" style="margin-bottom:1rem;">
+                    Hey there! I'm a passionate creator, explorer, and eternal student of life. This is my little corner
+                    of the internet where I share my journey, interests, and the things that make me tick.
+                  </p>
 
-      <!-- Item Template -->
-      <script>
-        const quickData = [
-          { title: "Developer", color: "#e55ae7", desc: "Building digital experiences", icon:
-            `<svg width="24" height="24" stroke="COLOR" fill="none" stroke-width="2" viewBox="0 0 24 24">
-              <polyline points="16 18 22 12 16 6"></polyline>
-              <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>`
-          },
-          { title: "Designer", color: "#f5983c", desc: "Creating beautiful things", icon:
-            `<svg width="24" height="24" stroke="COLOR" fill="none" stroke-width="2" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33..."/>
-            </svg>`
-          },
-          { title: "Enthusiast", color: "#e55ae7", desc: "Always learning & growing", icon:
-            `<svg width="24" height="24" stroke="COLOR" fill="none" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M9 18V5l12-2v13"></path>
-              <circle cx="6" cy="18" r="3"></circle>
-            </svg>`
-          },
-          { title: "Dreamer", color: "#f5983c", desc: "Turning ideas into reality", icon:
-            `<svg width="24" height="24" stroke="COLOR" fill="none" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M12 3v2m0 14v2m9-9h-2m-14 0H3"></path>
-            </svg>`
-          }
-        ];
+                  <p class="text-gray-700 leading-relaxed" style="margin-bottom:1rem;">
+                    Whether I'm diving deep into code, losing myself in games, or working on exciting projects,
+                    I'm always looking for new ways to express myself and connect with others who share similar passions.
+                  </p>
 
-        window.addEventListener("DOMContentLoaded", () => {
-          const container = document.currentScript.parentElement;
-          quickData.forEach((item, i) => {
-            const div = document.createElement("div");
-            div.className = "quick-card animate-fade-in";
-            div.style.animationDelay = `${0.4 + i*0.1}s`;
-            div.style.opacity = "0";
-
-            div.innerHTML = `
-              <div style="width:48px;height:48px;border-radius:12px;margin:0 auto 10px;
-                display:flex;align-items:center;justify-content:center;
-                background:linear-gradient(135deg, ${item.color}22, ${item.color}11);">
-                ${item.icon.replace(/COLOR/g, item.color)}
+                  <p class="text-gray-700 leading-relaxed">
+                    Feel free to explore around, check out my projects, or just see what I'm currently obsessing over.
+                    Welcome to my digital sanctuary! ✨
+                  </p>
+                </div>
               </div>
-              <h3 style="color:${item.color}; font-weight:700; font-size:1rem;">
-                ${item.title}
-              </h3>
-              <p style="color:#666; font-size:0.8rem;">${item.desc}</p>
-            `;
-            container.appendChild(div);
-          });
-        });
-      </script>
 
-    </div>
+              <!-- Quick Links Grid -->
+              <div class="grid grid-cols-2 gap-4 lg:col-span-1 content-start">
+                <!-- quick-link items injected by JS -->
+              </div>
+            </div>
 
+            <!-- Personal Philosophy -->
+            <div class="rounded-3xl p-8 md:p-12 animate-fade-in transition-all duration-300" style="animation-delay:0.8s; opacity:0; background: linear-gradient(90deg,#f3d1ff,#ffe1c9);">
+              <blockquote style="font-size:1.5rem; font-style:italic; text-align:center; color:#1f2937;">
+                "Create what you love, share what inspires you, and never stop exploring."
+              </blockquote>
+              <p style="text-align:center; margin-top:1rem; color:#4b5563;">— My Life Motto</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 
-  <!-- Philosophy -->
-  <div class="philosophy animate-fade-in" style="animation-delay:0.8s; opacity:0;">
-    <blockquote style="font-size:2rem; text-align:center; font-style:italic;">
-      "Create what you love, share what inspires you, and never stop exploring."
-    </blockquote>
-    <p style="text-align:center; margin-top:1rem; color:#555;">— My Life Motto</p>
-  </div>
+<script>
+/*
+  Converted behavior from the original React component:
+  - mobile menu open/close
+  - dark mode persisted in localStorage
+  - nav items (links to static files as requested)
+  - quick link cards
+  - icons rendered with lucide.createIcons()
+  - animations use CSS with per-element animationDelay set inline
+*/
 
-</div>
+(function () {
+  // --- Data that mirrors the React component ---
+  const navItems = [
+    { name: 'Home', icon: 'home', path: 'home.html' },
+    { name: 'Interests', icon: 'heart', path: 'interests.html' },
+    { name: 'Game Shrines', icon: 'gamepad-2', path: 'gameshrines.html' },
+    { name: 'Projects', icon: 'briefcase', path: 'projects.html' },
+    { name: 'Blog', icon: 'book-open', path: 'blog.html' }
+  ];
 
+  const quickItems = [
+    { icon: 'code', title: 'Developer', color: '#e55ae7', desc: 'Building digital experiences' },
+    { icon: 'palette', title: 'Designer', color: '#f5983c', desc: 'Creating beautiful things' },
+    { icon: 'music', title: 'Enthusiast', color: '#e55ae7', desc: 'Always learning & growing' },
+    { icon: 'sparkles', title: 'Dreamer', color: '#f5983c', desc: 'Turning ideas into reality' }
+  ];
+
+  // --- State ---
+  let mobileMenuOpen = false;
+  let darkMode = (function(){
+    try {
+      const saved = localStorage.getItem('darkMode');
+      return saved ? JSON.parse(saved) : false;
+    } catch(e){
+      return false;
+    }
+  })();
+
+  // --- Elements refs ---
+  const app = document.getElementById('app');
+  const sidebar = document.getElementById('sidebar');
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const nav = document.getElementById('nav');
+  const profileSubtitle = document.getElementById('profileSubtitle');
+  const themeToggle = document.getElementById('themeToggle');
+  const themeToggleInner = document.getElementById('themeToggleInner');
+  const quickGrid = document.querySelector('.grid.grid-cols-2');
+  const contentWrapper = document.getElementById('contentWrapper');
+
+  // --- Utilities ---
+  function saveDarkMode(value){
+    try { localStorage.setItem('darkMode', JSON.stringify(value)); } catch(e){}
+  }
+
+  function setDarkMode(enabled){
+    darkMode = !!enabled;
+    saveDarkMode(darkMode);
+    // apply a wrapper class that allows "dark-mode" overrides
+    if(darkMode){
+      // apply a class to content area so elements inside get dark styles
+      contentWrapper.classList.add('dark-mode');
+      document.documentElement.style.setProperty('--card', '#0b1020');
+      // slightly change global background to dark gradient
+      document.getElementById('app').style.background = 'linear-gradient(180deg,#0b1020,#0b0b12)';
+      // alter sidebar bg & mobile button
+      sidebar.style.background = '#0b1220';
+      mobileMenuBtn.style.background = '#0f1724';
+    } else {
+      contentWrapper.classList.remove('dark-mode');
+      document.documentElement.style.removeProperty('--card');
+      document.getElementById('app').style.background = '';
+      sidebar.style.background = '';
+      mobileMenuBtn.style.background = '';
+    }
+    renderThemeToggle();
+  }
+
+  function setMobileMenu(open){
+    mobileMenuOpen = !!open;
+    if(mobileMenuOpen){
+      sidebar.classList.remove('hidden');
+      // add overlay
+      addOverlay();
+      // change mobile menu icon to X
+      mobileMenuBtn.setAttribute('aria-expanded','true');
+    } else {
+      sidebar.classList.add('hidden');
+      removeOverlay();
+      mobileMenuBtn.setAttribute('aria-expanded','false');
+    }
+    renderMobileMenuIcon();
+  }
+
+  // overlay helpers
+  let overlayEl = null;
+  function addOverlay(){
+    if(overlayEl) return;
+    overlayEl = document.createElement('div');
+    overlayEl.className = 'overlay';
+    overlayEl.addEventListener('click', ()=> setMobileMenu(false));
+    document.body.appendChild(overlayEl);
+  }
+  function removeOverlay(){
+    if(!overlayEl) return;
+    overlayEl.remove();
+    overlayEl = null;
+  }
+
+  // create nav links
+  function renderNav(){
+    nav.innerHTML = '';
+    const currentPath = (function(){
+      const p = location.pathname.split('/').pop().toLowerCase();
+      return p || 'home.html';
+    })();
+
+    navItems.forEach((item, index) => {
+      const a = document.createElement('a');
+      a.href = item.path;
+      a.className = 'nav-link';
+      a.style.opacity = 0;
+      a.style.animation = 'fadeIn .6s ease-out forwards';
+      a.style.animationDelay = (index * 0.1) + 's';
+      // active detection based on filename
+      const isActive = item.path.toLowerCase() === currentPath;
+      if(isActive){
+        a.classList.add('nav-link-active');
+      } else {
+        // hover background for non-active
+      }
+      // create icon placeholder
+      const iconSpan = document.createElement('span');
+      iconSpan.setAttribute('data-lucide', item.icon);
+      iconSpan.setAttribute('aria-hidden','true');
+      iconSpan.style.width = '20px';
+      iconSpan.style.height = '20px';
+      iconSpan.style.display = 'inline-block';
+      iconSpan.style.flex = '0 0 20px';
+      iconSpan.style.color = isActive ? 'var(--color-primary)' : '#6b7280';
+
+      const label = document.createElement('span');
+      label.textContent = item.name;
+      label.className = 'font-medium';
+      label.style.marginLeft = '.5rem';
+
+      a.appendChild(iconSpan);
+      a.appendChild(label);
+
+      a.addEventListener('click', function(){
+        // close mobile menu when navigating on mobile
+        setMobileMenu(false);
+      });
+
+      nav.appendChild(a);
+    });
+
+    // create lucide icons inside nav
+    lucide && lucide.createIcons && lucide.createIcons();
+  }
+
+  // create quick link cards
+  function renderQuickCards(){
+    quickGrid.innerHTML = '';
+    quickItems.forEach((it, idx) => {
+      const card = document.createElement('div');
+      card.className = 'quick-card animate-fade-in';
+      card.style.opacity = 0;
+      card.style.animationDelay = (0.4 + idx*0.1) + 's';
+
+      const iconWrap = document.createElement('div');
+      iconWrap.style.width = '3rem';
+      iconWrap.style.height = '3rem';
+      iconWrap.style.borderRadius = '.75rem';
+      iconWrap.style.display = 'flex';
+      iconWrap.style.alignItems = 'center';
+      iconWrap.style.justifyContent = 'center';
+      iconWrap.style.margin = '0 auto .5rem';
+      iconWrap.style.background = `linear-gradient(135deg, ${it.color}22, ${it.color}11)`;
+
+      const iconSpan = document.createElement('span');
+      iconSpan.setAttribute('data-lucide', it.icon);
+      iconSpan.style.width = '1.25rem';
+      iconSpan.style.height = '1.25rem';
+      iconSpan.style.display = 'inline-block';
+      iconSpan.style.color = it.color;
+
+      iconWrap.appendChild(iconSpan);
+
+      const title = document.createElement('h3');
+      title.textContent = it.title;
+      title.style.color = it.color;
+      title.style.fontWeight = 700;
+      title.style.margin = '0 0 .25rem';
+      title.style.fontSize = '1rem';
+      title.style.textAlign = 'center';
+
+      const desc = document.createElement('p');
+      desc.textContent = it.desc;
+      desc.style.fontSize = '.8rem';
+      desc.style.color = '#6b7280';
+      desc.style.textAlign = 'center';
+      desc.style.margin = 0;
+
+      card.appendChild(iconWrap);
+      card.appendChild(title);
+      card.appendChild(desc);
+
+      quickGrid.appendChild(card);
+    });
+
+    // render lucide icons
+    lucide && lucid e && lucide.createIcons && lucide.createIcons();
+    try { lucide.createIcons(); } catch(e) { /* ignore */ }
+  }
+
+  // render theme toggle inner content
+  function renderThemeToggle(){
+    themeToggleInner.innerHTML = '';
+    const iconSpan = document.createElement('span');
+    iconSpan.style.display = 'inline-block';
+    iconSpan.style.width = '20px';
+    iconSpan.style.height = '20px';
+    if(darkMode){
+      iconSpan.setAttribute('data-lucide','moon');
+      const txt = document.createElement('span'); txt.textContent = 'Dark'; txt.style.fontSize='.9rem';
+      themeToggleInner.appendChild(iconSpan); themeToggleInner.appendChild(txt);
+    } else {
+      iconSpan.setAttribute('data-lucide','sun');
+      const txt = document.createElement('span'); txt.textContent = 'Light'; txt.style.fontSize='.9rem';
+      themeToggleInner.appendChild(iconSpan); themeToggleInner.appendChild(txt);
+    }
+    // render icons
+    try { lucide.createIcons(); } catch(e){}
+  }
+
+  // render mobile menu icon
+  function renderMobileMenuIcon(){
+    mobileMenuBtn.innerHTML = '';
+    const span = document.createElement('span');
+    span.style.display = 'inline-block';
+    span.style.width = '22px';
+    span.style.height = '22px';
+    if(mobileMenuOpen){
+      // close icon
+      span.setAttribute('data-lucide','x');
+      span.setAttribute('aria-hidden','true');
+      mobileMenuBtn.appendChild(span);
+    } else {
+      // menu icon
+      span.setAttribute('data-lucide','menu');
+      span.setAttribute('aria-hidden','true');
+      mobileMenuBtn.appendChild(span);
+    }
+    try { lucide.createIcons(); } catch(e){}
+  }
+
+  // initial render
+  function init(){
+    // prepare layout states
+    // hide sidebar on small screens initially
+    if(window.innerWidth < 1024){
+      sidebar.classList.add('hidden');
+    }
+
+    // theme
+    setDarkMode(darkMode);
+
+    // render nav & quick cards
+    renderNav();
+    renderQuickCards();
+
+    // render mobile menu icon
+    renderMobileMenuIcon();
+
+    // add event listeners
+    mobileMenuBtn.addEventListener('click', function(){
+      setMobileMenu(!mobileMenuOpen);
+    });
+
+    themeToggle.addEventListener('click', function(){
+      setDarkMode(!darkMode);
+    });
+
+    // ensure quick fade-in elements regain proper animation if user refreshes
+    // (we rely on CSS animation with inline delays)
+    // done by setting animation and opacity inline already in render functions
+
+    // If window resizes to desktop, ensure sidebar visible
+    window.addEventListener('resize', function(){
+      if(window.innerWidth >= 1024){
+        sidebar.classList.remove('hidden');
+        removeOverlay();
+      } else {
+        if(!mobileMenuOpen){
+          sidebar.classList.add('hidden');
+        }
+      }
+    });
+  }
+
+  // Run init on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', function(){
+    init();
+    // create lucide icons for anything present initially
+    try { lucide.createIcons(); } catch(e){}
+  });
+
+})();
+</script>
 </body>
 </html>
