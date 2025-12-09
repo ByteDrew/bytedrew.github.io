@@ -30,17 +30,19 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       transition: all 0.3s ease;
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
     }
 
     /* Light Mode */
     body.light {
-      background: linear-gradient(to bottom right, #f5f3ff, #ffffff, #fdf4f3);
+      background: radial-gradient(circle at top left, #f5f3ff 0, #ffffff 40%, #fdf4f3 100%);
       color: var(--text-primary-light);
     }
 
     /* Dark Mode */
     body.dark {
-      background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
+      background: radial-gradient(circle at top left, #111827 0, #1f2937 40%, #020617 100%);
       color: var(--text-primary-dark);
     }
 
@@ -80,6 +82,47 @@
 
     body.dark .border-light {
       border-color: #374151 !important;
+    }
+
+    /* REACTIVE FLOATING BACKGROUND BLOBS */
+    .background-blob-container {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .background-blob {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.6;
+      mix-blend-mode: screen;
+      animation: floatBlob 24s ease-in-out infinite alternate;
+    }
+
+    .background-blob.primary {
+      background: radial-gradient(circle, var(--color-primary), transparent 60%);
+    }
+
+    .background-blob.secondary {
+      background: radial-gradient(circle, var(--color-secondary), transparent 60%);
+    }
+
+    .background-blob.blob-1 { top: -10%; left: -5%; animation-delay: 0s; }
+    .background-blob.blob-2 { top: 20%; right: -10%; animation-delay: 4s; }
+    .background-blob.blob-3 { bottom: -15%; left: 10%; animation-delay: 8s; }
+    .background-blob.blob-4 { bottom: 10%; right: 5%; animation-delay: 12s; }
+
+    @keyframes floatBlob {
+      0%   { transform: translate3d(0, 0, 0) scale(1); }
+      25%  { transform: translate3d(40px, -30px, 0) scale(1.08); }
+      50%  { transform: translate3d(-20px, 30px, 0) scale(0.96); }
+      75%  { transform: translate3d(30px, 40px, 0) scale(1.04); }
+      100% { transform: translate3d(-30px, -20px, 0) scale(1.02); }
     }
 
     .gradient-text {
@@ -358,6 +401,8 @@
       margin-left: 0;
       transition: margin-left 0.3s ease;
       padding-top: 2rem;
+      position: relative;
+      z-index: 1;
     }
 
     @media (min-width: 1025px) {
@@ -552,6 +597,14 @@
   </style>
 </head>
 <body class="light">
+  <!-- Floating reactive background -->
+  <div class="background-blob-container">
+    <div class="background-blob primary blob-1"></div>
+    <div class="background-blob secondary blob-2"></div>
+    <div class="background-blob primary blob-3"></div>
+    <div class="background-blob secondary blob-4"></div>
+  </div>
+
   <!-- Mobile Menu Button -->
   <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">
     <i data-lucide="menu"></i>
@@ -574,7 +627,6 @@
         <p class="profile-subtitle">Software Engineer | Webmaster</p>
       </div>
 
-      
       <!-- Dark Mode Toggle -->
       <button id="themeToggle" class="theme-toggle">
         <span>Theme</span>
@@ -731,7 +783,6 @@
           themeToggle.style.background = 'linear-gradient(135deg, #f3e8ff, #fed7aa)';
           themeToggle.classList.remove('dark-theme');
         }
-        // Re-render icons after theme change
         setTimeout(() => lucide.createIcons(), 50);
       }
 
@@ -767,7 +818,6 @@
           text.classList.remove('gradient-text');
         });
 
-        // Find matching link and activate it
         const activeLink = Array.from(navLinks).find(link => {
           const href = link.getAttribute('href');
           return href === currentPath || href.split('/').pop() === currentPath;
@@ -782,32 +832,26 @@
         }
       }
 
-      // Navigation handler
       function handleNavClick(e) {
-        // Close mobile menu on desktop navigation
         if (window.innerWidth >= 1025 && mobileMenuOpen) {
           toggleMobileMenu();
         }
       }
 
-      // Event listeners
       mobileMenuBtn.addEventListener('click', toggleMobileMenu);
       overlay.addEventListener('click', toggleMobileMenu);
       themeToggle.addEventListener('click', toggleDarkMode);
       navLinks.forEach(link => link.addEventListener('click', handleNavClick));
 
-      // Initialize everything
       initTheme();
       updateActiveNav();
 
-      // Handle window resize
       window.addEventListener('resize', () => {
         if (window.innerWidth >= 1025 && mobileMenuOpen) {
           toggleMobileMenu();
         }
       });
 
-      // Re-initialize icons after short delay for theme changes
       setTimeout(() => lucide.createIcons(), 100);
     });
   </script>
