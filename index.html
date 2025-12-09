@@ -46,6 +46,112 @@
       color: var(--text-primary-dark);
     }
 
+    /* ANIMATED TRAVELING BACKGROUND BLOBS */
+    .background-blob-container {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .background-blob {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: 0.5;
+      mix-blend-mode: screen;
+      will-change: transform;
+    }
+
+    .blob-primary { background: radial-gradient(circle, var(--color-primary), transparent 70%); }
+    .blob-secondary { background: radial-gradient(circle, var(--color-secondary), transparent 70%); }
+
+    /* Blob 1: Left to Right slow sweep */
+    .blob-1 {
+      top: 20%;
+      animation: sweepLeftToRight 35s linear infinite;
+    }
+
+    /* Blob 2: Diagonal top-left to bottom-right */
+    .blob-2 {
+      top: 60%;
+      right: 100%;
+      animation: diagonalTLtoBR 42s linear infinite;
+      width: 350px;
+      height: 350px;
+    }
+
+    /* Blob 3: Bottom to top with sway */
+    .blob-3 {
+      bottom: -20%;
+      left: 20%;
+      animation: sweepBottomToTop 38s ease-in-out infinite;
+    }
+
+    /* Blob 4: Right to left fast */
+    .blob-4 {
+      top: 10%;
+      animation: sweepRightToLeft 28s linear infinite;
+      width: 220px;
+      height: 220px;
+    }
+
+    /* Blob 5: Circular orbit */
+    .blob-5 {
+      top: 70%;
+      left: 10%;
+      animation: orbitClockwise 50s linear infinite;
+      width: 300px;
+      height: 300px;
+    }
+
+    @keyframes sweepLeftToRight {
+      0% { left: -30%; transform: translateY(0) rotate(0deg); }
+      50% { left: 80%; transform: translateY(-20px) rotate(180deg); }
+      100% { left: -30%; transform: translateY(10px) rotate(360deg); }
+    }
+
+    @keyframes diagonalTLtoBR {
+      0% { left: -25%; top: 10%; transform: scale(1); }
+      33% { left: 20%; top: 40%; transform: scale(1.1); }
+      66% { left: 60%; top: 70%; transform: scale(0.95); }
+      100% { left: -25%; top: 10%; transform: scale(1); }
+    }
+
+    @keyframes sweepBottomToTop {
+      0% { bottom: -30%; left: 10%; transform: translateX(0); }
+      30% { bottom: 60%; left: 30%; transform: translateX(40px); }
+      60% { bottom: 20%; left: 60%; transform: translateX(-20px); }
+      100% { bottom: -30%; left: 10%; transform: translateX(0); }
+    }
+
+    @keyframes sweepRightToLeft {
+      0% { right: -30%; transform: translateY(0) rotate(0deg); }
+      50% { right: 70%; transform: translateY(30px) rotate(-180deg); }
+      100% { right: -30%; transform: translateY(-10px) rotate(-360deg); }
+    }
+
+    @keyframes orbitClockwise {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(100px, -50px) rotate(90deg); }
+      50% { transform: translate(150px, 50px) rotate(180deg); }
+      75% { transform: translate(50px, 100px) rotate(270deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
+    /* Responsive blob sizing */
+    @media (max-width: 768px) {
+      .background-blob {
+        width: 200px !important;
+        height: 200px !important;
+      }
+      .blob-2 { width: 250px !important; height: 250px !important; }
+      .blob-5 { width: 220px !important; height: 220px !important; }
+    }
+
     body.dark h1, body.dark h2, body.dark h3, body.dark h4 {
       color: var(--text-primary-dark);
     }
@@ -82,47 +188,6 @@
 
     body.dark .border-light {
       border-color: #374151 !important;
-    }
-
-    /* REACTIVE FLOATING BACKGROUND BLOBS */
-    .background-blob-container {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .background-blob {
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.6;
-      mix-blend-mode: screen;
-      animation: floatBlob 24s ease-in-out infinite alternate;
-    }
-
-    .background-blob.primary {
-      background: radial-gradient(circle, var(--color-primary), transparent 60%);
-    }
-
-    .background-blob.secondary {
-      background: radial-gradient(circle, var(--color-secondary), transparent 60%);
-    }
-
-    .background-blob.blob-1 { top: -10%; left: -5%; animation-delay: 0s; }
-    .background-blob.blob-2 { top: 20%; right: -10%; animation-delay: 4s; }
-    .background-blob.blob-3 { bottom: -15%; left: 10%; animation-delay: 8s; }
-    .background-blob.blob-4 { bottom: 10%; right: 5%; animation-delay: 12s; }
-
-    @keyframes floatBlob {
-      0%   { transform: translate3d(0, 0, 0) scale(1); }
-      25%  { transform: translate3d(40px, -30px, 0) scale(1.08); }
-      50%  { transform: translate3d(-20px, 30px, 0) scale(0.96); }
-      75%  { transform: translate3d(30px, 40px, 0) scale(1.04); }
-      100% { transform: translate3d(-30px, -20px, 0) scale(1.02); }
     }
 
     .gradient-text {
@@ -597,12 +662,13 @@
   </style>
 </head>
 <body class="light">
-  <!-- Floating reactive background -->
+  <!-- ANIMATED TRAVELING BACKGROUND BLOBS -->
   <div class="background-blob-container">
-    <div class="background-blob primary blob-1"></div>
-    <div class="background-blob secondary blob-2"></div>
-    <div class="background-blob primary blob-3"></div>
-    <div class="background-blob secondary blob-4"></div>
+    <div class="background-blob blob-primary blob-1"></div>
+    <div class="background-blob blob-secondary blob-2"></div>
+    <div class="background-blob blob-primary blob-3"></div>
+    <div class="background-blob blob-secondary blob-4"></div>
+    <div class="background-blob blob-primary blob-5"></div>
   </div>
 
   <!-- Mobile Menu Button -->
@@ -627,6 +693,7 @@
         <p class="profile-subtitle">Software Engineer | Webmaster</p>
       </div>
 
+      
       <!-- Dark Mode Toggle -->
       <button id="themeToggle" class="theme-toggle">
         <span>Theme</span>
@@ -783,6 +850,7 @@
           themeToggle.style.background = 'linear-gradient(135deg, #f3e8ff, #fed7aa)';
           themeToggle.classList.remove('dark-theme');
         }
+        // Re-render icons after theme change
         setTimeout(() => lucide.createIcons(), 50);
       }
 
@@ -818,6 +886,7 @@
           text.classList.remove('gradient-text');
         });
 
+        // Find matching link and activate it
         const activeLink = Array.from(navLinks).find(link => {
           const href = link.getAttribute('href');
           return href === currentPath || href.split('/').pop() === currentPath;
@@ -832,26 +901,32 @@
         }
       }
 
+      // Navigation handler
       function handleNavClick(e) {
+        // Close mobile menu on desktop navigation
         if (window.innerWidth >= 1025 && mobileMenuOpen) {
           toggleMobileMenu();
         }
       }
 
+      // Event listeners
       mobileMenuBtn.addEventListener('click', toggleMobileMenu);
       overlay.addEventListener('click', toggleMobileMenu);
       themeToggle.addEventListener('click', toggleDarkMode);
       navLinks.forEach(link => link.addEventListener('click', handleNavClick));
 
+      // Initialize everything
       initTheme();
       updateActiveNav();
 
+      // Handle window resize
       window.addEventListener('resize', () => {
         if (window.innerWidth >= 1025 && mobileMenuOpen) {
           toggleMobileMenu();
         }
       });
 
+      // Re-initialize icons after short delay for theme changes
       setTimeout(() => lucide.createIcons(), 100);
     });
   </script>
