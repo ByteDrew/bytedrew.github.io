@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects - Your Personal Site</title>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="../js/loadSidebar.js"></script>
   <script src="../js/website.js"></script>
   <style>
     :root {
@@ -395,51 +396,8 @@
     <i data-lucide="menu"></i>
   </button>
 
-  <!-- Sidebar -->
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-content">
-      <div class="profile-section animate-fade-in">
-        <div class="profile-img-container">
-          <div class="profile-img glow-effect">
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop" alt="Profile" class="w-full h-full object-cover">
-          </div>
-          <div class="profile-sparkle"><span>✨</span></div>
-        </div>
-        <h1 class="profile-name gradient-text">Your Name</h1>
-        <p class="profile-subtitle">Digital Creator & Dreamer</p>
-      </div>
-
-      <button id="themeToggle" class="theme-toggle">
-        <span>Theme</span>
-        <div id="themeIconContainer" class="flex items-center gap-2">
-          <i data-lucide="sun" class="w-5 h-5"></i>
-          <span class="text-sm">Light</span>
-        </div>
-      </button>
-
-      <nav class="nav">
-        <a href="index.html" class="nav-link" data-path="Home">
-          <i data-lucide="home" class="nav-icon"></i><span>Home</span>
-        </a>
-        <a href="interests.html" class="nav-link" data-path="Interests">
-          <i data-lucide="heart" class="nav-icon"></i><span>Interests</span>
-        </a>
-        <a href="gameshrines.html" class="nav-link" data-path="GameShrines">
-          <i data-lucide="gamepad-2" class="nav-icon"></i><span>Game Shrines</span>
-        </a>
-        <a href="projects.html" class="nav-link nav-link-active" data-path="Projects">
-          <i data-lucide="briefcase" class="nav-icon"></i><span>Projects</span>
-        </a>
-        <a href="blog.html" class="nav-link" data-path="Blog">
-          <i data-lucide="book-open" class="nav-icon"></i><span>Blog</span>
-        </a>
-      </nav>
-
-      <div class="sidebar-footer">
-        Made with <span class="gradient-text">♥</span> and creativity
-      </div>
-    </div>
-  </aside>
+  <!-- Sidebar (shared include) -->
+  <div id="sidebar-placeholder"></div>
 
   <!-- Overlay -->
   <div id="overlay" class="overlay"></div>
