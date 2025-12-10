@@ -103,6 +103,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    // Initialize audio player with autoplay
+    function initAudioPlayer() {
+      const audioElement = document.getElementById('sidebarAudio');
+      if (audioElement) {
+        // Attempt autoplay with fallback
+        audioElement.play().catch(() => {
+          // Autoplay failed, likely due to browser policy
+          // User will need to click play manually
+          console.log('Autoplay prevented by browser policy');
+        });
+      }
+    }
+
     // Event listeners (guard when elements may be missing)
     if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
     if (overlay) overlay.addEventListener('click', toggleMobileMenu);
@@ -112,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize everything
     initTheme();
     updateActiveNav();
+    initAudioPlayer();
 
     // Handle window resize
     window.addEventListener('resize', () => {
