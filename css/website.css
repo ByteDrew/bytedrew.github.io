@@ -1205,9 +1205,9 @@
 }
 
 #chattable-container iframe{
-    height: 420px;
+    height: 100%;
     overflow: visible;
-    min-width: 320px;
+    min-width: 100%;
 }
 
 #chattable {
