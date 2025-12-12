@@ -1,0 +1,335 @@
+:root {
+    --background-color: #141513;
+    --shadow-color: #0f110f3a;
+
+    --box-background-color: #1e201d;
+    --box-background-color-2: #2d322d;
+    --box-background-color-3: #171816;
+    --box-border-color: #798574;
+    --box-border-color-2: #464b42;
+
+
+    --text-color: #b4bbb4;
+    --highlight-color: #9fe62d;
+}
+
+* {
+    scrollbar-width: thin;
+}
+
+html {
+    padding: 0px;
+    margin: 0px;
+    background-color: var(--box-background-color);
+}
+
+body {
+    font-family: "MS PGothic", sans-serif;
+	font-size: 16px;
+	color: var(--text-color);
+}
+
+#top_banner {
+	font-family: "MS PGothic", sans-serif;
+	font-size: 16px;
+	background: none;
+	padding: 2px 6px 2px 9px;
+	margin: 0px;
+	background-color: var(--box-background-color-3);
+	color: var(--text-color);
+    box-shadow: 0px 1px 6px var(--background-color);
+    position: relative;
+    z-index: 1;
+}
+
+#top_banner::before {
+    content: "📫";
+    padding-right: 5px;
+}
+
+#background {
+    height: calc(100% - 81px);
+    padding: 0px 4px;
+}
+
+.allMessages {
+    padding: 4px 6px 6px 6px;
+}
+
+.allMessages a {
+    color: var(--highlight-color);
+    font-style: normal;
+    text-decoration: none;
+}
+
+.allMessages a:hover {
+    text-decoration: underline;
+}
+
+.allMessages.containsOnlyEmojis .emoji {
+    height: 50px;
+}
+
+
+.msgWrapper {
+    border-radius: 3px 3px 3px 1px;
+    background-color: var(--box-background-color-2);
+    max-width: 85vw;
+    width: fit-content;
+    border: 1px solid #00000000;
+    margin: 5px;
+
+    /* box-shadow: 1px 1px 2px var(--shadow-color); */
+    /* position: relative; */
+    /* z-index: 0; */
+}
+
+.msgWrapper:has(.sent) {
+    border-radius: 3px 3px 1px 3px;
+    background-color: var(--box-background-color-3);
+    margin-left:  auto;
+}
+
+.msgWrapper:hover {
+    border: 1px solid var(--box-border-color-2);
+}
+
+.msgWrapper:has(.sent):hover {
+    border: 1px solid var(--box-background-color-2);
+}
+
+.senderInfo {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--highlight-color);
+}
+
+.msgWrapper:has(.owner) {
+    min-width: 150px;
+}
+
+.mod, .owner, .tester {
+  width: 0px;
+  font-size: 12px;
+}
+
+/*.owner::before {
+  content: "[WEBMASTER]";
+  display: inline-block;
+  color: var(--text-color);
+  position: absolute;
+  top: 10px;
+  right: 6px;
+  font-weight: normal;
+}
+*/
+
+.senderInfo:has(.owner)::before {
+    content: "✨";
+}
+
+.sent, .received {
+    position: relative;
+    z-index: 1;
+}
+
+.recieved::after {
+    content: "";
+    background-color: var(--box-background-color-2);
+    height: 10px;
+    width: 7px;
+    position: absolute;
+    left: -7px;
+    bottom: -1px;
+    border-radius: 0 0 0 3px;
+    background: linear-gradient(-45deg, var(--box-background-color-2) 5px, #00000000 4px);
+    z-index: -1;
+}
+
+.recieved:hover::after {
+    border-bottom: 1px solid var(--box-border-color-2);
+    background: linear-gradient(-45deg, var(--box-background-color-2) 5px, var(--box-border-color-2) 6px, #00000000 7px);
+}
+
+.sent::after {
+    content: " ";
+    background-color: var(--box-background-color-3);
+    height: 10px;
+    width: 7px;
+    position: absolute;
+    right: -7px;
+    bottom: -1px;
+    border-radius: 0 0 3px 0;
+    background: linear-gradient(45deg, var(--box-background-color-3) 5px, #00000000 4px);
+    z-index: -1;
+}
+
+.sent:hover::after {
+    border-bottom: 1px solid var(--box-background-color-2);
+    background: linear-gradient(45deg, var(--box-background-color-3) 5px, var(--box-background-color-2) 6px, #00000000 7px);
+}
+
+
+#timestamp {
+    margin: 0px;
+    margin-top: -4px;
+    padding: 3px 5px;
+    text-align: right;
+}
+
+
+#settings {
+	height: 18px;
+	width: 18px;
+	filter: invert(0.8);
+	top: 6px;
+}
+
+#scrollToBottom {
+	bottom: 56px !important;
+	background: var(--box-background-color-2) !important;
+	background-color: var(--box-background-color-2);
+	border-radius: 3px;
+	border: 1px solid var(--highlight-color);
+	color: var(--highlight-color) !important;
+
+	box-shadow: 1px 1px 2px var(--shadow-color);
+}
+
+#scrollToBottom:hover {
+    background: var(--box-border-color-2) !important;
+    background-color: var(--box-border-color-2);
+}
+
+#ctxMenu {
+    background-color: var(--box-border-color-2);
+    background: var(--box-border-color-2) !important;
+    border-radius: 3px;
+	box-shadow: none;
+	border: 1px solid var(--box-border-color-2);
+
+	box-shadow: 1px 1px 2px var(--shadow-color);
+}
+
+.ctxMenuOption {
+	background-color: var(--box-background-color-2);
+	background: var(--box-background-color-2) !important;
+	color: var(--text-color);
+	font-size: 16px;
+}
+
+.ctxMenuOption:hover {
+    cursor: pointer !important;
+    background: var(--box-border-color-2) !important;
+    background-color: var(--box-border-color-2);
+}
+
+
+.emoji {
+	height: 16px;
+	vertical-align: top;
+}
+
+#emojiTrayToggle {
+    height: 24px;
+	width: 24px;
+	border-radius: 0px;
+	filter: invert(0.8);
+    position: absolute;
+    z-index: 3;
+}
+
+#emojiTrayToggle:hover, #settings:hover {
+    filter: invert(1);
+}
+
+#emojiTray {
+	color: var(--text-color);
+	background-color: var(--box-background-color-3);
+	border: none;
+	border-radius: 3px 3px 0px 0px;
+	box-shadow: 0px -1px 6px var(--background-color);
+    position: absolute;
+    z-index: 2;
+}
+
+#emojiTray h3 {
+	font-size: 16px;
+    font-weight: normal;
+}
+
+.emojiInGrid {
+    height: 32px;
+}
+
+#is_typing {
+	background-color: var(--box-background-color-2);
+	border-radius: 3px;
+	margin-left: 8px;
+    box-shadow: 1px 1px 2px var(--shadow-color);
+}
+
+#input, #nameEntry {
+    border-radius: 0px;
+    padding: 5px 34px 5px 6px;
+    height: 16px;
+    font-family: "MS PGothic", sans-serif;
+	font-size: 16px;
+	background-color: var(--box-background-color-3);
+	color: var(--text-color);
+    position: relative;
+    z-index: 1;
+}
+
+
+#input:empty::before {
+    font-family: "MS PGothic", sans-serif;
+	font-size: 16px;
+	color: var(--box-border-color-2);
+}
+
+#nameEntry:focus, #nameEntry:active, #input:focus, #input:active {
+    outline: 1px solid var(--box-background-color-2);
+}
+
+#replyBanner {
+    background-color: var(--box-background-color-2);
+    /*position: relative;*/
+    top: -26px;
+    display: inline;
+    box-shadow: 1px 1px 2px var(--shadow-color);
+    padding: 5px;
+    border: 1px solid var(--highlight-color);
+    border-bottom: none;
+    border-radius: 3px 3px 0px 0px;
+}
+
+#replyBanner :nth-child(2) {
+    color: var(--highlight-color) !important;
+}
+
+#replyBanner :nth-child(2):hover {
+    text-decoration: underline;
+}
+
+
+.highlight {
+    background-color: var(--box-border-color-2);
+    border-radius: 2px;
+}
+
+pre.msgBody {
+  white-space: normal;
+}
+
+.msgWrapper em a {
+    color: var(--box-border-color) !important;
+}
+
+.msgWrapper:has(.sent) em a {
+    color: var(--box-border-color-2) !important;
+}
+
+.msgBody em a::before {
+    content: "\27A5";
+}
