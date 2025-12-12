@@ -21,6 +21,7 @@ html {
     padding: 0px;
     margin: 0px;
     background-color: var(--box-background-color);
+	width: 50%
 }
 
 body {
@@ -113,7 +114,7 @@ body {
   font-size: 12px;
 }
 
-/*.owner::before {
+.owner::before {
   content: "[WEBMASTER]";
   display: inline-block;
   color: var(--text-color);
@@ -122,7 +123,6 @@ body {
   right: 6px;
   font-weight: normal;
 }
-*/
 
 .senderInfo:has(.owner)::before {
     content: "✨";
