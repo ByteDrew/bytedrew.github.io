@@ -39,23 +39,17 @@
         <div class="content-grid">
           <!-- About Me Card -->
           <div class="bg-card about-card animate-fade-in glow-effect">
-            <div class="card-header">
-              <i data-lucide="sparkles" class="w-8 h-8" style="color: var(--color-primary)"></i>
-              <h2 class="gradient-text">About Me</h2>
-            </div>
-            <div class="prose prose-lg">
-              <p class="about-text">
-                Hey there! I'm a passionate software engineer, artist, and eternal student of life. This is my little corner
-                of the internet where I share my journey, interests, and the things that make me tick.
-              </p>
-              <p class="about-text">
-                Whether I'm diving deep into code, losing myself in games, or working on exciting projects,
-                I'm always looking for new ways to express myself and connect with others who share similar passions.
-              </p>
-              <p class="about-text">
-                Feel free to explore around, check out my projects, or just see what I'm currently obsessing over.
-                Welcome to my sanctuary! ✨
-              </p>
+                <div id="community">
+                    <div id="chattable-container">
+                        <iframe src="https://iframe.chat/embed?chat=15151489" id="chattable" frameborder='0'></iframe>
+                        <script>
+                            const theme = localStorage.getItem('theme') || 'rainworld-theme';
+                            const stylesheet = `/css/chattable-${theme}.css`
+                            chattable.initialize({
+                                stylesheet : stylesheet
+                            });
+                        </script>
+                    </div>
             </div>
           </div>
   </main>
