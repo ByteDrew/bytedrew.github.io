@@ -1173,3 +1173,45 @@
     .game-header {
       display: flex;
     }
+
+#community {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+@media only screen and (max-width: 700px) {
+    #community {
+        flex-direction: row;
+        gap: 5px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    #community {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    #community>* {
+        width: 100%;
+    }
+}
+
+#chattable-container {
+    display: flex;
+}
+
+#chattable-container iframe{
+    height: 420px;
+    overflow: visible;
+    min-width: 320px;
+}
+
+#chattable {
+    border: 1px solid var(--box-border-color-2);
+    border-radius: 3px;
+}
+    }
