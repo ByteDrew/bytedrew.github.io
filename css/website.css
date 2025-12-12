@@ -1205,13 +1205,12 @@
 }
 
 #chattable-container iframe{
-    height: 500px;
+    height: 420px;
     overflow: visible;
-    min-width: 500px;
+    min-width: 320px;
 }
 
 #chattable {
     border: 1px solid var(--box-border-color-2);
     border-radius: 3px;
 }
-    }
