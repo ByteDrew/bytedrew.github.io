@@ -94,6 +94,78 @@
         </div>
       </div>
 
+  <!-- Games Grid -->
+      <div id="gamesContainer">
+        <!-- Sample games for demo -->
+        <div class="games-grid">
+          <div class="game-card animate-fade-in" style="animation-delay: 0.1s">
+            <div class="game-cover">
+              <img src="https://images.unsplash.com/photo-1592876543944-00ef4e274d7d?w=400&h=300&fit=crop" alt="The Legend of Zelda">
+            </div>
+            <div class="game-content">
+              <div class="game-header">
+                <div>
+                  <h3 class="game-title gradient-text">The Legend of Zelda: Breath of the Wild</h3>
+                  <p class="game-meta">Nintendo Switch • Action-Adventure</p>
+                </div>
+                <button class="btn-danger" onclick="deleteGame(this)">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+              <p class="game-description">An open-world masterpiece that redefined exploration and freedom in gaming. Every moment felt like discovery.</p>
+              <div class="favorite-moment">
+                <p class="favorite-moment-label">Favorite Moment:</p>
+                <p class="favorite-moment-text">Gliding down from the Great Plateau at sunrise - pure magic ✨</p>
+              </div>
+              <div class="game-stats">
+                <div class="stat-item">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  <span>250+ hours</span>
+                </div>
+                <div class="stat-item rating">
+                  <i data-lucide="star" class="w-4 h-4"></i>
+                  <span>10/10</span>
+                </div>
+                <i data-lucide="heart" class="w-4 h-4 heart-filled"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-card animate-fade-in" style="animation-delay: 0.15s">
+            <div class="game-cover">
+              <img src="https://images.unsplash.com/photo-1611746804143-6cc96b7b4532?w=400&h=300&fit=crop" alt="Hades">
+            </div>
+            <div class="game-content">
+              <div class="game-header">
+                <div>
+                  <h3 class="game-title gradient-text">Hades</h3>
+                  <p class="game-meta">PC • Roguelike</p>
+                </div>
+                <button class="btn-danger" onclick="deleteGame(this)">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+              <p class="game-description">Perfect blend of tight gameplay, incredible writing, and addictive progression. Every run tells a story.</p>
+              <div class="game-stats">
+                <div class="stat-item">
+                  <i data-lucide="clock" class="w-4 h-4"></i>
+                  <span>120 hours</span>
+                </div>
+                <div class="stat-item rating">
+                  <i data-lucide="star" class="w-4 h-4"></i>
+                  <span>10/10</span>
+                </div>
+                <i data-lucide="heart" class="w-4 h-4 heart-filled"></i>
+              </div>
+            </div>
+          </div>
+        <div id="emptyState" class="empty-state animate-fade-in" style="display: none">
+        <i data-lucide="gamepad-2" class="w-16 h-16 mx-auto mb-4" style="color: #d1d5db"></i>
+        <p class="text-lg">No game shrines yet. Add your first favorite game!</p>
+      </div>
+        </div>
+      </div>
+      
       <!-- Loading State (hidden by default) -->
       <div id="loadingState" class="text-center py-12" style="display: none">
         <div class="loading-spinner"></div>
