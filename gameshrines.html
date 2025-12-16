@@ -38,59 +38,6 @@
         <div class="header">
           <h1 class="gradient-text">Game Shrines</h1>
           <p>A tribute to the games that shaped my journey and stole my heart</p>
-          <button id="addGameBtn" class="add-game-btn">
-            <i data-lucide="plus" class="w-5 h-5"></i>
-            Add Game Shrine
-          </button>
-        </div>
-      </div>
-
-      <!-- Add Game Form -->
-      <div id="gameForm" class="form-card animate-fade-in" style="display: none">
-        <div class="form-header">
-          <h2 class="form-title gradient-text">Create a New Game Shrine</h2>
-        </div>
-        <div class="form-content">
-          <form id="gameFormElement">
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Game Title *</label>
-                <input type="text" class="form-input" id="gameTitle" required placeholder="Enter game title">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Platform</label>
-                <input type="text" class="form-input" id="gamePlatform" placeholder="PC, PlayStation, Xbox, etc.">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Genre</label>
-                <input type="text" class="form-input" id="gameGenre" placeholder="RPG, Action, Adventure, etc.">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Hours Played</label>
-                <input type="number" class="form-input" id="gameHours" placeholder="0" min="0">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Your Rating (1-10)</label>
-                <input type="number" class="form-input" id="gameRating" placeholder="10" min="1" max="10" value="10">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Cover Image URL</label>
-                <input type="url" class="form-input" id="gameCover" placeholder="https://...">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Why You Love This Game *</label>
-                <textarea class="form-textarea" id="gameDescription" required placeholder="Share your passion..." rows="4"></textarea>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Favorite Moment</label>
-                <textarea class="form-textarea" id="gameMoment" placeholder="That unforgettable scene or achievement..." rows="3"></textarea>
-              </div>
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn-primary">Create Shrine</button>
-              <button type="button" class="btn-secondary" id="cancelForm">Cancel</button>
-            </div>
-          </form>
         </div>
       </div>
 
@@ -100,27 +47,24 @@
         <div class="games-grid">
           <div class="game-card animate-fade-in" style="animation-delay: 0.1s">
             <div class="game-cover">
-              <img src="https://images.unsplash.com/photo-1592876543944-00ef4e274d7d?w=400&h=300&fit=crop" alt="The Legend of Zelda">
+              <img src="../assets/halflifealyx.jpg" alt="Half Life: Alyx">
             </div>
             <div class="game-content">
               <div class="game-header">
                 <div>
-                  <h3 class="game-title gradient-text">The Legend of Zelda: Breath of the Wild</h3>
-                  <p class="game-meta">Nintendo Switch • Action-Adventure</p>
+                  <h3 class="game-title gradient-text">Half Life: Alyx</h3>
+                  <p class="game-meta">Virtual Reality • VALVe</p>
                 </div>
-                <button class="btn-danger" onclick="deleteGame(this)">
-                  <i data-lucide="trash-2" class="w-4 h-4"></i>
-                </button>
               </div>
-              <p class="game-description">An open-world masterpiece that redefined exploration and freedom in gaming. Every moment felt like discovery.</p>
+              <p class="game-description">One of the absolute best VR titles, plus Half Life? What's not to love about it, you get to experience the Half Life experience in VR with the thrill of being an rebel.</p>
               <div class="favorite-moment">
                 <p class="favorite-moment-label">Favorite Moment:</p>
-                <p class="favorite-moment-text">Gliding down from the Great Plateau at sunrise - pure magic ✨</p>
+                <p class="favorite-moment-text">Meeting the heavier soldiers of the game, the Suppressor and Wallhammer is real scary</p>
               </div>
               <div class="game-stats">
                 <div class="stat-item">
                   <i data-lucide="clock" class="w-4 h-4"></i>
-                  <span>250+ hours</span>
+                  <span>125+ hours</span>
                 </div>
                 <div class="stat-item rating">
                   <i data-lucide="star" class="w-4 h-4"></i>
@@ -141,9 +85,6 @@
                   <h3 class="game-title gradient-text">Hades</h3>
                   <p class="game-meta">PC • Roguelike</p>
                 </div>
-                <button class="btn-danger" onclick="deleteGame(this)">
-                  <i data-lucide="trash-2" class="w-4 h-4"></i>
-                </button>
               </div>
               <p class="game-description">Perfect blend of tight gameplay, incredible writing, and addictive progression. Every run tells a story.</p>
               <div class="game-stats">
