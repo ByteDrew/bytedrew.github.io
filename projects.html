@@ -39,59 +39,6 @@
         <div class="header">
           <h1 class="gradient-text">My Projects</h1>
           <p>Things I'm building, learning, and bringing to life</p>
-          <button id="addProjectBtn" class="add-project-btn">
-            <i data-lucide="plus" class="w-5 h-5"></i>Add Project
-          </button>
-        </div>
-      </div>
-
-      <!-- Add Project Form -->
-      <div id="projectForm" class="form-card animate-fade-in" style="display: none">
-        <div class="form-header">
-          <h2 class="form-title gradient-text">Add New Project</h2>
-        </div>
-        <div class="form-content">
-          <form id="projectFormElement">
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Project Title *</label>
-                <input type="text" class="form-input" id="projectTitle" required placeholder="My Awesome Project">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Status</label>
-                <select class="form-select" id="projectStatus">
-                  <option value="planning">Planning</option>
-                  <option value="in_progress" selected>In Progress</option>
-                  <option value="completed">Completed</option>
-                  <option value="on_hold">On Hold</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">GitHub URL</label>
-                <input type="url" class="form-input" id="projectGithub" placeholder="https://github.com/...">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Demo URL</label>
-                <input type="url" class="form-input" id="projectDemo" placeholder="https://...">
-              </div>
-              <div class="form-group" style="grid-column: span 2">
-                <label class="form-label">Technologies (comma-separated)</label>
-                <input type="text" class="form-input" id="projectTech" placeholder="React, Node.js, MongoDB">
-              </div>
-              <div class="form-group" style="grid-column: span 2">
-                <label class="form-label">Project Image URL</label>
-                <input type="url" class="form-input" id="projectImage" placeholder="https://...">
-              </div>
-              <div class="form-group" style="grid-column: span 2">
-                <label class="form-label">Description *</label>
-                <textarea class="form-textarea" id="projectDescription" required placeholder="Describe your project..." rows="4"></textarea>
-              </div>
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn-primary">Add Project</button>
-              <button type="button" class="btn-secondary" id="cancelProjectForm">Cancel</button>
-            </div>
-          </form>
         </div>
       </div>
 
@@ -123,6 +70,9 @@
                 <a href="#" class="project-link" target="_blank">
                   <i data-lucide="github" class="w-4 h-4"></i><span>Code</span>
                 </a>
+                <a href="#" class="project-link" target="_blank">
+                  <i data-lucide="external-link" class="w-4 h-4"></i><span>Demo</span>
+                </a>
               </div>
             </div>
           </div>
@@ -133,26 +83,18 @@
             <div class="project-content">
               <div class="project-header">
                 <div>
-                  <h3 class="project-title gradient-text">Task Manager App</h3>
-                  <span class="project-status status-in_progress">In Progress</span>
+                  <h3 class="project-title gradient-text">Project Resonances</h3>
+                  <span class="project-status status-in_progress">Hiatus</span>
                 </div>
                 <button class="btn-danger" onclick="deleteProject(this)">
                   <i data-lucide="trash-2" class="w-4 h-4"></i>
                 </button>
               </div>
-              <p class="project-description">Full-stack task management application with real-time updates, drag & drop functionality, and localStorage persistence.</p>
+              <p class="project-description">An Garry's Mod server that introduces a proper Black Mesa 2024 feel to multiplayer. Introduces an working AMS with custom made events and roleplay opportunities in the Black Mesa Research Facility.</p>
               <div class="tech-tags">
-                <span class="tech-tag">React</span>
+                <span class="tech-tag">gLua</span>
                 <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">MongoDB</span>
-              </div>
-              <div class="project-links">
-                <a href="#" class="project-link" target="_blank">
-                  <i data-lucide="github" class="w-4 h-4"></i><span>Code</span>
-                </a>
-                <a href="#" class="project-link" target="_blank">
-                  <i data-lucide="external-link" class="w-4 h-4"></i><span>Demo</span>
-                </a>
+                <span class="tech-tag">C++</span>
               </div>
             </div>
           </div>
