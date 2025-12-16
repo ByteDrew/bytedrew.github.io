@@ -50,7 +50,7 @@ body {
 }
 
 #background {
-    height: calc(100% - 81px);
+    height: calc(100% - 200px);
     padding: 0px 4px;
 }
 
