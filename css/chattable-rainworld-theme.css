@@ -21,8 +21,7 @@ html {
     padding: 0px;
     margin: 0px;
     background-color: var(--box-background-color);
-	width: 250px;
-	height: 350px
+	width: 100%;
 }
 
 body {
