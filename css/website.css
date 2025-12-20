@@ -1223,3 +1223,62 @@
   width: 100%;
   height: 100%;
 }
+
+/* Make the chat page occupy the full viewport and remove scrolling */
+.chat-page, .chat-page html, .chat-page body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.chat-page main {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.chat-page .main-container {
+  max-width: 100%;
+  width: 100%;
+  padding: 0;
+  height: 100%;
+}
+
+.chat-page .content-grid {
+  height: 100%;
+  display: flex;
+}
+
+.chat-page .bg-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  padding: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-page #community {
+  height: 100%;
+  display: flex;
+}
+
+.chat-page #chattable-container {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.chat-page #chattable-container iframe{
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+}
+
+.chat-page #chattable {
+  width: 100% !important;
+  height: 100% !important;
+}
