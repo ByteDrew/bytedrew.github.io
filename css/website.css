@@ -1175,6 +1175,7 @@
     }
 
 #community {
+    height: 150px;
     display: flex;
     flex-direction: row;
     gap: 5px;
