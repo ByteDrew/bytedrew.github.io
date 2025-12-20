@@ -1271,29 +1271,6 @@
   }
 }
 
-@media (min-width: 1025px) {
-  /* keep the chat inset from the sidebar to avoid visual bleeding */
-  .chat-page .main-container {
-    /* subtract sidebar width (20rem) and horizontal padding (2rem) */
-    width: calc(100% - 20rem - 2rem);
-    max-width: none;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .chat-page .bg-card {
-    width: 100%;
-    max-width: none;
-    overflow: hidden;
-  }
-
-  .chat-page #chattable-container iframe {
-    /* ensure iframe width doesn't exceed the container */
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-}
-
 /* Height tweaks: use vh-based calculations so sizing doesn't rely on parent 100% */
 .chat-page {
   --chat-top-gap: 1.5rem;
