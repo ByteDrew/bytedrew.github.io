@@ -1235,6 +1235,8 @@
   padding: 0;
   margin: 0;
   display: flex;
+  margin-left: 0; /* default: no left offset (mobile/overlay sidebar)
+             will be overridden on wide screens */
 }
 
 .chat-page .main-container {
@@ -1247,6 +1249,25 @@
 .chat-page .content-grid {
   height: 100%;
   display: flex;
+}
+
+@media (min-width: 1025px) {
+  /* On wide screens the sidebar is visible and fixed at 20rem. Keep chat to the right of it. */
+  .chat-page main {
+    margin-left: 20rem;
+    height: 100vh;
+  }
+
+  .chat-page .main-container {
+    padding: 1.5rem; /* small breathing room inside the content area */
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  .chat-page .bg-card {
+    border-radius: 1rem;
+    padding: 0.5rem;
+  }
 }
 
 .chat-page .bg-card {
