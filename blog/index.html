@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - Your Personal Site</title>
+  <script src="../js/lucide.js"></script>
+  <script src="../js/loadSidebar.js"></script>
+  <script src="../js/website.js"></script>
+  <link rel="stylesheet" href="../css/lists.css">
+</head>
+<body class="light">
+    <div class="background-blob-container">
+    <div class="background-blob blob-primary blob-1"></div>
+    <div class="background-blob blob-secondary blob-2"></div>
+    <div class="background-blob blob-primary blob-3"></div>
+    <div class="background-blob blob-secondary blob-4"></div>
+    <div class="background-blob blob-primary blob-5"></div>
+  </div>
+  <!-- Mobile Menu Button -->
+  <button id="mobileMenuBtn" class="mobile-menu-btn">
+    <i data-lucide="menu"></i>
+  </button>
+
+  <!-- Sidebar (shared include) -->
+  <div id="sidebar-placeholder"></div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Main Content -->
+  <main id="main">
+    <div class="main-container">
+      <!-- Header -->
+      <div class="header-section animate-fade-in">
+        <div class="header-icon glow-effect">
+          <i data-lucide="briefcase" class="w-10 h-10" style="color: var(--color-primary)"></i>
+        </div>
+        <div class="header">
+          <h1 class="gradient-text">My Projects</h1>
+          <p>Things I'm building, learning, and bringing to life</p>
+        </div>
+      </div>
+
+        <div id="loadingState" class="text-center py-12" style="display: none">
+        <div class="loading-spinner"></div>
+      </div>
+      <div id="emptyState" class="empty-state animate-fade-in" style="display: none">
+        <i data-lucide="briefcase" class="w-16 h-16 mx-auto mb-4" style="color: #d1d5db"></i>
+        <p class="text-lg">No projects yet. Add your first project!</p>
+      </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
