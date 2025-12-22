@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ByteDrew's Corner</title>
+  <link rel="icon" type="image/x-icon" href="/assets/drewprofile.png">
+  <script src="../js/lucide.js"></script>
+  <script src="../js/visitorCounter.js"></script>
+  <link rel="stylesheet" href="../css/website.css">
+</head>
+<body class="light">
+  
+  <div class="background-blob-container">
+    <div class="background-blob blob-primary blob-1"></div>
+    <div class="background-blob blob-secondary blob-2"></div>
+    <div class="background-blob blob-primary blob-3"></div>
+    <div class="background-blob blob-secondary blob-4"></div>
+    <div class="background-blob blob-primary blob-5"></div>
+  </div>
+
+  <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">
+    <i data-lucide="menu"></i>
+  </button>
+
+  <div id="sidebar-placeholder"></div>
+
+
+  <div id="overlay" class="overlay"></div>
+
+
+  <main id="main">
+    <div class="main-container">
+      <div class="space-y-12">
+
+        <div class="hero">
+          <h1 class="gradient-text animate-fade-in">ByteDrew's Corner</h1>
+          <p class="animate-fade-in">A digital space where I can be myself, learn about me</p>
+          <h1 class="animate-fade-in">You are the #<span id="visitorcount"></span> guest today!</h1>
+        </div>
+
+        <div class="content-grid">
+
+          <div class="bg-card about-card animate-fade-in glow-effect">
+            <div class="card-header">
+              <i data-lucide="sparkles" class="w-8 h-8" style="color: var(--color-primary)"></i>
+              <h2 class="gradient-text">About Me</h2>
+            </div>
+            <div class="prose prose-lg">
+              <p class="about-text">
+                Hey there! I'm a passionate software engineer, artist, and eternal student of life. This is my little corner
+                of the internet where I share my journey, interests, and the things that make me, me.
+              </p>
+              <p class="about-text">
+                Whether I'm diving deep into code, losing myself in games, or working on projects,
+                I'm always looking for new ways to express myself and connect with others who share similar passions.
+                Currently interning with Microsoft's Azure program in their Core Team, and got plenty of stories to tell.
+              </p>
+              <p class="about-text">
+                Feel free to explore around, check out my projects, or just see what I'm currently obsessing over.
+                Welcome to my sanctuary, the website gets updated quite frequently so come back to see more! ✨
+              </p>
+            </div>
+          </div>
+
+          <div class="quick-links">
+            <div class="quick-link-card animate-fade-in" style="animation-delay: 0.1s">
+              <div class="quick-link-icon" style="background: linear-gradient(135deg, #e55ae722, #e55ae711)">
+                <i data-lucide="code" class="w-6 h-6" style="color: #e55ae7"></i>
+              </div>
+              <h3 class="quick-link-title" style="color: #e55ae7">Developer</h3>
+              <p class="quick-link-desc">Microsoft Employee and C#/Engineer</p>
+            </div>
+            <div class="quick-link-card animate-fade-in" style="animation-delay: 0.2s">
+              <div class="quick-link-icon" style="background: linear-gradient(135deg, #f5983c22, #f5983c11)">
+                <i data-lucide="palette" class="w-6 h-6" style="color: #f5983c"></i>
+              </div>
+              <h3 class="quick-link-title" style="color: #f5983c">Artist</h3>
+              <p class="quick-link-desc">3D Arts and sprite work</p>
+            </div>
+            <div class="quick-link-card animate-fade-in" style="animation-delay: 0.3s">
+              <div class="quick-link-icon" style="background: linear-gradient(135deg, #e55ae722, #e55ae711)">
+                <i data-lucide="music" class="w-6 h-6" style="color: #e55ae7"></i>
+              </div>
+              <h3 class="quick-link-title" style="color: #e55ae7">Enthusiast</h3>
+              <p class="quick-link-desc">Big on music and instruments</p>
+            </div>
+            <div class="quick-link-card animate-fade-in" style="animation-delay: 0.4s">
+              <div class="quick-link-icon" style="background: linear-gradient(135deg, #f5983c22, #f5983c11)">
+                <i data-lucide="sparkles" class="w-6 h-6" style="color: #f5983c"></i>
+              </div>
+              <h3 class="quick-link-title" style="color: #f5983c">Main Goal</h3>
+              <p class="quick-link-desc">Found a spare laptop, trying to get it to work</p>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div class="philosophy-card bg-gradient-light animate-fade-in">
+          <blockquote class="philosophy-quote">
+            "Your choices, Clark. Your actions... that's what makes you who you are. I'll tell you something, son... I couldn't be more proud of you."
+          </blockquote>
+          <p class="philosophy-author">— Pa Kent, Superman 2025</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../js/loadSidebar.js"></script>
+  <script src="../js/website.js"></script>
+</body>
+</html>
