@@ -64,6 +64,28 @@
             <span class="text-sm">Now Playing: Punkrocker</span>
           </div>
         </div>
+        
+  <script>
+    const audio = document.getElementById('sidebarAudio');
+    
+    // Fade out function
+    function fadeOutMusic(duration = 2000) {
+        const stepTime = 50;
+        const steps = duration / stepTime;
+        let currentStep = 0;
+        const fade = setInterval(() => {
+            currentStep++;
+            audio.volume = Math.max(0, audio.volume - (1 / steps));
+            if (audio.volume <= 0) {
+                audio.pause();
+                clearInterval(fade);
+            }
+        }, stepTime);
+    }
+
+    // Fade out after 5 seconds
+    setTimeout(() => fadeOutMusic(3000), 5000);
+  </script>
       </div>
     </div>
 
