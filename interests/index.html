@@ -11,20 +11,6 @@
   <script src="../js/website.js"></script>
 </head>
 <body class="light">
-      <script>
-    const audio = document.getElementById('sidebarAudio');
-
-    // Load saved playback time
-    const savedTime = localStorage.getItem('musicTime');
-    if (savedTime) {
-        audio.currentTime = parseFloat(savedTime);
-    }
-
-    // Save current time before leaving the page
-    window.addEventListener('beforeunload', () => {
-        localStorage.setItem('musicTime', audio.currentTime);
-    });
-    </script>
   
     <div class="background-blob-container">
     <div class="background-blob blob-primary blob-1"></div>
