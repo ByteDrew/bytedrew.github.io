@@ -67,6 +67,20 @@
       </div>
     </div>
 
+        <script>
+    const audio = document.getElementById('sidebarAudio');
+
+    // Load saved playback time
+    const savedTime = localStorage.getItem('musicTime');
+    if (savedTime) {
+        audio.currentTime = parseFloat(savedTime);
+    }
+
+    // Save current time before leaving the page
+    window.addEventListener('beforeunload', () => {
+        localStorage.setItem('musicTime', audio.currentTime);
+    });
+    </script>
     
     <!-- Footer -->
     <div class="sidebar-footer">
