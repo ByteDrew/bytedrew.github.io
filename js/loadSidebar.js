@@ -17,3 +17,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('loadSidebar error:', err);
   }
 });
+
+// Wait for the sidebar to load
+window.addEventListener('sidebar:loaded', () => {
+    const audio = document.getElementById('sidebarAudio');
+    if (!audio) return;
+
+    // Resume from last saved time
+    const savedTime = localStorage.getItem('musicTime');
+    if (savedTime) audio.currentTime = parseFloat(savedTime);
+
+    // Resume play/pause state
+    const savedPaused = localStorage.getItem('musicPaused');
+    if (savedPaused === 'true') audio.pause();
+
+    // Save time and pause/play before leaving page
+    window.addEventListener('beforeunload', () => {
+        localStorage.setItem('musicTime', audio.currentTime);
+        localStorage.setItem('musicPaused', audio.paused);
+    });
+});
