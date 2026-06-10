@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drew's Swamp</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <nav>
+        <a class="brand" href="../index.html" aria-label="Drew's Swamp home">
+            <img src="../assets/BarLogo.png" alt="Drew's Swamp navbar logo">
+        </a>
+
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../projects/index.html">Projects</a></li>
+            <li><a href="../games/index.html">Game Shrine</a></li>
+            <li><a href="../contact/index.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="music-control" aria-label="Music controls">
+        <button id="music-toggle" type="button">▶ Play music</button>
+        <button id="music-mute" type="button">🔊 Mute</button>
+        <span id="music-status">Music loading…</span>
+    </div>
+
+    <script src="../js/music.js"></script>
+
+    <main class="page-shell">
+        <section class="page-card contact-card">
+            <p class="eyebrow">Get in touch</p>
+            <h1>Contact</h1>
+            <p class="page-intro">
+                Want to talk swamp projects, art, or just say hello? You can send me an email directly from here.
+            </p>
+
+            <img src="../assets/Contact.png" class="contact-visual" alt="Contact illustration">
+
+            <div class="contact-box">
+                <h2>Email me</h2>
+                <p>Use the button below to open your email app and send a message.</p>
+                <a class="contact-button" href="mailto:contact@bytedew.com">contact@bytedew.com</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

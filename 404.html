@@ -1,29 +1,44 @@
-
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.3">
-    <title>404</title>
-    <link href="../css/style.css" rel="stylesheet" type="text/css" media="all">
-    <style>
-    
-    body {
-    background-image: url('/assets/thenew404backgroundhavefun.jpg'); 
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    opacity: 1.5;
-    background-size: cover; }
-    img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h1 {text-align: center;}
-    p {text-align: center; color: #ffffff}
-    </style>
-  </head>
-  <body>
-  <a href="../"><img width=99% height=98.5% style="position:absolute; top:0px;" src="../assets/clear.gif"></a>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Drew's Swamp</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <nav>
+        <a class="brand" href="index.html" aria-label="Drew's Swamp home">
+            <img src="assets/BarLogo.png" alt="Drew's Swamp navbar logo">
+        </a>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="games.html">Game Shrine</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="music-control" aria-label="Music controls">
+        <button id="music-toggle" type="button">▶ Play music</button>
+        <button id="music-mute" type="button">🔊 Mute</button>
+        <span id="music-status">Music loading…</span>
+    </div>
+
+    <script src="js/music.js"></script>
+
+    <main class="page-shell">
+        <section class="page-card" style="text-align:center; max-width:700px;">
+            <img src="assets/404.png" alt="404 illustration" style="width:100%; max-width:320px; margin:0 auto 18px; display:block; border-radius:18px; box-shadow:0 12px 22px rgba(0,0,0,0.18);">
+            <p class="eyebrow">Oops — page not found</p>
+            <h1>404</h1>
+            <p class="page-intro" style="margin:0 auto 18px;">
+                The page you were looking for sank into the swamp. Head back home and keep exploring.
+            </p>
+            <a class="contact-button" href="index.html">Back to Home</a>
+        </section>
+    </main>
+</body>
 </html>

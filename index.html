@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drew's Swamp</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a class="brand" href="index.html" aria-label="Drew's Swamp home">
+            <img src="assets/BarLogo.png" alt="Drew's Swamp navbar logo">
+        </a>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects/index.html">Projects</a></li>
+            <li><a href="games/index.html">Game Shrine</a></li>
+            <li><a href="contact/index.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="music-control" aria-label="Music controls">
+        <button id="music-toggle" type="button">▶ Play music</button>
+        <button id="music-mute" type="button">🔊 Mute</button>
+        <span id="music-status">Music loading…</span>
+    </div>
+
+    <script src="js/music.js"></script>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <!-- Left Card -->
+        <div class="paper-card">
+            <h1>Welcome to the Swamp.</h1>
+
+            <p>
+                Home of Drew, a crocodile enthusiast,
+                Discord community owner, and creator.
+            </p>
+
+            <button><a href="projects.html">Explore</a></button>
+        </div>
+
+        <!-- Center Personal Card -->
+        <article class="feature-card">
+            <p class="eyebrow">Quick things about me</p>
+            <h2>About Me</h2>
+            <p class="feature-copy">
+                I’m the kind of person who loves crocodiles, builds communities, and keeps my projects a little wild.
+                This page is my little swamp hub for updates, hobbies, and the things I’m working on.
+            </p>
+
+            <div class="update-grid">
+                <section class="mini-card">
+                    <h3>What am I doing right now</h3>
+                    <ul>
+                        <li>Growing my community</li>
+                        <li>Messing around with tech</li>
+                        <li>Living the swamp life</li>
+                    </ul>
+                </section>
+
+                <section class="mini-card accent">
+                    <h3>Website Updates</h3>
+                    <ul>
+                        <li>Finished adding images</li>
+                        <li>Cool new profile</li>
+                        <li>I'll add more soon</li>
+                    </ul>
+                </section>
+
+                <section class="mini-card fun-facts">
+                    <h3>Fun Facts</h3>
+                    <ul>
+                        <li>Friendly to most people, although I joke around a lot.</li>
+                        <li>I'm big on collecting, so I keep a few treasures around of random things.</li>
+                        <li>I like making the internet feel more personal, I don't like generic.</li>
+                    </ul>
+                </section>
+            </div>
+        </article>
+
+        <!-- Right Sidebar -->
+        <aside class="profile-panel">
+
+            <img src="assets/Mascot.png" class="profile-pic" alt="Drew profile image">
+
+            <h2>Drew</h2>
+
+            <p>
+                Crocodile lover, C# Nerd,
+                Music enthusiast and swamp dweller.
+            </p>
+
+            <div class="info">
+                <span>🐊 Drew's Swamp</span>
+                <span>💬 Community Owner</span>
+                <span>🖥️ Tech Enthusiast</span>
+            </div>
+
+        </aside>
+
+    </section>
+
+</body>
+</html>
