@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Drifting Outside the Orbit</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0a0514',
+                        foreground: '#f3e8ff',
+                        card: '#12081f',
+                        primary: {
+                            DEFAULT: '#a855f7',
+                            foreground: '#ffffff',
+                        },
+                        muted: {
+                            DEFAULT: '#9ca3af',
+                            foreground: '#6b7280',
+                        },
+                        secondary: '#6366f1'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0a0514;
+            color: #f3e8ff;
+        }
+
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(18, 8, 31, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .moon-halo-broken {
+            box-shadow: 0 0 60px rgba(168, 85, 247, 0.4), inset 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Starfield Animation */
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.15;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 0.95;
+                transform: scale(1.25);
+            }
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #ffffff;
+            animation: twinkle infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        /* Shooting Star Animations */
+        @keyframes shootingStar {
+            0% {
+                transform: translateX(0) translateY(0) rotate(-45deg);
+                opacity: 1;
+                width: 100px;
+            }
+            100% {
+                transform: translateX(-400px) translateY(400px) rotate(-45deg);
+                opacity: 0;
+                width: 0px;
+            }
+        }
+
+        .shooting-star {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,1), transparent);
+            animation: shootingStar 7s infinite linear;
+            pointer-events: none;
+        }
+
+        /* Ambient floating elements */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        .float-anim {
+            animation: floatSlow 8s infinite ease-in-out;
+        }
+
+        /* Parallax Container Smooth Transition */
+        .parallax-layer {
+            transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1);
+            will-change: transform;
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground relative flex min-h-screen items-center justify-center overflow-hidden antialiased">
+
+    <!-- COSMIC PARALLAX BACKGROUND -->
+    <div id="parallax-bg" class="parallax-layer pointer-events-none absolute inset-0 -z-10 scale-105">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#1a0832] via-[#0a0514] to-[#05020a]"></div>
+        
+        <!-- Dynamic Starfield -->
+        <div id="starfield" class="absolute inset-0 overflow-hidden">
+            <span class="shooting-star" style="top: 12%; left: 85%; animation-delay: 2s;"></span>
+            <span class="shooting-star" style="top: 28%; left: 60%; animation-delay: 9s;"></span>
+        </div>
+
+        <!-- Ambient Atmospheric Glow Orbs -->
+        <div class="absolute left-1/3 top-1/4 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[130px]"></div>
+        <div class="absolute bottom-10 right-1/4 h-96 w-96 rounded-full bg-indigo-600/15 blur-[120px]"></div>
+    </div>
+
+    <!-- MAIN 404 CARD CONTAINER -->
+    <main class="relative z-10 mx-4 w-full max-w-lg p-1 sm:p-2">
+        <div class="glass float-anim relative flex flex-col items-center rounded-3xl border border-primary/20 p-8 text-center shadow-[0_0_80px_-20px_rgba(168,85,247,0.3)] sm:p-12">
+            
+            <!-- Fading / Eclipsed Moon Icon -->
+            <div class="moon-halo-broken relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-primary/40 via-purple-900/40 to-background p-[2px] sm:h-28 sm:w-28">
+                <div class="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-[#0d041c]">
+                    <svg class="h-12 w-12 text-primary/70 sm:h-14 sm:w-14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <!-- Eclipsing Shadow Lines -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0514] via-transparent to-transparent opacity-80"></div>
+                </div>
+            </div>
+
+            <!-- Error Code & Headings -->
+            <p class="mt-6 text-[10px] uppercase tracking-[0.5em] text-primary/80 sm:text-[11px]">
+                404 — Lost in Space
+            </p>
+            
+            <h1 class="mt-3 font-heading text-2xl font-light text-foreground sm:text-4xl">
+                Drifting Outside the Orbit
+            </h1>
+
+            <p class="mt-4 max-w-sm text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                The page you're looking for has drifted into the dark expanse or never existed in this night sky.
+            </p>
+
+            <!-- Action Button -->
+            <a href="index.html" class="group relative mt-8 flex items-center gap-3 overflow-hidden rounded-full border border-primary/35 bg-primary/15 px-7 py-3 text-xs uppercase tracking-[0.26em] text-foreground transition-all duration-300 hover:border-primary/70 hover:bg-primary/25 hover:shadow-[0_0_35px_-8px_rgba(168,85,247,0.8)]">
+                <span>Return to Home</span>
+                <svg class="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+
+            <p class="mt-4 text-[10px] uppercase tracking-[0.25em] text-muted-foreground/50">
+                Or re-enter orbit safely
+            </p>
+        </div>
+    </main>
+
+    <!-- FOOTER TEXT -->
+    <footer class="absolute bottom-6 left-0 right-0 text-center text-[9px] uppercase tracking-[0.3em] text-muted-foreground/30">
+        © 2026 Ian Drew • Deep Space Telemetry
+    </footer>
+
+    <!-- INTERACTIVE PARALLAX & STAR GENERATOR -->
+    <script>
+        // Generate Starfield
+        function generateStars() {
+            const container = document.getElementById('starfield');
+            if (!container) return;
+
+            for (let i = 0; i < 110; i++) {
+                const star = document.createElement('span');
+                star.className = 'star';
+                const top = Math.random() * 100;
+                const left = Math.random() * 100;
+                const size = Math.random() < 0.85 ? 1 : 2.2;
+                const duration = 3 + Math.random() * 5;
+                const delay = Math.random() * 6;
+                const opacity = 0.2 + Math.random() * 0.6;
+
+                star.style.top = `${top}%`;
+                star.style.left = `${left}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.opacity = opacity;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${delay}s`;
+
+                if (size > 2) {
+                    star.style.boxShadow = '0 0 7px rgba(221,200,255,0.9)';
+                }
+                container.appendChild(star);
+            }
+        }
+
+        // Mouse Move Parallax Effect
+        function initParallax() {
+            const bg = document.getElementById('parallax-bg');
+            window.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 30;
+                const y = (e.clientY / window.innerHeight - 0.5) * 30;
+                bg.style.transform = `translate3d(${x}px, ${y}px, 0) scale(1.05)`;
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            generateStars();
+            initParallax();
+        });
+    </script>
+</body>
+</html>
