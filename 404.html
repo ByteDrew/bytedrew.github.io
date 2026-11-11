@@ -112,6 +112,30 @@
             transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1);
             will-change: transform;
         }
+
+        /* Cursor Purple Star Particle Styling */
+        .cursor-star {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            color: #c084fc;
+            text-shadow: 0 0 8px #a855f7, 0 0 16px #9333ea;
+            animation: starFade 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            user-select: none;
+        }
+
+        @keyframes starFade {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.1) rotate(180deg) translateY(20px);
+            }
+        }
     </style>
 </head>
 <body class="bg-background text-foreground relative flex min-h-screen items-center justify-center overflow-hidden antialiased">
@@ -178,7 +202,7 @@
         © 2026 ByteDrew • Starry Midnight
     </footer>
 
-    <!-- INTERACTIVE PARALLAX & STAR GENERATOR -->
+    <!-- INTERACTIVE SCRIPTS -->
     <script>
         // Generate Starfield
         function generateStars() {
@@ -220,9 +244,43 @@
             });
         }
 
+        // Purple Star Cursor Trail Controller
+        function initCursorTrail() {
+            let lastX = 0;
+            let lastY = 0;
+            const starIcons = ['★', '✦', '✧', '✶'];
+
+            window.addEventListener('mousemove', (e) => {
+                const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+                if (dist < 12) return;
+
+                lastX = e.clientX;
+                lastY = e.clientY;
+
+                const star = document.createElement('span');
+                star.className = 'cursor-star';
+                star.textContent = starIcons[Math.floor(Math.random() * starIcons.length)];
+                
+                const size = 10 + Math.random() * 12;
+                const offsetX = (Math.random() - 0.5) * 8;
+                const offsetY = (Math.random() - 0.5) * 8;
+
+                star.style.left = `${e.clientX + offsetX}px`;
+                star.style.top = `${e.clientY + offsetY}px`;
+                star.style.fontSize = `${size}px`;
+
+                document.body.appendChild(star);
+
+                setTimeout(() => {
+                    star.remove();
+                }, 750);
+            });
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             generateStars();
             initParallax();
+            initCursorTrail();
         });
     </script>
 </body>
