@@ -403,8 +403,7 @@
                             <footer class="mt-4 flex shrink-0 items-center justify-between text-[9px] uppercase tracking-[0.28em] text-muted-foreground/40 sm:text-[10px]">
                                 <span>© 2026 ByteDrew</span>
                                 <div class="flex items-center gap-4">
-                                    <button id="footer-replay-btn" class="hover:text-primary transition-colors uppercase">Replay Descent</button>
-                                    <span class="hidden sm:inline">built under a purple moon</span>
+                                    <span class="hidden sm:inline">Ran through Google Cloud</span>
                                 </div>
                             </footer>
                         </section>
@@ -436,8 +435,8 @@
                         <!-- ABOUT TAB PANEL -->
                         <section id="panel-about" class="tab-panel hidden flex h-full min-h-0 flex-col">
                             <header class="reveal-node shrink-0">
-                                <p class="text-[10px] uppercase tracking-[0.5em] text-primary/80">who is this</p>
-                                <h1 class="mt-3 font-heading text-3xl font-light leading-none text-foreground sm:text-4xl lg:text-5xl">About</h1>
+                                <p class="text-[10px] uppercase tracking-[0.5em] text-primary/80">who am i?</p>
+                                <h1 class="mt-3 font-heading text-3xl font-light leading-none text-foreground sm:text-4xl lg:text-5xl">About me</h1>
                             </header>
 
                             <div class="mt-6 grid min-h-0 flex-1 gap-3 sm:mt-8 sm:grid-cols-5 sm:gap-4">
@@ -446,7 +445,7 @@
                                 </div>
 
                                 <div class="reveal-node min-h-0 overflow-hidden rounded-2xl border border-primary/10 bg-card/40 p-5 backdrop-blur-md sm:col-span-2 sm:p-6">
-                                    <p class="text-[9px] uppercase tracking-[0.3em] text-primary/70">the short version</p>
+                                    <p class="text-[9px] uppercase tracking-[0.3em] text-primary/70">Some other information</p>
                                     <dl id="about-facts" class="mt-3 space-y-3"></dl>
                                     <div id="about-short-interests" class="mt-4 flex flex-wrap gap-1.5"></div>
                                 </div>
@@ -468,15 +467,15 @@
     <script>
         // --- SITE DATA ---
         const interests = [
-            { id: '1', title: 'Systems & Architecture', tag: 'Engineering', short: 'Architecture', image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80' },
-            { id: '2', title: 'Sandbox Physics & Scripting', tag: "Garry's Mod", short: 'Scripting', image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80' },
-            { id: '3', title: 'Atmospheric Exploration', tag: 'Atmosphere', short: 'Exploration', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80' },
-            { id: '4', title: 'Network Infrastructure', tag: 'Networking', short: 'Infrastructure', image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80' },
-            { id: '5', title: 'Retro & Indie Games', tag: 'Gaming', short: 'Indie Games', image: 'https://images.unsplash.com/photo-1612287233002-b1d283c79d1d?auto=format&fit=crop&w=600&q=80' },
-            { id: '6', title: 'Quiet Hours & Code', tag: 'Midnight', short: 'Night Coding', image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80' }
+            { id: '1', title: 'Network Infrastructure', tag: 'Networking', short: 'Infrastructure', image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80' },
+            { id: '2', title: 'Coding Languages', tag: "Coding", short: 'C# & Java', image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80' },
+            { id: '3', title: 'Atmospheric Exploration', tag: 'Atmosphere', short: 'Exploring at night', image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80' },
+            { id: '4', title: 'Guitarist', tag: 'music', short: 'Playing music', image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80' },
+            { id: '5', title: 'Horror & Indie Games', tag: 'Gaming', short: 'Indie and Horror games', image: 'https://images.unsplash.com/photo-1612287233002-b1d283c79d1d?auto=format&fit=crop&w=600&q=80' },
+            { id: '6', title: 'Quiet Hours & Quiet', tag: 'Midnight', short: 'Night & Quiet', image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80' }
         ];
 
-        const interestTags = ['Engineering', 'Scripting', 'Atmosphere', 'Networking', 'Gaming', 'Midnight'];
+        const interestTags = ['Programming', 'Music', 'Exploring', 'Horror', 'Gaming', 'Stargazing'];
 
         const aboutParagraphs = [
             "Building robust systems and exploring digital environments by night. I focus on creating clean, efficient technical solutions and immersive sandbox mechanics.",
@@ -485,8 +484,8 @@
 
         const aboutFacts = [
             { label: 'Location', value: 'St. Charles County, Missouri' },
-            { label: 'Focus', value: 'Software Engineering & Systems' },
-            { label: 'Environment', value: 'Linux Ubuntu & Custom Hardware' }
+            { label: 'Focus', value: 'IT & Network Infrastructure' },
+            { label: 'Experience', value: '2+ Years' }
         ];
 
         const games = [
